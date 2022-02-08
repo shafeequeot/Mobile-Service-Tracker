@@ -14,7 +14,7 @@ document.getElementById('toggle-dark-mode').addEventListener('click', async () =
 })
 
 
-var circle = document.querySelector('circle');
+var circle = document.getElementById('crlTotalStock');
 var radius = circle.r.baseVal.value;
 var circumference = radius * 2 * Math.PI;
 circle.style.strokeDasharray = `${circumference} ${circumference}`;
@@ -35,6 +35,9 @@ setProgress(input);
 // })
 
 
-
+rdStock.onclick = evt = () =>{
+  openThisPage = { Page: "/pages/purchase.html", Parent: "MainWindow", Width: "800", Height: "700" }
+    ipcRenderer.invoke('createNewWindow', openThisPage)
+}
 
 

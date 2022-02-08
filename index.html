@@ -6,13 +6,15 @@
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
 
   <link rel="stylesheet" href="./config/css/style.css">
+  <link rel="stylesheet" href="./config/css/grid-Style.css">
+  
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <title>Auxwall - Mobile Repair Tracking System</title>
 </head>
 
 <body>
- 
+
 
 
   <div class="container">
@@ -26,8 +28,7 @@
 
 
 
-      <input type="radio" name="rdCategory" id="rdDashBoard" class="btnReportButtons">
-      <label for="rdDashBoard">Dash Board</label>
+   
       <input type="radio" name="rdCategory" id="rdService" class="btnReportButtons">
       <label for="rdService">Services</label>
       <input type="radio" name="rdCategory" id="rdAgent" class="btnReportButtons">
@@ -37,43 +38,98 @@
       <input type="radio" name="rdCategory" id="rdSalesMen" class="btnReportButtons">
       <label for="rdSalesMen">Sales Man</label>
       <input type="radio" name="rdCategory" id="rdStock" class="btnReportButtons">
-      <label for="rdStock">Purchas</label>
-     
+      <label for="rdStock">Purchase</label>
+      <input type="radio" name="rdCategory" id="rdSettings" class="btnReportButtons">
+      <label for="rdSettings">Settings</label>
 
-      <div class="btnDarkMode" id="toggle-dark-mode"></div> 
+      <div class="btnDarkMode" id="toggle-dark-mode"></div>
     </div>
-    
-    
+
+
     <div class="container">
-    
-      <div class="divProgress">
-        
-        <span class="pregressTitle">dksdfsdf sdf sdf sdsf <br/> fsddf j</span>
-        <svg
-        class="progress-ring"
-        width="220"
-        height="220">
-             <circle
-         class="progress-ring__circle"
-         stroke="white"
-         stroke-width="4"
-         fill="transparent"
-         r="100"
-         cx="110"
-         cy="110"/>
-         
-     </svg>
-   
-     <!-- <input id="inputss" type="text"
-       value="98"
-       type="number"
-       step="5"
-       min="0"
-       max="100"
-       placeholder="progress"
-     > -->
+      <div class="headBlock">
+
+        <img class="imageBackground" src="./config/img/animation_640_kzcqxwh1.gif" ></lottie-player>
       </div>
 
+      <div class="Grid-3">
+
+        <div class="divProgress">
+
+          <span class="pregressTitle">Total in Stocks <h2 id="lblTotalStock">444</h2></span>
+
+          <svg class="progress-ring" width="200" height="200">
+            <circle class="progress-ring__circle" stroke="white" stroke-width="4" id="crlTotalStock" fill="transparent"
+            r="90"
+            cx="100" cy="100" />
+
+          </svg>
+
+        </div>
+
+        <div class="divProgress">
+
+          <span class="pregressTitle">Total in Service <h2 id="lblTotalService">444</h2></span>
+
+          <svg class="progress-ring" width="200" height="200">
+            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalService" fill="transparent" r="90"
+            cx="100" cy="100" />
+
+          </svg>
+
+        </div>
+
+
+        <div class="divProgress">
+
+          <span class="pregressTitle">Total in Service <h2 id="lblTotalPending">444</h2></span>
+
+          <svg class="progress-ring" width="200" height="200">
+            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalPending" fill="transparent" r="90"
+            cx="100" cy="100" />
+
+          </svg>
+
+        </div>
+
+
+        <div class="divProgress">
+
+          <span class="pregressTitle">Total in Service <h2 id="lblTotalCompleted">444</h2></span>
+
+          <svg class="progress-ring" width="200" height="200">
+            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalCompleted" fill="transparent" r="90"
+            cx="100" cy="100" />
+
+          </svg>
+
+        </div>
+
+        <div class="divProgress">
+
+          <span class="pregressTitle">Total in Service <h2 id="lblTotalRejected">444</h2></span>
+
+          <svg class="progress-ring" width="200" height="200">
+            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalRejected" fill="transparent" r="90"
+            cx="100" cy="100" />
+
+          </svg>
+
+        </div>
+
+
+        <div class="divProgress">
+
+          <span class="pregressTitle">Total in Service <h2 id="lblTotalDead">444</h2></span>
+
+          <svg class="progress-ring" width="200" height="200">
+            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalDead" fill="transparent" r="90"
+              cx="100" cy="100" />
+
+          </svg>
+
+        </div>
+      </div>
     </div>
 
   </div>
@@ -86,8 +142,8 @@
 
 
 
-
-      <script src="./index.js"> </script>
+  <script src="./config/js/lottie-plyer.js"></script>
+  <script src="./index.js"> </script>
 </body>
 
 

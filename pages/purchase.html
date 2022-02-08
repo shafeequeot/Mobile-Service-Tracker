@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+    <link rel="stylesheet" href="../config/css/style.css">
+    <link rel="stylesheet" href="../config/css/grid-Style.css">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Auxwall - Mobile Repair Tracking System</title>
+</head>
+
+<body>
+
+
+
+    <div class="container">
+
+
+        <div class="heading">
+            <h2>REGISTER PURCHASE DETIALS</h2>
+        </div>
+
+        <form method="POST" id="purchaseForm" name="purchaseForm">
+
+            <div class="formGroup">
+
+
+                <input type="hidden" id="companyId" name="companyId" value="0" />
+
+                <div class="margin-top-1rem">
+
+                    <label for="txtSupplier">Supplier Name*</label>
+                    <select class="input-feild" name="txtSupplier" id="txtSupplier" required autofocus placeholder="Enter Supplier Name">
+                        <option value="00" disabled selected>Select Supplier</option>
+                        <option value="0">Add New</option>
+                     
+                    </select>
+
+                </div>
+
+                <div class="margin-top-1rem">
+
+                    <label for="txtManufacture">Supplier Name*</label>
+                    <select class="input-feild" name="txtManufacture" id="txtManufacture" required autofocus placeholder="Enter Manufacture Name">
+                        <option value="00" disabled selected>Select Manufacture</option>
+                        <option value="0">Add New</option>
+                    </select>
+
+                </div>
+
+                <div class="margin-top-1rem">
+                    <label for="txtModelNo">Model No.</label>
+                    <input class="input-feild" type="text" name="txtModelNo" id="txtModelNo" required placeholder="Enter Model No." />
+                </div>
+
+                
+                <div class="margin-top-1rem">
+                        <label for="txtIMEI">IMEI</label>
+                        <input class="input-feild" type="text" name="txtIMEI" id="txtIMEI" required placeholder="Enter IMEI No." />
+                    </div>
+           
+                
+
+                <div class="margin-top-1rem">
+                    <label for="txtInvNo">Invoice No.</label>
+                    <input class="input-feild" type="text" name="txtInvNo" id="txtInvNo" required placeholder="Enter Invoice No" />
+                </div>
+
+
+                <div class="margin-top-1rem">
+                    <label for="txtOtherDesc">Other Description</label>
+                    <textarea class="input-feild-area" rows="5" name="txtOtherDesc" id="txtOtherDesc" required placeholder="Description" ></textarea>
+                </div>
+
+                
+                <div class="btnGroup">
+                    <div class="message" id='formResult'></div>
+                    <button name="btnSave" id="btnSave" class="btnUpdate"><div id="txtSave">Save</div> <div id="btnSaveLoader"></div> </button>
+                    <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+  
+    <script src="./purchase.js"> </script>
+</body>
+
+
+</html>
+
+
+<!-- git password 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 -->

@@ -1,10 +1,12 @@
 const { app, BrowserWindow, ipcMain, nativeTheme } = require('electron')
 const path = require('path')
-
+let MainWindow
 function createWindow () {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+   MainWindow = new BrowserWindow({
+    width: 1000,
+    minWidth: 1000,
+    height: 700,
+    minHeight: 700,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
@@ -13,8 +15,8 @@ function createWindow () {
     }
   })
 
-  win.loadFile('index.html')
-win.maximize()
+  MainWindow.loadFile('index.html')
+
 
 
 //  dark  mode start 
@@ -56,3 +58,41 @@ app.on('window-all-closed', () => {
 })
 
 
+// creating sub window function
+
+
+
+const createSubWindow = (htmlFile, parentWindow, width, height, arg) => {
+  let modal = new BrowserWindow({
+      width: width,
+      height: height,
+      modal: true,
+      resizable: false,
+      icon: path.join(__dirname + '/public/auxwall/logos/favicon.png'),
+      parent: parentWindow,
+      frame: false,
+      webPreferences: {
+          contextIsolation: false,
+          nodeIntegration: true,
+          additionalArguments: [arg]
+      }
+  })
+
+  modal.loadFile(htmlFile)
+
+
+
+  return modal;
+
+}
+
+
+// opan new window if requested
+var custWindow = {}
+
+ipcMain.handle("createNewWindow", async(event, custWindow) => {
+
+    Page = path.join(__dirname, custWindow.Page)
+
+    createSubWindow(Page, MainWindow, parseInt(custWindow.Width), parseInt(custWindow.Height), custWindow.arg);
+})

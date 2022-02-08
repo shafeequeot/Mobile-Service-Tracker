@@ -961,6 +961,8 @@ text-align: center;
 
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
+  stroke-width: 5;
+  stroke: var(--primary-color);
 }
 
 
