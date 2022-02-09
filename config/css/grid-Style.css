@@ -2,20 +2,24 @@
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 12px;
-}
+    }
 
 .headBlock{
     /* background-color: #d5ecf4;; */
     align-items: center;
     display: flex;
     justify-content: center;
-    height: 35vh;
+    width: 100%;
+    overflow: hidden;
+    
 
 }
 
 
 .imageBackground{
     mix-blend-mode: multiply;
-    position: relative;
+    /* position: relative; */
     /* width: 80%; */
+    height: 30vh;
+   
 }

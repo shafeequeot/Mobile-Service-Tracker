@@ -41,3 +41,22 @@ rdStock.onclick = evt = () =>{
 }
 
 
+rdSalesMen.onclick = evt = () =>{
+  openThisPage = { Page: "/pages/Client.html", Parent: "MainWindow", Width: "800", Height: "700" }
+  ipcRenderer.invoke('createNewWindow', openThisPage)
+}
+
+rdSalesRoute.onclick = evt = () =>{
+  openThisPage = { Page: "/pages/salesRoute.html", Parent: "MainWindow", Width: "700", Height: "500" }
+  ipcRenderer.invoke('createNewWindow', openThisPage)
+}
+
+rdAgent.onclick = evt = () =>{
+  openThisPage = { Page: "/pages/serviceAgent.html", Parent: "MainWindow", Width: "800", Height: "700" }
+  ipcRenderer.invoke('createNewWindow', openThisPage)
+}
+
+rdService.onclick = evt = () =>{
+  openThisPage = { Page: "/pages/newService.html", Parent: "MainWindow", Width: "800", Height: "700" }
+  ipcRenderer.invoke('createNewWindow', openThisPage)
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+    <link rel="stylesheet" href="../config/css/style.css">
+    <link rel="stylesheet" href="../config/css/grid-Style.css">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Auxwall - Mobile Repair Tracking System</title>
+</head>
+
+<body>
+
+
+
+    <div class="container">
+
+
+        <div class="heading">
+            <h2>NEW SERVICE REQUEST</h2>
+        </div>
+
+        <form method="POST" id="purchaseForm" name="purchaseForm">
+
+            <div class="formGroup">
+
+
+                <input type="hidden" id="companyId" name="companyId" value="0" />
+
+              
+       
+<div class="Grid-3">
+
+    <div class="margin-top-1rem">
+        <label for="txtIMEI">IMEI</label>
+        <input class="input-feild" type="text" name="txtIMEI" id="txtIMEI" required placeholder="Enter IMEI No." />
+    </div>
+
+     <div class="margin-top-1rem">
+        <label for="txtBrand">Brand</label>
+        <input class="input-feild" type="text" name="txtBrand" id="txtBrand" required placeholder="Brand name" />
+    </div>
+
+    <div class="margin-top-1rem">
+        <label for="txtModelNo">Model No.</label>
+        <input class="input-feild" type="text" name="txtModelNo" id="txtModelNo" required placeholder="Model No." />
+    </div>
+
+
+</div>
+ 
+<div class="margin-top-1rem">
+
+    <label for="txtRoute">Sales route</label>
+    <select class="input-feild" name="txtRoute" id="txtRoute" required autofocus placeholder="select Sales route">
+        <option value="00" disabled selected>Sales Route</option>
+        <option value="0">Add New</option>
+    </select>
+
+</div>
+
+<div class="margin-top-1rem">
+
+    <label for="txtServiceAgent">Service Agnet</label>
+    <select class="input-feild" name="txtServiceAgent" id="txtServiceAgent" required autofocus placeholder="Select Service Agnet">
+        <option value="00" disabled selected>Service Agent</option>
+        <option value="0">Add New</option>
+    </select>
+
+</div>
+              
+                
+
+                <div class="margin-top-1rem">
+                    <label for="txtOtherDesc">Other Description</label>
+                    <textarea class="input-feild-area" rows="5" name="txtOtherDesc" id="txtOtherDesc" required placeholder="Description" ></textarea>
+                </div> 
+
+                
+                <div class="btnGroup">
+                    <div class="message" id='formResult'></div>
+                    <button name="btnSave" id="btnSave" class="btnUpdate"><div id="txtSave">Save</div> <div id="btnSaveLoader"></div> </button>
+                    <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+  
+    <script src="./newSerivce.js"> </script>
+</body>
+
+
+</html>
+
+
+<!-- git password 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 -->

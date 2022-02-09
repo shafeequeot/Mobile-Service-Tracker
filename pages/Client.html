@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+    <link rel="stylesheet" href="../config/css/style.css">
+    <link rel="stylesheet" href="../config/css/grid-Style.css">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Auxwall - Mobile Repair Tracking System</title>
+</head>
+
+<body>
+
+
+
+    <div class="container">
+
+
+        <div class="heading">
+            <h2>CLIENT DETIALS</h2>
+        </div>
+
+        <form method="POST" id="purchaseForm" name="purchaseForm">
+
+            <div class="formGroup">
+
+
+                <input type="hidden" id="companyId" name="companyId" value="0" />
+
+                <div class="margin-top-1rem">
+                    <label for="txtClient">Clent Name*</label>
+                    <input class="input-feild" type="text" name="txtClient" id="txtClient" required placeholder="Enter Client name" />
+                </div>
+
+
+                
+                                <div class="margin-top-1rem">
+                                    <label for="txtRoute">Sales Route</label>
+                                    <select class="input-feild" name="txtRoute" id="txtRoute" required autofocus placeholder="Enter Route Name">
+                                        <option value="00" disabled selected>Select Sales Route</option>
+                                        <option value="0">Add New</option>
+                                    </select>
+                <div class="margin-top-1rem">
+                    <label for="txtLocation">Location</label>
+                    <input class="input-feild" type="text" name="txtLocation" id="txtLocation" required placeholder="Enter Location" />
+                </div>
+
+                </div>
+
+                <div class="margin-top-1rem">
+                    <label for="txtContactNo">Contact No.</label>
+                    <input class="input-feild" type="text" name="txtContactNo" id="txtContactNo" required placeholder="Enter Contact." />
+                </div>
+
+                
+                <div class="margin-top-1rem">
+                        <label for="txtOther">Narration</label>
+                        <input class="input-feild" type="text" name="txtOther" id="txtOther" required placeholder="Enter Other descriptions" />
+                    </div>
+           
+
+                
+                <div class="btnGroup">
+                    <div class="message" id='formResult'></div>
+                    <button name="btnSave" id="btnSave" class="btnUpdate"><div id="txtSave">Save</div> <div id="btnSaveLoader"></div> </button>
+                    <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
+                </div>
+
+                <div class="Table">
+                    here will be the list of clients
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+  
+    <script src="./Client.js"> </script>
+</body>
+
+
+</html>
+
+
+<!-- git password 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 -->

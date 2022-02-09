@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+    <link rel="stylesheet" href="../config/css/style.css">
+    <link rel="stylesheet" href="../config/css/grid-Style.css">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Auxwall - Mobile Repair Tracking System</title>
+</head>
+
+<body>
+
+
+
+    <div class="container">
+
+
+        <div class="heading">
+            <h2>SERVICE AGENT</h2>
+        </div>
+
+        <form method="POST" id="purchaseForm" name="purchaseForm">
+
+            <div class="formGroup">
+
+
+                <input type="hidden" id="companyId" name="companyId" value="0" />
+
+                <div class="margin-top-1rem">
+                    <label for="txtAgent">Company name</label>
+                    <input class="input-feild" type="text" name="txtAgent" id="txtAgent" required placeholder="Enter Agent name" />
+                </div>
+
+
+                <div class="margin-top-1rem">
+                    <label for="txtPerson">Contact Person</label>
+                    <input class="input-feild" type="text" name="txtPerson" id="txtPerson" required placeholder="Enter Contact Person" />
+                </div>
+
+                <div class="margin-top-1rem">
+                    <label for="txtPhone">Contact Number</label>
+                    <input class="input-feild" type="text" name="txtPhone" id="txtPhone" required placeholder="Enter Contact Number" />
+                </div>
+
+                <div class="margin-top-1rem">
+                    <label for="txtLocation">Location</label>
+                    <input class="input-feild" type="text" name="txtLocation" id="txtLocation" required placeholder="Enter Location" />
+                </div>
+
+                </div>
+
+
+                
+                <div class="btnGroup">
+                    <div class="message" id='formResult'></div>
+                    <button name="btnSave" id="btnSave" class="btnUpdate"><div id="txtSave">Save</div> <div id="btnSaveLoader"></div> </button>
+                    <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
+                </div>
+
+                <div class="Table">
+                    here will be the list of clients
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+  
+    <script src="./serviceAgent.js"> </script>
+</body>
+
+
+</html>
+
+
+<!-- git password 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 -->
