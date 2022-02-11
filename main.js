@@ -17,6 +17,15 @@ function createWindow () {
 
   MainWindow.loadFile('index.html')
 
+// Window.localStorage.dbPath =  "path.join(app.getPath('userData'), '\DB/dataBase.sql')"
+// database location to Renderer
+
+// send user data path to render page
+ipcMain.handle('userDataPath', async(e, sav) => {
+    return path.join(app.getPath('userData'), '\DB/dataBase.db')
+})
+
+
 
 
 //  dark  mode start 

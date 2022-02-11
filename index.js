@@ -1,4 +1,6 @@
 const { ipcRenderer } = require('electron')
+const dataBase = require('./config/js/dbConfig')
+
 // const bootstrap = require('bootstrap')
 
 window.localStorage.Theme ? document.getElementById("toggle-dark-mode").innerHTML = window.localStorage.Theme : document.getElementById("toggle-dark-mode").innerHTML = "Dark"
@@ -24,6 +26,11 @@ function setProgress(percent) {
   const offset = circumference - percent / 100 * circumference;
   circle.style.strokeDashoffset = offset;
 }
+
+
+// dataBase.then((res)=>{
+//   alert('okey')
+// })
 
 const input = 55
 setProgress(input);
@@ -57,6 +64,6 @@ rdAgent.onclick = evt = () =>{
 }
 
 rdService.onclick = evt = () =>{
-  openThisPage = { Page: "/pages/newService.html", Parent: "MainWindow", Width: "800", Height: "700" }
+  openThisPage = { Page: "/pages/newService.html", Parent: "MainWindow", Width: "800", Height: "570" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }

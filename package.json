@@ -9,6 +9,8 @@
   "author": "AuxWall",
   "license": "ISC",
   "dependencies": {
-    "electron": "^17.0.0"
+    "electron": "^17.0.0",
+    "fs-extra": "^10.0.0",
+    "sqlite3": "^5.0.2"
   }
 }
