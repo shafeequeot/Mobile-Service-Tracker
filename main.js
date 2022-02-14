@@ -1,5 +1,9 @@
 const { app, BrowserWindow, ipcMain, nativeTheme } = require('electron')
 const path = require('path')
+const sqlite3 = require('sqlite3')
+var db = new sqlite3.Database(path.join(app.getPath('userData'), '\DB/dataBase.db'))
+  
+ 
 let MainWindow
 function createWindow () {
    MainWindow = new BrowserWindow({
@@ -104,4 +108,39 @@ ipcMain.handle("createNewWindow", async(event, custWindow) => {
     Page = path.join(__dirname, custWindow.Page)
 
     createSubWindow(Page, MainWindow, parseInt(custWindow.Width), parseInt(custWindow.Height), custWindow.arg);
+})
+
+
+
+// save to Database start
+ipcMain.handle('SaveToDb', async(event, SaveToDb) => {
+
+  return new Promise((resolve, reject) => {
+
+
+
+      svTableDataHead = Object.keys(SaveToDb.tableContent)
+      svTableDataContent = Object.values(SaveToDb.tableContent)
+      svtableName = Object.values(SaveToDb)
+      db.serialize(function() {
+        
+        db.run(`INSERT INTO  ${svtableName[0]} (${svTableDataHead.toString()}) VALUES (${svTableDataContent.toString()})`, function(err) {
+  
+            if (err) {
+                reject(err)
+            } else {
+  
+                resolve(this.lastID)
+            }
+  
+        })
+      })
+      
+
+
+     
+  })
+
+
+
 })
