@@ -48,7 +48,6 @@ btnSave.onclick = evt => {
                 Brand_Name: '"' + txtManufacture.value + '"',
                 Model_No: '"' + txtModelNo.value + '"',
                 IMEI: '"' + txtIMEI.value + '"',
-                IMEI: '"' + txtIMEI.value + '"',
                 Inv_No: '"' + txtInvNo.value + '"',
                 Other: '"' + txtOtherDesc.value + '"',
                 
@@ -78,7 +77,7 @@ btnSave.onclick = evt => {
                     formResult.textContent = 'IMEI code is duplicate, type other IMEI' 
                     txtIMEI.focus()
                 }
-                    else formResult.textContent = 'data note saveda ' + err
+                    else formResult.textContent = 'Could not save ' + err
                 // formResult.textContent = 'data note saved ' + err
                 btnSaveLoader.classList.remove('loader')
                 txtSave.textContent = "Save"

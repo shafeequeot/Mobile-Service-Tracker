@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, nativeTheme } = require('electron')
+const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
 const path = require('path')
 const sqlite3 = require('sqlite3')
 var db = new sqlite3.Database(path.join(app.getPath('userData'), '\DB/dataBase.db'))
@@ -135,12 +135,67 @@ ipcMain.handle('SaveToDb', async(event, SaveToDb) => {
   
         })
       })
-      
+           
+  })
 
+})
+
+
+
+// dialog boxes 
+// show error message
+ipcMain.handle("showMeError", async(event, message) => {
+  return new Promise((res, rej) => {
+
+      dialog.showMessageBox(message.message).then((PRESSED) => {
+          res(PRESSED)
+          if (PRESSED.response == 0 && message.quit)
+
+              app.quit()
+      })
+  })
+
+})
+
+
+
+
+// fetch all data from Database start
+ipcMain.handle('fetchAllDataFromDb', async(event, userRequest) => {
+  let sql = ''
+  return new Promise((resolve, reject) => {
+      sql = `SELECT ${userRequest.tableData}  FROM ${userRequest.tableName} WHERE ${userRequest.where}`
+   
+          db.serialize(async function() {
+              await db.all(sql, [], (err, row) => {
+                  if (err) reject(err)
+
+                  else resolve(row)
+              })
+          })
 
      
   })
+})
 
+// fetch data from Database start
+ipcMain.handle('fetchFromDb', async(event, userRequestingData) => {
 
+  return new Promise((resolve, reject) => {
+ 
+      let whereCondition = ''
+      if (userRequestingData.where) whereCondition = 'WHERE ' + userRequestingData.where
+      sql = `SELECT ${userRequestingData.tableData}  FROM ${userRequestingData.tableName} ${whereCondition}`
+      // console.log(sql)    
+      db.serialize(function() {
+              db.parallelize(function() {
+                  db.get(sql, [], (err, row) => {
+                      if (err) reject(err)
 
+                      else resolve(row)
+                      // db.close()
+                  })
+              })
+          })
+  })
 })
