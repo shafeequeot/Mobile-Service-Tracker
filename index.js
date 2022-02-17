@@ -1,6 +1,10 @@
 const { ipcRenderer } = require('electron')
 const dataBase = require('./config/js/dbConfig')
 
+var $  = require( 'jquery' );
+const commonNames = require('./config/js/commonNames');
+var dt = require( 'datatables.net' )();
+
 // const bootstrap = require('bootstrap')
 
 window.localStorage.Theme ? document.getElementById("toggle-dark-mode").innerHTML = window.localStorage.Theme : document.getElementById("toggle-dark-mode").innerHTML = "Dark"
@@ -67,3 +71,58 @@ rdService.onclick = evt = () =>{
   openThisPage = { Page: "/pages/newService.html", Parent: "MainWindow", Width: "800", Height: "570" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
+
+
+
+
+
+
+function ServiceList(){
+
+  let serviceList = {
+    tableName: commonNames.services +" , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
+    tableData: `'${commonNames.services}'.'id' ,'${commonNames.services}'.'Created_Date' , '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route', '${commonNames.services}'.'Status'`,
+    where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'Sale_Route'`
+
+}
+
+
+ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((membData) => {})
+
+
+  $(document).ready( function () {
+    var data = [
+        [
+            "Tiger Nixon",
+            "System Architect",
+            "Edinburgh",
+            "5421",
+            "2011/04/25",
+            "$3,120"
+        ],
+        [
+            "Garrett Winters",
+            "Director",
+            "Edinburgh",
+            "8422",
+            "2011/07/25",
+            "$5,300"
+        ]
+    ]
+
+
+
+
+
+
+      $('#table_id').DataTable({
+        data: data,
+         });
+    
+    } );
+
+
+}
+
+
+// data table work start

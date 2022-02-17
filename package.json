@@ -9,8 +9,11 @@
   "author": "AuxWall",
   "license": "ISC",
   "dependencies": {
+    "datatables": "^1.10.18",
+    "datatables.net-dt": "^1.11.4",
     "electron": "^17.0.0",
     "fs-extra": "^10.0.0",
+    "jquery": "^3.6.0",
     "sqlite3": "^5.0.2"
   }
 }
