@@ -1,10 +1,13 @@
 const { ipcRenderer } = require("electron");
+const calculateHelpers = require("../config/js/calculateHelpers");
 const commonNames = require("../config/js/commonNames");
 
 
 btnCancel.onclick = evt = ()=>{
     window.close()
 }
+
+let toDay = calculateHelpers.dateFormat(new Date())
 
 
 //   save or update the data to db on save button click
@@ -43,7 +46,7 @@ btnSave.onclick = evt => {
         let purchaseDetials = {
             tableName: commonNames.purchase,
             tableContent: {
-                Created_Date: '"' + new Date() + '"',
+                Created_Date: '"' + toDay + '"',
                 Supplier_Name: '"' + txtSupplier.value + '"',
                 Brand_Name: '"' + txtManufacture.value + '"',
                 Model_No: '"' + txtModelNo.value + '"',
@@ -62,7 +65,7 @@ btnSave.onclick = evt => {
                 formResult.textContent = "All data has been saved!"
                 btnSaveLoader.classList.remove('loader')
                 txtSave.textContent = "Save"
-                txtIMEI.focus()
+                txtSupplier.focus()
                 purchaseForm.reset()
                 btnSave.disabled =  false
 

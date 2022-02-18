@@ -1,10 +1,10 @@
 const { ipcRenderer } = require("electron");
+const calculateHelpers = require("../config/js/calculateHelpers");
 const commonNames = require("../config/js/commonNames");
-
+let toDay = calculateHelpers.dateFormat(new Date())
 btnCancel.onclick = evt = ()=>{
     window.close()
 }
-
 
 //   save or update the data to db on save button click
 
@@ -28,7 +28,7 @@ btnSave.onclick = evt => {
         let saveThisDetials = {
             tableName: commonNames.serviceAgent,
             tableContent: {
-                Created_Date: '"' + new Date() + '"',
+                Created_Date: '"' + toDay + '"',
                 Company_Name: '"' + txtAgent.value + '"',
                 Contact_Person: '"' + txtPerson.value + '"',
                 Location: '"' + txtLocation.value + '"',

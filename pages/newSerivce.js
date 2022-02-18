@@ -1,6 +1,7 @@
 const { ipcRenderer } = require("electron")
+const calculateHelpers = require("../config/js/calculateHelpers")
 const commonNames = require("../config/js/commonNames")
-
+let toDay = calculateHelpers.dateFormat(new Date())
 btnCancel.onclick = evt = ()=>{
     window.close()
 }
@@ -168,7 +169,7 @@ btnSave.onclick = evt => {
             tableName: commonNames.services,
             tableContent: {
              
-                Created_Date: '"' + new Date() + '"',
+                Created_Date: '"' + toDay + '"',
                 Stock: '"' + txtIMEI.value + '"',
                 Sale_Route: '"' + txtRoute.value + '"',
                 Service_Agent: '"' + txtServiceAgent.value + '"',

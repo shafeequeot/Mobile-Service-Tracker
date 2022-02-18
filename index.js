@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron')
 const dataBase = require('./config/js/dbConfig')
 
+
 var $  = require( 'jquery' );
 const commonNames = require('./config/js/commonNames');
 var dt = require( 'datatables.net' )();
@@ -74,55 +75,50 @@ rdService.onclick = evt = () =>{
 
 
 
-
+ServiceList()
 
 
 function ServiceList(){
 
   let serviceList = {
     tableName: commonNames.services +" , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
-    tableData: `'${commonNames.services}'.'id' ,'${commonNames.services}'.'Created_Date' , '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route', '${commonNames.services}'.'Status'`,
-    where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'Sale_Route'`
+    tableData: `'${commonNames.services}'.'Created_Date' , '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route', '${commonNames.services}'.'Status'`,
+    where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id'`
 
 }
 
 
-ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((membData) => {})
 
-
-  $(document).ready( function () {
-    var data = [
-        [
-            "Tiger Nixon",
-            "System Architect",
-            "Edinburgh",
-            "5421",
-            "2011/04/25",
-            "$3,120"
-        ],
-        [
-            "Garrett Winters",
-            "Director",
-            "Edinburgh",
-            "8422",
-            "2011/07/25",
-            "$5,300"
-        ]
-    ]
-
-
-
-
-
-
-      $('#table_id').DataTable({
-        data: data,
-         });
+ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
     
-    } );
+  // data table work start
+  
+  
+  let tableEditor =    $('#serviceList').DataTable({
+    dom: "Bfrtip",
+        data: Data,
+        rowId: 'id',
+        columns: [
+          
+          { data: 'Created_Date' },
+          { data: null, render: function ( data, type, row ) {
+            // Combine the first and last names into a single table field
+            return data.Brand_Name+' '+data.Model_No;
+        } }, 
+          { data: 'Company_Name' },
+          { data: 'Sale_Route' },
+          { data: 'Status' },
+      ]
+         })
 
+         $('#serviceList').on( 'click', 'tr', function () {
+          // Get the rows id value
+          var id = tableEditor.row( this ).id();
+          // Filter for only numbers
+          // Transform to numeric value
+          
+          alert( 'Clicked row id '+id );
+        });
+})
 
 }
-
-
-// data table work start
