@@ -1,8 +1,8 @@
-const { app, BrowserWindow, ipcMain, nativeTheme, dialog } = require('electron')
+const { app, BrowserWindow, ipcMain, nativeTheme, dialog, ipcRenderer } = require('electron')
 const path = require('path')
 const sqlite3 = require('sqlite3')
 var db = new sqlite3.Database(path.join(app.getPath('userData'), '\DB/dataBase.db'))
-  
+let modal
  
 let MainWindow
 function createWindow () {
@@ -76,7 +76,7 @@ app.on('window-all-closed', () => {
 
 
 const createSubWindow = (htmlFile, parentWindow, width, height, arg) => {
-  let modal = new BrowserWindow({
+ modal = new BrowserWindow({
       width: width,
       height: height,
       modal: true,
@@ -97,6 +97,8 @@ const createSubWindow = (htmlFile, parentWindow, width, height, arg) => {
 
   return modal;
 
+
+
 }
 
 
@@ -109,6 +111,8 @@ ipcMain.handle("createNewWindow", async(event, custWindow) => {
 
     createSubWindow(Page, MainWindow, parseInt(custWindow.Width), parseInt(custWindow.Height), custWindow.arg);
 })
+
+
 
 
 
@@ -141,7 +145,12 @@ ipcMain.handle('SaveToDb', async(event, SaveToDb) => {
 })
 
 
+// receiving and passing to other rendererr window
 
+ipcMain.on('dataToRender', (evnt, arg)=>{
+  console.log(arg)
+  MainWindow.webContents.send('argToRender', 'arg')
+})
 // dialog boxes 
 // show error message
 ipcMain.handle("showMeError", async(event, message) => {
@@ -199,3 +208,5 @@ ipcMain.handle('fetchFromDb', async(event, userRequestingData) => {
           })
   })
 })
+
+

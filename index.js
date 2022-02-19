@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron')
 const dataBase = require('./config/js/dbConfig')
-
+let status 
 
 var $  = require( 'jquery' );
 const commonNames = require('./config/js/commonNames');
@@ -82,7 +82,7 @@ function ServiceList(){
 
   let serviceList = {
     tableName: commonNames.services +" , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
-    tableData: `'${commonNames.services}'.'Created_Date' , '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route', '${commonNames.services}'.'Status'`,
+    tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route', '${commonNames.services}'.'Status'`,
     where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id'`
 
 }
@@ -97,7 +97,7 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
   let tableEditor =    $('#serviceList').DataTable({
     dom: "Bfrtip",
         data: Data,
-        rowId: 'id',
+        rowId: "id",
         columns: [
           
           { data: 'Created_Date' },
@@ -107,8 +107,19 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
         } }, 
           { data: 'Company_Name' },
           { data: 'Sale_Route' },
-          { data: 'Status' },
-      ]
+          { data: null, render: function (data, type, row){
+            
+ if (data.Status == 1 )  {
+   status = 'Processing'
+} else if (data.Status == 2 ) 
+{status = 'Service'
+} else if (data.Status == 3) {
+  status = 'Completed'
+} else status = 'Delivered'
+ return status
+          } },
+      ],
+      select: 'true',
          })
 
          $('#serviceList').on( 'click', 'tr', function () {
@@ -116,9 +127,25 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
           var id = tableEditor.row( this ).id();
           // Filter for only numbers
           // Transform to numeric value
+          if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+          tableEditor.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+          if(id){
+            openThisPage = { Page: `/pages/newService.html`, Parent: "MainWindow", Width: "800", Height: "600" }
+            ipcRenderer.invoke('createNewWindow', openThisPage).then(res=>{
+             ipcRenderer.send('argToRender', 'id=333')
+
+            })
           
-          alert( 'Clicked row id '+id );
+          }
         });
 })
 
 }
+ipcRenderer.on('argToRender' ,(key,res)=>{
+  alert(res)
+})

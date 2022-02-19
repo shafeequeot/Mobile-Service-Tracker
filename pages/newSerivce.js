@@ -209,3 +209,6 @@ btnSave.onclick = evt => {
     }
 }
 
+ipcRenderer.on('dataToRender', (event, message)=>{
+    console.log(message)
+})
