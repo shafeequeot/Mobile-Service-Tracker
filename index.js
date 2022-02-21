@@ -135,9 +135,13 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
             $(this).addClass('selected');
         }
           if(id){
-            openThisPage = { Page: `/pages/newService.html`, Parent: "MainWindow", Width: "800", Height: "600" }
-            ipcRenderer.invoke('createNewWindow', openThisPage).then(res=>{
-             ipcRenderer.send('argToRender', 'id=333')
+            openThisPage = { Page: `/pages/newService.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
+          
+            ipcRenderer.invoke('createNewWindow', openThisPage).then((par, res)=>{
+              console.log(res)
+             ipcRenderer.invoke('msgSender', 'id=333').then(res=>{
+              
+             })
 
             })
           
@@ -146,6 +150,4 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
 })
 
 }
-ipcRenderer.on('argToRender' ,(key,res)=>{
-  alert(res)
-})
+

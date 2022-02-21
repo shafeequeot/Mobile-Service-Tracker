@@ -75,7 +75,7 @@ app.on('window-all-closed', () => {
 
 
 
-const createSubWindow = (htmlFile, parentWindow, width, height, arg) => {
+const createSubWindow = (htmlFile, parentWindow, width, height, arg, id) => {
  modal = new BrowserWindow({
       width: width,
       height: height,
@@ -84,6 +84,7 @@ const createSubWindow = (htmlFile, parentWindow, width, height, arg) => {
       icon: path.join(__dirname + '/public/auxwall/logos/favicon.png'),
       parent: parentWindow,
       frame: false,
+      // show: false,
       webPreferences: {
           contextIsolation: false,
           nodeIntegration: true,
@@ -91,7 +92,9 @@ const createSubWindow = (htmlFile, parentWindow, width, height, arg) => {
       }
   })
 
-  modal.loadFile(htmlFile)
+  modal.loadFile(htmlFile).then(res=>{
+    if (id) modal.webContents.send('gotID', id)  
+  })
 
 
 
@@ -109,7 +112,7 @@ ipcMain.handle("createNewWindow", async(event, custWindow) => {
 
     Page = path.join(__dirname, custWindow.Page)
 
-    createSubWindow(Page, MainWindow, parseInt(custWindow.Width), parseInt(custWindow.Height), custWindow.arg);
+    createSubWindow(Page, MainWindow, parseInt(custWindow.Width), parseInt(custWindow.Height), custWindow.arg, custWindow.id);
 })
 
 
@@ -145,12 +148,6 @@ ipcMain.handle('SaveToDb', async(event, SaveToDb) => {
 })
 
 
-// receiving and passing to other rendererr window
-
-ipcMain.on('dataToRender', (evnt, arg)=>{
-  console.log(arg)
-  MainWindow.webContents.send('argToRender', 'arg')
-})
 // dialog boxes 
 // show error message
 ipcMain.handle("showMeError", async(event, message) => {
@@ -210,3 +207,13 @@ ipcMain.handle('fetchFromDb', async(event, userRequestingData) => {
 })
 
 
+
+// receiving and passing to other rendererr window
+
+ipcMain.handle('msgSender', (evnt, arg)=>{
+  console.log(arg)
+ 
+
+    modal.webContents.send('msgReceiver', 'from Main')
+
+})
