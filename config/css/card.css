@@ -35,6 +35,11 @@
     padding: 8px;
 }
 
+.max-Height-250 {
+    max-height: 250px;
+    padding: 8px;
+}
+
 .max-Height-380 {
     max-height: 380px;
     padding: 8px;

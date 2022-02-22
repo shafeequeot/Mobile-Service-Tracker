@@ -37,36 +37,38 @@ function bringPromotionDetials(serviceId) {
 // bring status history
     let statusDateHistory = {
         tableName: commonNames.serviceStatus ,
-        tableData: `'id' , 'Created_Date' , 'Serv_Req', 'Status'`,
-        where: `Serv_Req = ${serviceId}`
+        tableData: `*`,
+        where: `"Serv_Req" = "${serviceId}" ORDER BY 'Created_Date' DESC`
 
     }
-
+let eachStatus
     ipcRenderer.invoke("fetchAllDataFromDb", statusDateHistory).then((statusHist) => {
+        console.log(statusHist)
         statusHist.forEach((statusElements, idx) => {
-            
-            console.log(statusElements.id)
-            
-          
-    //         calculateHelpers.serviceStatus(Element.Status).then((result) => {
-    //             const promoContent = `
-    //                 <div class="card">
-    //     <div class="flexGroup">
-    //         <h3 id="Staff:" class="col-1">${Element.result}</h3>
-    //     </div>
+        
+       if (statusElements.Status == 1) eachStatus = 'Received for Repair'
+       else if (statusElements.Status == 2) eachStatus = 'Given to repair center'
+       else if (statusElements.Status == 3) eachStatus = 'Received from rapair Center'
+       else if (statusElements.Status == 4) eachStatus = 'Delivered to client' 
+       else eachStatus = 'Not recorded' 
+                const promoContent = `
+                    <div class="card">
+        <div class="flexGroup">
+            <h3 id="Staff:" class="col-1">${eachStatus}</h3>
+        </div>
        
-    //     <div class="flexGroup">
-    //         <div class="col-1"><span class="AuxGray">Created on ${Element.Created_Date}</span></div>
+        <div class="flexGroup">
+            <div class="col-1"><span class="AuxGray">Dated on ${statusElements.Created_Date}</span></div>
            
-    //         </div>
-    //     </div>
-    // </div>
-    //               `;
+            </div>
+        </div>
+    </div>
+                  `;
 
-    //             // Append newyly created card promoElement to the container
-    //             divServiceHistory.innerHTML += promoContent;
-    //             // Construct card content
-    //         })
+                // Append newyly created card promoElement to the container
+                divServiceHistory.innerHTML += promoContent;
+                // Construct card content
+           
         })
     })
 }
