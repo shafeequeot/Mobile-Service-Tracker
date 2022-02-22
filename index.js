@@ -69,7 +69,7 @@ rdAgent.onclick = evt = () =>{
 }
 
 rdService.onclick = evt = () =>{
-  openThisPage = { Page: "/pages/newService.html", Parent: "MainWindow", Width: "800", Height: "570" }
+  openThisPage = { Page: "/pages/newService.html", Parent: "MainWindow", Width: "800", Height: "600" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
@@ -135,15 +135,32 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
             $(this).addClass('selected');
         }
           if(id){
-            openThisPage = { Page: `/pages/newService.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
-          
-            ipcRenderer.invoke('createNewWindow', openThisPage).then((par, res)=>{
-              console.log(res)
-             ipcRenderer.invoke('msgSender', 'id=333').then(res=>{
-              
-             })
 
+            let dialogMessage = {
+              message: {
+                  type: 'warning',
+                  buttons: ["Update", "View"],
+                  message: "Do you wish to View or Update?",
+                  title: "View or Update?"
+              },
+              quit: false
+          }
+          ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
+            console.log(confirmed)  
+            if (!confirmed.response){
+              openThisPage = { Page: `/pages/newService.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
+          
+              ipcRenderer.invoke('createNewWindow', openThisPage).then((par, res)=>{
+        
+              })
+
+              }else{
+                openThisPage = { Page: `/pages/viewServiceStatus.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
+          
+                ipcRenderer.invoke('createNewWindow', openThisPage)
+              }
             })
+          
           
           }
         });

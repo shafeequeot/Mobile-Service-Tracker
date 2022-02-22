@@ -23,3 +23,9 @@
     height: 30vh;
    
 }
+
+.serviceView{
+    display: grid;
+    grid-template-columns: 100px auto;
+    gap: 12px;
+    }

@@ -21,7 +21,7 @@
 
 
         <div class="heading">
-            <h2>NEW SERVICE REQUEST</h2>
+            <h2 id="heading">SERVICE REQUEST</h2>
         </div>
 
         <form method="POST" id="purchaseForm" name="purchaseForm">
@@ -32,20 +32,24 @@
                 <input type="hidden" id="companyId" name="companyId" value="0" />
 
               
-       
+                
 <div class="Grid-3">
 
-    <div class="margin-top-1rem">
+   
+
+
+
+    <div >
         <label for="txtIMEI">IMEI</label>
         <input class="input-feild" type="text" name="txtIMEI" id="txtIMEI" required placeholder="Enter IMEI No." />
     </div>
 
-     <div class="margin-top-1rem">
+     <div >
         <label for="txtBrand">Brand</label>
         <input class="input-feild" type="text" disabled name="txtBrand" id="txtBrand" required placeholder="Brand name" />
     </div>
 
-    <div class="margin-top-1rem">
+    <div >
         <label for="txtModelNo">Model No.</label>
         <input class="input-feild" type="text" disabled name="txtModelNo" id="txtModelNo" required placeholder="Model No." />
     </div>
@@ -79,7 +83,17 @@
                     <label for="txtOtherDesc">Other Description</label>
                     <textarea class="input-feild-area" rows="5" name="txtOtherDesc" id="txtOtherDesc" required placeholder="Description" ></textarea>
                 </div> 
+                <div id="divStatus" class="margin-top-1rem hisdeMe">
 
+                    <label for="txtStatus">Status</label>
+                    <select class="input-feild" name="txtStatus" id="txtStatus" required autofocus placeholder="Select Status">
+                        <option value="1" selected>Collected from Client</option>
+                        <option value="2">Handover to Agent</option>
+                        <option value="3">Collected from Agent</option>
+                        <option value="4">Delivered</option>
+                    </select>
+                
+                </div>
                 
                 <div class="btnGroup">
                     <div class="message" id='formResult'></div>

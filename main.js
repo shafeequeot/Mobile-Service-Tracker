@@ -207,13 +207,24 @@ ipcMain.handle('fetchFromDb', async(event, userRequestingData) => {
 })
 
 
+// update data in Database start 
 
-// receiving and passing to other rendererr window
 
-ipcMain.handle('msgSender', (evnt, arg)=>{
-  console.log(arg)
- 
 
-    modal.webContents.send('msgReceiver', 'from Main')
 
+ipcMain.handle('UpdateToDb', async(event, SaveToDb) => {
+
+  return new Promise((resolve, reject) => {
+               db.serialize(function() {
+              db.exec(`UPDATE "${SaveToDb.tableName}" SET ${SaveToDb.setContent.toString()} WHERE ${SaveToDb.where};`, (err) => {
+                  if (err) {
+                      reject(err)
+                  } else {
+                      resolve('Updated!')
+                  }
+              })
+          })
+  })
 })
+
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+    <link rel="stylesheet" href="../config/css/style.css">
+    <link rel="stylesheet" href="../config/css/grid-Style.css">
+    <link rel="stylesheet" href="../config/css/card.css" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Auxwall - Mobile Repair Tracking System</title>
+</head>
+
+<body>
+
+
+
+    <div class="container">
+
+
+        <div class="heading">
+            <h2>SERVICE HISTORY</h2>
+        </div>
+        <div class="serviceView">
+            <div>
+                Device:
+            </div>
+            <div id="phoneName">
+                N/a
+            </div>
+            <div>
+                IMEI:
+            </div>
+            <div id="phoneIMEI">
+                N/a
+            </div>
+
+            <div>
+                Service Agent:
+            </div>
+            <div id="serviceAgent">
+                N/a
+            </div>
+
+            <div>
+                Sale Route:
+            </div>
+            <div id="saleRoute">
+                N/a
+            </div>
+            <div>
+                Current Status:
+            </div>
+            <div id="currentStatus">
+                N/a
+            </div>
+            <div>
+                Description:
+            </div>
+            <div id="description">
+                N/a
+            </div>
+        </div>
+        <div id="divServiceHistory" name="divServiceHistory" class="max-Height-380 overFlowActive">
+         
+        </div>
+        <div class="btnGroup">
+            <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="./viewServiceStatus.js"> </script>
+</body>
+
+
+</html>
+
+
+<!-- git password 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 -->

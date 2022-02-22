@@ -1,0 +1,54 @@
+.card {
+    /* background-color: red; */
+    padding: 8px;
+    border-radius: var(--border-radios);
+    border: var(--aux-gray) 0.5px solid;
+    margin-top: 8px;
+    align-items: center;
+    text-align: start;
+}
+
+.card>.flexGroup {
+    padding-top: 6px;
+    margin: 0;
+    position: relative;
+}
+
+.card>.flexGroup span {
+    position: absolute;
+    bottom: 0;
+}
+
+.card-heading {
+    text-align: start;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.staffDetials {
+    max-height: 420px;
+    padding: 8px;
+}
+
+.max-Height-320 {
+    max-height: 320px;
+    padding: 8px;
+}
+
+.max-Height-380 {
+    max-height: 380px;
+    padding: 8px;
+}
+
+.staffList {
+    max-height: 400px;
+    padding-right: 8px;
+}
+
+.ListHeadding {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
