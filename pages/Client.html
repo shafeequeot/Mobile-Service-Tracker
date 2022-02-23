@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" href="../config/css/style.css">
     <link rel="stylesheet" href="../config/css/grid-Style.css">
+    <link rel="stylesheet" href="../config/css/dataTable.css">
+    <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.min.css">
 
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
@@ -70,9 +72,20 @@
                     <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
                 </div>
 
-                <div class="Table">
-                    here will be the list of clients
-                </div>
+                
+                <div class="dataTable">
+                    <table id="serviceAgent" class="display">
+                      <thead>
+                          <tr>
+                              <th>Route</th>
+                              <th>Description</th>                                                 
+                          </tr>
+                      </thead>
+                      <tbody>
+                   
+                      </tbody>
+                  </table>
+                  </div>
             </div>
         </form>
     </div>

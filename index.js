@@ -53,8 +53,8 @@ rdStock.onclick = evt = () =>{
 }
 
 
-rdSalesMen.onclick = evt = () =>{
-  openThisPage = { Page: "/pages/Client.html", Parent: "MainWindow", Width: "800", Height: "700" }
+rdPurchaseList.onclick = evt = () =>{
+  openThisPage = { Page: "/pages/InventoryList.html", Parent: "MainWindow", Width: "800", Height: "700" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
