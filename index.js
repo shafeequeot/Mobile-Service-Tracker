@@ -59,7 +59,7 @@ rdSalesMen.onclick = evt = () =>{
 }
 
 rdSalesRoute.onclick = evt = () =>{
-  openThisPage = { Page: "/pages/salesRoute.html", Parent: "MainWindow", Width: "700", Height: "500" }
+  openThisPage = { Page: "/pages/salesRoute.html", Parent: "MainWindow", Width: "700", Height: "600" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
@@ -149,14 +149,12 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
             console.log(confirmed)  
             if (!confirmed.response){
               openThisPage = { Page: `/pages/newService.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
-          
               ipcRenderer.invoke('createNewWindow', openThisPage).then((par, res)=>{
         
               })
 
               }else{
                 openThisPage = { Page: `/pages/viewServiceStatus.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
-          
                 ipcRenderer.invoke('createNewWindow', openThisPage)
               }
             })
