@@ -21,30 +21,7 @@ document.getElementById('toggle-dark-mode').addEventListener('click', async () =
 })
 
 
-var circle = document.getElementById('crlTotalStock');
-var radius = circle.r.baseVal.value;
-var circumference = radius * 2 * Math.PI;
-circle.style.strokeDasharray = `${circumference} ${circumference}`;
-circle.style.strokeDashoffset = `${circumference}`;
 
-function setProgress(percent) {
-  const offset = circumference - percent / 100 * circumference;
-  circle.style.strokeDashoffset = offset;
-}
-
-
-// dataBase.then((res)=>{
-//   alert('okey')
-// })
-
-const input = 55
-setProgress(input);
-
-// input.addEventListener('change', function(e) {
-//   if (input.value < 101 && input.value > -1) {
-//     setProgress(input.value);
-//   }  
-// })
 
 
 rdStock.onclick = evt = () =>{
@@ -98,6 +75,7 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
     dom: "Bfrtip",
         data: Data,
         rowId: "id",
+        destroy: true,
         columns: [
           
           { data: 'Created_Date' },
@@ -166,3 +144,70 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
 
 }
 
+
+
+// updating circle detials
+function circleDetials(Circle, input){
+
+
+  var circle = document.getElementById(Circle);
+  var radius = circle.r.baseVal.value;
+  var circumference = radius * 2 * Math.PI;
+  circle.style.strokeDasharray = `${circumference} ${circumference}`;
+  circle.style.strokeDashoffset = `${circumference}`;
+  
+  function setProgress(percent) {
+    const offset = circumference - percent / 100 * circumference;
+    circle.style.strokeDashoffset = offset;
+  }
+  
+  
+ 
+  
+  setProgress(input);
+  
+ 
+
+
+
+}
+
+
+
+
+
+
+
+
+
+let fetchSingQuery = {
+  tableName: commonNames.services,
+  tableData: `sum(case when Status = 1 then 1 else 0 end) as RcFromClnt,  
+  sum(case when Status = 2 then 1 else 0 end) as GaveToService,-- only count status 0
+  sum(case when Status = 3 then 1 else 0 end) as GotFromService,-- only count status 0
+  sum(case when Status = 4 then 1 else 0 end) as Delivered,-- only count status 0
+  count(*) as totals`,
+  where: "`id` = `id`"
+}
+
+function updateCircle(){
+
+  ipcRenderer.invoke("fetchFromDb", fetchSingQuery).then((gotDetials) => {
+    circleDetials('crlTotalStock','100')
+  let serviceCount = ( (gotDetials.RcFromClnt + gotDetials.GaveToService + gotDetials.GotFromService) / gotDetials.totals )*100
+  circleDetials('crlTotalService',serviceCount)
+  let completedCount = ( gotDetials.Delivered / gotDetials.totals )*100
+  circleDetials('crlTotalDone',completedCount)
+    console.log(gotDetials)
+    lblTotalStock.innerHTML = gotDetials.totals
+    lblTotalService.innerHTML = gotDetials.RcFromClnt + gotDetials.GaveToService + gotDetials.GotFromService
+    lblTotalDone.innerHTML = gotDetials.Delivered
+  })
+}
+
+updateCircle()
+
+ipcRenderer.on('somethingUpdated',()=>{
+  updateCircle()
+  ServiceList()
+})

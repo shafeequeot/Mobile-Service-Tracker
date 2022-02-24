@@ -228,3 +228,39 @@ ipcMain.handle('UpdateToDb', async(event, SaveToDb) => {
 })
 
 
+// delete data from database 
+
+
+ipcMain.handle('DeleteFromDb', async(event, Db) => {
+
+  return new Promise((resolve, reject) => {
+
+     
+          db.serialize(function() {
+
+              db.exec(`DELETE FROM "${Db.tableName}"  WHERE ${Db.where};`, (err) => {
+
+                  if (err) {
+                      reject(err)
+                  } else {
+
+                      resolve('Deleted!')
+                  }
+
+              })
+          })
+
+
+     
+  })
+
+})
+
+
+
+// let know updations main page
+
+ipcMain.handle('somthingUpdated', () => {
+
+  MainWindow.webContents.send('somethingUpdated')
+})

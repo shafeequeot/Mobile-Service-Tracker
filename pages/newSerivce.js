@@ -4,7 +4,10 @@ const commonNames = require("../config/js/commonNames")
 let serviceId, currentStatus, saveNewUpdates
 let toDay = calculateHelpers.dateFormat(new Date())
 btnCancel.onclick = evt = () => {
-    window.close()
+    ipcRenderer.invoke('somthingUpdated').then(()=>{
+
+        window.close()
+    })
 }
 
 
@@ -163,7 +166,14 @@ btnSave.onclick = evt => {
             btnSaveLoader.classList.remove('loader')
             txtSave.textContent = "Save"
             txtRoute.focus()
-        } else {
+        } else if (txtServiceAgent.value == '0') {
+            formResult.classList.add('Error')
+            formResult.textContent = "Select Service Agent"
+            btnSaveLoader.classList.remove('loader')
+            txtSave.textContent = "Save"
+            txtServiceAgent.focus()
+        } 
+        else {
             btnSave.disabled = true
             let updateThis = {
                 tableName: `${commonNames.services}`,
@@ -242,6 +252,12 @@ btnSave.onclick = evt => {
             btnSaveLoader.classList.remove('loader')
             txtSave.textContent = "Save"
             txtRoute.focus()
+        } else if (txtServiceAgent.value == '0') {
+            formResult.classList.add('Error')
+            formResult.textContent = "Select Service Agent"
+            btnSaveLoader.classList.remove('loader')
+            txtSave.textContent = "Save"
+            txtServiceAgent.focus()
         } else {
             btnSave.disabled = true
             let ServiceReqDetials = {

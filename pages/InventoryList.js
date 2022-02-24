@@ -3,7 +3,7 @@ const commonNames = require("../config/js/commonNames")
 var $ = require('jquery');
 var dt = require('datatables.net')();
 btnCancel.onclick = evt = () => {
-    window.close()
+  window.close()
 }
 
 
@@ -12,82 +12,88 @@ btnCancel.onclick = evt = () => {
 ServiceList()
 
 
-function ServiceList(){
+function ServiceList() {
 
   let serviceList = {
-    tableName:  commonNames.purchase ,
+    tableName: commonNames.purchase,
     tableData: `*`,
     where: `id = id`
 
-}
+  }
 
 
 
-ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
-    
-  // data table work start
-  
-  
-  let tableEditor =    $('#inventoryList').DataTable({
-    dom: "Bfrtip",
-        data: Data,
-        rowId: "id",
-        columns: [
-          
-          { data: 'Created_Date' },
-          { data: 'Supplier_Name' },
-          { data: null, render: function ( data, type, row ) {
+  ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
+
+    // data table work start
+
+
+    let tableEditor = $('#inventoryList').DataTable({
+      dom: "Bfrtip",
+      data: Data,
+      rowId: "id",
+      destroy: true,
+      columns: [
+
+        { data: 'Created_Date' },
+        { data: 'Supplier_Name' },
+        {
+          data: null, render: function (data, type, row) {
             // Combine the first and last names into a single table field
-            return data.Brand_Name+' '+data.Model_No;
-        } }, 
-        
-          { data: 'IMEI' },
-          { data: 'Inv_No' },
-          { data: 'Other'},
+            return data.Brand_Name + ' ' + data.Model_No;
+          }
+        },
+
+        { data: 'IMEI' },
+        { data: 'Inv_No' },
+        { data: 'Other' },
+        {
+          data: null,
+          className: "dt-center editor-delete",
+          defaultContent: '<i class="fa fa-trash"/>',
+          orderable: false
+        }
       ],
       select: 'true',
-         })
+    })
 
-         $('#inventoryList').on( 'click', 'tr', function () {
-          // Get the rows id value
-          var id = tableEditor.row( this ).id();
-          // Filter for only numbers
-          // Transform to numeric value
-          if ( $(this).hasClass('selected') ) {
-            $(this).removeClass('selected');
-        }
-        else {
-          tableEditor.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
-          if(id){
 
-            let dialogMessage = {
-              message: {
-                  type: 'warning',
-                  buttons: ["Update", "View"],
-                  message: "Do you wish to View or Update?",
-                  title: "View or Update?"
-              },
-              quit: false
-          }
-          ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
-            console.log(confirmed)  
-            if (!confirmed.response){
-              openThisPage = { Page: `/pages/newService.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
-              ipcRenderer.invoke('createNewWindow', openThisPage).then((par, res)=>{
-        
-              })
+    
 
-              }else{
-                openThisPage = { Page: `/pages/viewServiceStatus.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
-                ipcRenderer.invoke('createNewWindow', openThisPage)
-              }
-            })
-          
-          
-          }
-        });
-})
+
+  })
 
 }
+
+$('#inventoryList').on('click', 'td.editor-delete', function (e) {
+  e.preventDefault();
+
+
+  let dialogMessage = {
+    message: {
+      type: 'warning',
+      buttons: ["Delete", "No"],
+      message: "Are your sure to delete? Can't revert back",
+      title: "Are you sure?"
+    },
+    quit: false
+  }
+  ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
+    if (!confirmed.response) {
+
+      let deleteQuery = {
+        tableName: `${commonNames.purchase}`,
+        where: `id = ${$(this).closest('tr')[0].id}`
+      }
+
+      ipcRenderer.invoke("DeleteFromDb", deleteQuery).then((id) => {
+
+        console.log(`has been Deleted!` + id)
+        ServiceList()
+      })
+
+    }
+  })
+
+
+});
