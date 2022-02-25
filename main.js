@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, nativeTheme, dialog, ipcRenderer } = require('electron')
+const { app, BrowserWindow, ipcMain, nativeTheme, dialog, ipcRenderer, Menu } = require('electron')
 const path = require('path')
 const sqlite3 = require('sqlite3')
 var db = new sqlite3.Database(path.join(app.getPath('userData'), '\DB/dataBase.db'))
@@ -20,9 +20,8 @@ function createWindow () {
   })
 
   MainWindow.loadFile('index.html')
+MainWindow.maximize()
 
-// Window.localStorage.dbPath =  "path.join(app.getPath('userData'), '\DB/dataBase.sql')"
-// database location to Renderer
 
 // send user data path to render page
 ipcMain.handle('userDataPath', async(e, sav) => {
@@ -81,7 +80,7 @@ const createSubWindow = (htmlFile, parentWindow, width, height, arg, id) => {
       height: height,
       modal: true,
       resizable: false,
-      icon: path.join(__dirname + '/public/auxwall/logos/favicon.png'),
+      icon: path.join(__dirname + 'public/auxwall/logos/favicon.svg'),
       parent: parentWindow,
       frame: false,
       // show: false,
@@ -264,3 +263,98 @@ ipcMain.handle('somthingUpdated', () => {
 
   MainWindow.webContents.send('somethingUpdated')
 })
+
+
+// custimze Menu 
+const isMac = process.platform === 'darwin'
+
+const template = [
+  // { role: 'appMenu' }
+  ...(isMac ? [{
+    label: app.name,
+    submenu: [
+      { role: 'about' },
+      { type: 'separator' },
+      { role: 'services' },
+      { type: 'separator' },
+      { role: 'hide' },
+      { role: 'hideOthers' },
+      { role: 'unhide' },
+      { type: 'separator' },
+      { role: 'quit' }
+    ]
+  }] : []),
+  // { role: 'fileMenu' }
+  {
+    label: 'File',
+    submenu: [
+      {label: 'New Service', click(){createSubWindow("pages/newService.html",MainWindow,800,700)},
+      accelerator: process.platform === 'darwin' ? 'Cmd+N' : 'Ctrl+N'},
+      {label: 'Service Agent', click(){createSubWindow("pages/serviceAgent.html",MainWindow,800,700)}},
+      {label: 'Sales Route', click(){createSubWindow("pages/salesRoute.html",MainWindow,800,700)}},
+      {label: 'Add New Product', click(){createSubWindow("pages/purchase.html",MainWindow,800,700)}},
+      {label: 'Inventory List', click(){createSubWindow("pages/InventoryList.html",MainWindow,800,700)}},
+      { type: 'separator' },
+      isMac ? { role: 'close' } : { role: 'quit' }
+    ]
+  },
+  // { role: 'editMenu' }
+  {
+    label: 'Edit',
+    submenu: [
+          ...(isMac ? [
+      
+        {
+          label: 'Speech',
+          submenu: [
+            { role: 'startSpeaking' },
+            { role: 'stopSpeaking' }
+          ]
+        }
+      ] : [
+        
+      ])
+    ]
+  },
+  // { role: 'viewMenu' }
+  {
+    label: 'View',
+    submenu: [
+
+    
+      { type: 'separator' },
+      { role: 'togglefullscreen' }
+    ]
+  },
+  // { role: 'windowMenu' }
+  {
+    label: 'Window',
+    submenu: [
+      { role: 'minimize' },
+      
+      ...(isMac ? [
+        { type: 'separator' },
+        { role: 'front' },
+        { type: 'separator' },
+        { role: 'window' }
+      ] : [
+        { role: 'close' }
+      ])
+    ]
+  },
+  {
+    role: 'help',
+    submenu: [
+      {
+        label: 'Learn More',
+        click: async () => {
+          const { shell } = require('electron')
+          await shell.openExternal('https://auxwall.com')
+        }
+      }
+    ]
+  }
+]
+
+const menu = Menu.buildFromTemplate(template)
+Menu.setApplicationMenu(menu)
