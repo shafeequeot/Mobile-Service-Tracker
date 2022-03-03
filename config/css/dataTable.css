@@ -112,3 +112,12 @@ table.dataTable thead th.sorting_asc:after {
 table.dataTable thead th.sorting_desc:after {
   content: "\f0dd" !important;
 }
+
+.width-100{
+  width: 100% !important;
+}
+
+.inventoryTable{
+  min-height: 500px;
+}
+

@@ -971,3 +971,10 @@ position: absolute;
 
 }
 
+.strong{
+    font-weight: 700;
+}
+
+.progSpace{
+    height: 12fr;
+}

@@ -50,6 +50,10 @@ rdService.onclick = evt = () =>{
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
+rdReport.onclick = evt = () =>{
+  openThisPage = { Page: "/pages/Reports.html", Parent: "MainWindow", Width: "800", Height: "600" }
+  ipcRenderer.invoke('createNewWindow', openThisPage)
+}
 
 
 ServiceList()
@@ -59,7 +63,7 @@ function ServiceList(){
 
   let serviceList = {
     tableName: commonNames.services +" , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
-    tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route', '${commonNames.services}'.'Status'`,
+    tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'CSR_No' , '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route', '${commonNames.services}'.'Status'`,
     where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id'`
 
 }
@@ -83,6 +87,8 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
             // Combine the first and last names into a single table field
             return data.Brand_Name+' '+data.Model_No;
         } }, 
+        { data: 'CSR_No' },
+
           { data: 'Company_Name' },
           { data: 'Sale_Route' },
           { data: null, render: function (data, type, row){
@@ -93,8 +99,10 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
 {status = 'Service'
 } else if (data.Status == 3) {
   status = 'Completed'
-} else status = 'Delivered'
- return status
+} else if (data.Status == 4) {
+  status = '<span class="Success">Delivered <i class="fa-solid fa-check"></i> </span>'
+} else status = '<span class="Error">Dead  </span>'
+ return "<strong>" + status + "</strong>"
           } },
       ],
       select: 'true',
@@ -116,22 +124,22 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
 
             let dialogMessage = {
               message: {
-                  type: 'warning',
-                  buttons: ["Update", "View"],
-                  message: "Do you wish to View or Update?",
+                  type: 'question',
+                  buttons: ["Close","Update", "View Detials"],
+                  message: "Do you wish to",
                   title: "View or Update?"
               },
               quit: false
           }
           ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
             console.log(confirmed)  
-            if (!confirmed.response){
+            if (confirmed.response == 1){
               openThisPage = { Page: `/pages/newService.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
               ipcRenderer.invoke('createNewWindow', openThisPage).then((par, res)=>{
         
               })
 
-              }else{
+              }else if(confirmed.response == 2){
                 openThisPage = { Page: `/pages/viewServiceStatus.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
                 ipcRenderer.invoke('createNewWindow', openThisPage)
               }
@@ -186,6 +194,8 @@ let fetchSingQuery = {
   sum(case when Status = 2 then 1 else 0 end) as GaveToService,-- only count status 0
   sum(case when Status = 3 then 1 else 0 end) as GotFromService,-- only count status 0
   sum(case when Status = 4 then 1 else 0 end) as Delivered,-- only count status 0
+  sum(case when Status = 5 then 1 else 0 end) as Dead,-- only count status 0
+
   count(*) as totals`,
   where: "`id` = `id`"
 }
@@ -198,10 +208,13 @@ function updateCircle(){
   circleDetials('crlTotalService',serviceCount)
   let completedCount = ( gotDetials.Delivered / gotDetials.totals )*100
   circleDetials('crlTotalDone',completedCount)
-    console.log(gotDetials)
+  let deadCount = ( gotDetials.Dead / gotDetials.totals )*100
+    circleDetials('crlTotalDead',deadCount) 
     lblTotalStock.innerHTML = gotDetials.totals
     lblTotalService.innerHTML = gotDetials.RcFromClnt + gotDetials.GaveToService + gotDetials.GotFromService
     lblTotalDone.innerHTML = gotDetials.Delivered
+    
+    lblTotalDead.innerHTML = gotDetials.Dead
   })
 }
 
@@ -216,25 +229,21 @@ ipcRenderer.on('somethingUpdated',()=>{
 
 
 // customize menu
-window.addEventListener('contextmenu', (e) => {
-  e.preventDefault()
-  ipcRenderer.send('show-context-menu')
-})
+// window.addEventListener('contextmenu', (e) => {
+//   e.preventDefault()
+//   ipcRenderer.send('show-context-menu')
+// })
 
-ipcRenderer.on('context-menu-command', (e, command) => {
-  // ...
-})
+// ipcRenderer.on('context-menu-command', (e, command) => {
+//   const template = [
+//         {
+//           label: 'Menu Item 1',
+//           click: () => { event.sender.send('context-menu-command', 'menu-item-1') }
+//         },
+//         { type: 'separator' },
+//         { label: 'Menu Item 2', type: 'checkbox', checked: true }
+//       ]
+//       const menu = Menu.buildFromTemplate(template)
+//       menu.popup(BrowserWindow.fromWebContents(event.sender))
+// })
 
-// main
-ipcMain.on('show-context-menu', (event) => {
-  const template = [
-    {
-      label: 'Menu Item 1',
-      click: () => { event.sender.send('context-menu-command', 'menu-item-1') }
-    },
-    { type: 'separator' },
-    { label: 'Menu Item 2', type: 'checkbox', checked: true }
-  ]
-  const menu = Menu.buildFromTemplate(template)
-  menu.popup(BrowserWindow.fromWebContents(event.sender))
-})

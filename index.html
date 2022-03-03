@@ -40,6 +40,8 @@
       <label for="rdStock">Add new Product</label>
       <input type="radio" name="rdCategory" id="rdPurchaseList" class="btnReportButtons">
       <label for="rdPurchaseList">Product List</label>
+      <input type="radio" name="rdCategory" id="rdReport" class="btnReportButtons">
+      <label for="rdReport">Reports</label>
       <input type="radio" name="rdCategory" id="rdSettings" class="btnReportButtons">
       <label for="rdSettings">Settings</label>
 
@@ -53,16 +55,16 @@
   
       </div>
 
-      <div class="Grid-3 margin-top-1rem">
+      <div class="flexGroup margin-top-1rem progSpace">
 
         <div class="divProgress">
 
-          <span class="pregressTitle">Service <h2 id="lblTotalStock">444</h2></span>
+          <span class="pregressTitle">Service <h2 id="lblTotalStock">NA</h2></span>
 
-          <svg class="progress-ring" width="200" height="200">
+          <svg class="progress-ring" width="10rem" height="10rem">
             <circle class="progress-ring__circle" stroke="white" stroke-width="4" id="crlTotalStock" fill="transparent"
-            r="90"
-            cx="100" cy="100" />
+            r="70"
+            cx="80" cy="80" />
 
           </svg>
 
@@ -70,11 +72,11 @@
 
         <div class="divProgress">
 
-          <span class="pregressTitle">Processing<h2 id="lblTotalService">444</h2></span>
+          <span class="pregressTitle">Processing<h2 id="lblTotalService">NA</h2></span>
 
-          <svg class="progress-ring" width="200" height="200">
-            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalService" fill="transparent" r="90"
-            cx="100" cy="100" />
+          <svg class="progress-ring" width="10rem" height="10rem">
+            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalService" fill="transparent" r="70"
+            cx="80" cy="80" />
 
           </svg>
 
@@ -83,11 +85,23 @@
 
         <div class="divProgress">
 
-          <span class="pregressTitle">Delivered<h2 id="lblTotalDone">444</h2></span>
+          <span class="pregressTitle">Delivered<h2 id="lblTotalDone">NA</h2></span>
 
-          <svg class="progress-ring" width="200" height="200">
-            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalDone" fill="transparent" r="90"
-            cx="100" cy="100" />
+          <svg class="progress-ring" width="10rem" height="10rem">
+            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalDone" fill="transparent" r="70"
+            cx="80" cy="80" />
+
+          </svg>
+
+        </div>
+
+        <div class="divProgress">
+
+          <span class="pregressTitle">Dead<h2 id="lblTotalDead">NA</h2></span>
+
+          <svg class="progress-ring" width="10rem" height="10rem">
+            <circle class="progress-ring__circle" stroke-width="4" id="crlTotalDead" fill="transparent" r="70"
+            cx="80" cy="80" />
 
           </svg>
 
@@ -95,11 +109,12 @@
 
       </div>
 <div class="dataTable">
-  <table id="serviceList" class="display">
+  <table id="serviceList" class="display width-100">
     <thead>
         <tr>
             <th>Date</th>
             <th>Phone</th>
+            <th>CSR No</th>
             <th>Service Agent</th>
             <th>Sale Route</th>
             <th>Status</th>

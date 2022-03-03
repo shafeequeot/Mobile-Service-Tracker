@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+    <link rel="stylesheet" href="../config/css/style.css">
+    <link rel="stylesheet" href="../config/css/grid-Style.css">
+    <link rel="stylesheet" href="../config/css/dataTable.css">
+    <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.min.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Auxwall - Mobile Repair Tracking System</title>
+</head>
+
+<body>
+
+
+
+
+
+    <div class="main">
+        <div class="sideBar">
+
+
+
+
+            <input type="radio" name="rdCategory" id="rdService" class="btnReportButtons">
+            <label for="rdService">Register New</label>
+            <input type="radio" name="rdCategory" id="rdAgent" class="btnReportButtons">
+            <label for="rdAgent">Service Agent</label>
+            <input type="radio" name="rdCategory" id="rdSalesRoute" class="btnReportButtons">
+            <label for="rdSalesRoute">Sales Routes</label>
+            <input type="radio" name="rdCategory" id="rdStock" class="btnReportButtons">
+            <label for="rdStock">Add new Product</label>
+            <input type="radio" name="rdCategory" id="rdPurchaseList" class="btnReportButtons">
+            <label for="rdPurchaseList">Product List</label>
+            <input type="radio" name="rdCategory" id="rdReport" class="btnReportButtons">
+            <label for="rdReport">Reports</label>
+            <input type="radio" name="rdCategory" id="rdSettings" class="btnReportButtons">
+            <label for="rdSettings">Settings</label>
+
+            <div class="btnDarkMode" id="toggle-dark-mode"></div>
+        </div>
+
+
+        <div class="container">
+            <div class="headBlock">
+
+
+            </div>
+
+            <div class="Grid-3 margin-top-1rem">
+
+                <div class="divProgress">
+
+                    <span class="pregressTitle">Service <h2 id="lblTotalStock">444</h2></span>
+
+                    <svg class="progress-ring" width="200" height="200">
+                        <circle class="progress-ring__circle" stroke="white" stroke-width="4" id="crlTotalStock"
+                            fill="transparent" r="90" cx="100" cy="100" />
+
+                    </svg>
+
+                </div>
+
+                <div class="divProgress">
+
+                    <span class="pregressTitle">Processing<h2 id="lblTotalService">444</h2></span>
+
+                    <svg class="progress-ring" width="200" height="200">
+                        <circle class="progress-ring__circle" stroke-width="4" id="crlTotalService" fill="transparent"
+                            r="90" cx="100" cy="100" />
+
+                    </svg>
+
+                </div>
+
+
+                <div class="divProgress">
+
+                    <span class="pregressTitle">Delivered<h2 id="lblTotalDone">444</h2></span>
+
+                    <svg class="progress-ring" width="200" height="200">
+                        <circle class="progress-ring__circle" stroke-width="4" id="crlTotalDone" fill="transparent"
+                            r="90" cx="100" cy="100" />
+
+                    </svg>
+
+                </div>
+
+            </div>
+            <div class="dataTable">
+                <table id="serviceList" class="display">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Phone</th>
+                            <th>CSR No</th>
+                            <th>Service Agent</th>
+                            <th>Sale Route</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="./index.js"> </script>
+</body>
+
+
+</html>

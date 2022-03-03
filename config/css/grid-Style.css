@@ -1,8 +1,18 @@
+.Grid-4{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 12px;
+    }
 .Grid-3{
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 12px;
     }
+    .Grid-2{
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 12px;
+        }
 
 .headBlock{
     /* background-color: #d5ecf4;; */

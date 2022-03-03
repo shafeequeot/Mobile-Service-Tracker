@@ -149,7 +149,7 @@ btnSave.onclick = evt => {
 
     if (txtSave.textContent == "Update") {
        
-        // updating existing requests
+        // updating existing requests 
 
         txtSave.textContent = "Saving.."
         btnSaveLoader.classList.add('loader')
@@ -158,19 +158,25 @@ btnSave.onclick = evt => {
             formResult.classList.add('Error')
             formResult.textContent = "IMEI code is manditory"
             btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Save"
+            txtSave.textContent = "Update"
             txtIMEI.focus()
         } else if (txtRoute.value === '0') {
             formResult.classList.add('Error')
             formResult.textContent = "Select sales route"
             btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Save"
+            txtSave.textContent = "Update"
             txtRoute.focus()
-        } else if (txtServiceAgent.value == '0') {
+        } else if (txtCSR.value == '') {
+            formResult.classList.add('Error')
+            formResult.textContent = "Enter CSR Number"
+            btnSaveLoader.classList.remove('loader')
+            txtSave.textContent = "Update"
+            txtCSR.focus()
+        }else if (txtServiceAgent.value == '0') {
             formResult.classList.add('Error')
             formResult.textContent = "Select Service Agent"
             btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Save"
+            txtSave.textContent = "Update"
             txtServiceAgent.focus()
         } 
         else {
@@ -182,7 +188,8 @@ btnSave.onclick = evt => {
                     `'Sale_Route' = '${txtRoute.value}',
                     'Service_Agent' = '${txtServiceAgent.value}',
                     'Status' = '${txtStatus.value}',
-                    'Other' = '${txtOtherDesc.value}'
+                    'Other' = '${txtOtherDesc.value}',
+                    'CSR_No' = '${txtCSR.value}'
                     `
                 ],
 
@@ -220,7 +227,6 @@ btnSave.onclick = evt => {
                 formResult.classList.add('Error')
                 formResult.classList.remove('success')
                 formResult.textContent = 'Could not complete ' + err
-                // formResult.textContent = 'data note saved ' + err
                 btnSaveLoader.classList.remove('loader')
                 txtSave.textContent = "Update"
                 btnSave.disabled = false
@@ -246,13 +252,19 @@ btnSave.onclick = evt => {
             btnSaveLoader.classList.remove('loader')
             txtSave.textContent = "Save"
             txtIMEI.focus()
-        } else if (txtRoute.value === '0') {
+        } else if (txtCSR.value == '') {
+            formResult.classList.add('Error')
+            formResult.textContent = "Enter CSR Number"
+            btnSaveLoader.classList.remove('loader')
+            txtSave.textContent = "Save"
+            txtCSR.focus()
+        }else if (txtRoute.value === '0') {
             formResult.classList.add('Error')
             formResult.textContent = "Select sales route"
             btnSaveLoader.classList.remove('loader')
             txtSave.textContent = "Save"
             txtRoute.focus()
-        } else if (txtServiceAgent.value == '0') {
+        }  else if (txtServiceAgent.value == '0') {
             formResult.classList.add('Error')
             formResult.textContent = "Select Service Agent"
             btnSaveLoader.classList.remove('loader')
@@ -270,6 +282,7 @@ btnSave.onclick = evt => {
                     Service_Agent: '"' + txtServiceAgent.value + '"',
                     Status: `"${txtStatus.value}"`,
                     Other: '"' + txtOtherDesc.value + '"',
+                    CSR_No: '"' + txtCSR.value + '"'
                 }
             }
 
@@ -328,15 +341,15 @@ ipcRenderer.on('gotID', (key, res) => {
 
     let fetchQuery = {
         tableName: commonNames.services +" , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
-        tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'Service_Agent', '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.services}'.'Sale_Route' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
+        tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'CSR_No', '${commonNames.services}'.'Service_Agent', '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.services}'.'Sale_Route' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
         where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id' AND ${commonNames.services}.'id' = ${serviceId}`
     
     }
 
     ipcRenderer.invoke("fetchFromDb", fetchQuery).then((Mobile) => {
-        console.log(Mobile)
         if (Mobile) {
             txtIMEI.value = Mobile.Stock
+            txtCSR.value = Mobile.CSR_No
             txtBrand.value = Mobile.Brand_Name
             txtModelNo.value = Mobile.Model_No
             txtRoute.value = Mobile.Sale_Route

@@ -71,7 +71,7 @@ $('#inventoryList').on('click', 'td.editor-delete', function (e) {
 
   let dialogMessage = {
     message: {
-      type: 'warning',
+      type: 'error',
       buttons: ["Delete", "No"],
       message: "Are your sure to delete? Can't revert back",
       title: "Are you sure?"

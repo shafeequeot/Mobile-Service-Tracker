@@ -27,78 +27,83 @@
         <form method="POST" id="purchaseForm" name="purchaseForm">
 
             <div class="formGroup">
-
-
                 <input type="hidden" id="companyId" name="companyId" value="0" />
+                <div class="Grid-3">
 
-              
-                
-<div class="Grid-3">
+                    <div>
+                        <label for="txtIMEI">IMEI</label>
+                        <input class="input-feild" autofocus type="text" name="txtIMEI" id="txtIMEI" required
+                            placeholder="Enter IMEI No." />
+                    </div>
 
-   
+                    <div>
+                        <label for="txtBrand">Brand</label>
+                        <input class="input-feild" type="text" disabled name="txtBrand" id="txtBrand" required
+                            placeholder="Brand name" />
+                    </div>
 
+                    <div>
+                        <label for="txtModelNo">Model No.</label>
+                        <input class="input-feild" type="text" disabled name="txtModelNo" id="txtModelNo" required
+                            placeholder="Model No." />
+                    </div>
 
-
-    <div >
-        <label for="txtIMEI">IMEI</label>
-        <input class="input-feild" type="text" name="txtIMEI" id="txtIMEI" required placeholder="Enter IMEI No." />
-    </div>
-
-     <div >
-        <label for="txtBrand">Brand</label>
-        <input class="input-feild" type="text" disabled name="txtBrand" id="txtBrand" required placeholder="Brand name" />
-    </div>
-
-    <div >
-        <label for="txtModelNo">Model No.</label>
-        <input class="input-feild" type="text" disabled name="txtModelNo" id="txtModelNo" required placeholder="Model No." />
-    </div>
-
-
-</div>
- 
-<div class="margin-top-1rem">
-
-    <label for="txtRoute">Sales route</label>
-    <select class="input-feild" name="txtRoute" id="txtRoute" required autofocus placeholder="select Sales route">
-        <option value="00" disabled selected>Sales Route</option>
-        <option value="0">Add New</option>
-    </select>
-
-</div>
-
-<div class="margin-top-1rem">
-
-    <label for="txtServiceAgent">Service Agnet</label>
-    <select class="input-feild" name="txtServiceAgent" id="txtServiceAgent" required autofocus placeholder="Select Service Agnet">
-        <option value="00" disabled selected>Service Agent</option>
-        <option value="0">Add New</option>
-    </select>
-
-</div>
-              
-                
+                </div>
 
                 <div class="margin-top-1rem">
+
+                    <label for="txtCSR">CSR No.</label>
+                    <input type="number" class="input-feild" name="txtCSR" id="txtCSR" required placeholder="CSR Number"/>
+                </div>
+                <div class="Grid-2">
+                    <div class="margin-top-1rem">
+
+                        <label for="txtRoute">Sales route</label>
+                        <select class="input-feild" name="txtRoute" id="txtRoute" required autofocus
+                            placeholder="select Sales route">
+                            <option value="00" disabled selected>Sales Route</option>
+                            <option value="0">Add New</option>
+                        </select>
+
+                    </div>
+
+                    <div class="margin-top-1rem">
+                        <label for="txtServiceAgent">Service Agent</label>
+                        <select class="input-feild" name="txtServiceAgent" id="txtServiceAgent" required autofocus
+                            placeholder="Select Service Agnet">
+                            <option value="00" disabled selected>Service Agent</option>
+                            <option value="0">Add New</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="margin-top-1rem">
                     <label for="txtOtherDesc">Other Description</label>
-                    <textarea class="input-feild-area" rows="5" name="txtOtherDesc" id="txtOtherDesc" required placeholder="Description" ></textarea>
-                </div> 
+                    <textarea class="input-feild-area" rows="5" name="txtOtherDesc" id="txtOtherDesc" required
+                        placeholder="Description"></textarea>
+                </div>
                 <div id="divStatus" class="margin-top-1rem hisdeMe">
 
                     <label for="txtStatus">Status</label>
-                    <select class="input-feild" name="txtStatus" id="txtStatus" required autofocus placeholder="Select Status">
+                    <select class="input-feild" name="txtStatus" id="txtStatus" required autofocus
+                        placeholder="Select Status">
                         <option value="1" selected>Collected from Client</option>
                         <option value="2">Handover to Agent</option>
                         <option value="3">Collected from Agent</option>
                         <option value="4">Delivered</option>
+                        <option value="5">Dead</option>
+
                     </select>
-                
+
                 </div>
-                
+
                 <div class="btnGroup">
                     <div class="message" id='formResult'></div>
-                    <button name="btnSave" id="btnSave" class="btnUpdate"><div id="txtSave">Save</div> <div id="btnSaveLoader"></div> </button>
-                    <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
+                    <button name="btnSave" id="btnSave" class="btnUpdate">
+                        <div id="txtSave">Save</div>
+                        <div id="btnSaveLoader"></div>
+                    </button>
+                    <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div>
+                    </button>
                 </div>
             </div>
         </form>
@@ -108,8 +113,9 @@
 
 
 
-  
-    <script src="./newSerivce.js"> </script>
+
+    <script src="./newSerivce.js">
+    </script>
 </body>
 
 
