@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="../config/css/style.css">
     <link rel="stylesheet" href="../config/css/grid-Style.css">
-    <link rel="stylesheet" href="../config/css/dataTable.css">
+    <link rel="stylesheet" href="../config/css/tabStyle.css">
     <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.min.css">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
@@ -21,101 +21,53 @@
 
 
     <div class="main">
-        <div class="sideBar">
+        <div class="tabset">
+            <!-- Tab 1 -->
+            <input type="radio" name="tabset" id="tab1" aria-controls="CSRDetials" checked>
+            <label for="tab1">CSR Report</label>
+            <!-- Tab 2 -->
+            <input type="radio" name="tabset" id="tab2" aria-controls="AgentDetials">
+            <label for="tab2">Agent Report</label>
+            <!-- Tab 3 -->
+            <input type="radio" name="tabset" id="tab3" aria-controls="RouteDetials">
+            <label for="tab3">Route Report</label>
+            <div class="tab-panels">
 
 
+                <!-- First tab compnay registration starting here  -->
 
 
-            <input type="radio" name="rdCategory" id="rdService" class="btnReportButtons">
-            <label for="rdService">Register New</label>
-            <input type="radio" name="rdCategory" id="rdAgent" class="btnReportButtons">
-            <label for="rdAgent">Service Agent</label>
-            <input type="radio" name="rdCategory" id="rdSalesRoute" class="btnReportButtons">
-            <label for="rdSalesRoute">Sales Routes</label>
-            <input type="radio" name="rdCategory" id="rdStock" class="btnReportButtons">
-            <label for="rdStock">Add new Product</label>
-            <input type="radio" name="rdCategory" id="rdPurchaseList" class="btnReportButtons">
-            <label for="rdPurchaseList">Product List</label>
-            <input type="radio" name="rdCategory" id="rdReport" class="btnReportButtons">
-            <label for="rdReport">Reports</label>
-            <input type="radio" name="rdCategory" id="rdSettings" class="btnReportButtons">
-            <label for="rdSettings">Settings</label>
-
-            <div class="btnDarkMode" id="toggle-dark-mode"></div>
-        </div>
-
-
-        <div class="container">
-            <div class="headBlock">
-
-
-            </div>
-
-            <div class="Grid-3 margin-top-1rem">
-
-                <div class="divProgress">
-
-                    <span class="pregressTitle">Service <h2 id="lblTotalStock">444</h2></span>
-
-                    <svg class="progress-ring" width="200" height="200">
-                        <circle class="progress-ring__circle" stroke="white" stroke-width="4" id="crlTotalStock"
-                            fill="transparent" r="90" cx="100" cy="100" />
-
-                    </svg>
+                <section id="CSRDetials" class="tab-panel">
+                <div class="container Grid-3 margin-top-1rem">
+                    <div class="">
+                        <label for="txtRoute">CSR Number</label>
+                        <input class="input-feild" type="text" name="txtRoute" id="txtRoute" placeholder="Enter CSR No" />
+                    </div>
+                
+                    <div class="">
+                        <label for="dtMonth">Select Month</label>
+                        <input class="input-feild" type="month" name="dtMonth" id="dtMonth" placeholder="Enter Route name" />
+                    </div>
+                    <button name="btnSave" id="btnSave" class="btnSearch"><div id="txtSave">Search</div> <div id="btnSaveLoader"></div> </button>
 
                 </div>
+                </section>
 
-                <div class="divProgress">
+                <section id="AgentDetials" class="tab-panel">
+                    kdjfsdsd
+                </section>
 
-                    <span class="pregressTitle">Processing<h2 id="lblTotalService">444</h2></span>
-
-                    <svg class="progress-ring" width="200" height="200">
-                        <circle class="progress-ring__circle" stroke-width="4" id="crlTotalService" fill="transparent"
-                            r="90" cx="100" cy="100" />
-
-                    </svg>
-
-                </div>
-
-
-                <div class="divProgress">
-
-                    <span class="pregressTitle">Delivered<h2 id="lblTotalDone">444</h2></span>
-
-                    <svg class="progress-ring" width="200" height="200">
-                        <circle class="progress-ring__circle" stroke-width="4" id="crlTotalDone" fill="transparent"
-                            r="90" cx="100" cy="100" />
-
-                    </svg>
-
-                </div>
-
+                <section id="RouteDetials" class="tab-panel">
+                    kdjfsd dd
+                </section>
             </div>
-            <div class="dataTable">
-                <table id="serviceList" class="display">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Phone</th>
-                            <th>CSR No</th>
-                            <th>Service Agent</th>
-                            <th>Sale Route</th>
-                            <th>Status</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                </table>
-            </div>
 
         </div>
-
     </div>
 
-
-    <script src="./index.js"> </script>
+    <script src="./reports.js"> </script>
 </body>
 
 
