@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../config/css/style.css">
     <link rel="stylesheet" href="../config/css/grid-Style.css">
     <link rel="stylesheet" href="../config/css/tabStyle.css">
+    <link rel="stylesheet" href="../config/css/dataTable.css">
+
     <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.min.css">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
@@ -38,7 +40,10 @@
 
 
                 <section id="CSRDetials" class="tab-panel">
-                <div class="container Grid-3 margin-top-1rem">
+                    <div class="container ">
+
+                  
+                <div class=" Grid-3 margin-top-1rem">
                     <div class="">
                         <label for="txtRoute">CSR Number</label>
                         <input class="input-feild" type="text" name="txtRoute" id="txtRoute" placeholder="Enter CSR No" />
@@ -48,8 +53,132 @@
                         <label for="dtMonth">Select Month</label>
                         <input class="input-feild" type="month" name="dtMonth" id="dtMonth" placeholder="Enter Route name" />
                     </div>
-                    <button name="btnSave" id="btnSave" class="btnSearch"><div id="txtSave">Search</div> <div id="btnSaveLoader"></div> </button>
+                    <button name="btnSearch" id="btnSearch" class="btnSearch"><div id="txtSearch">Search</div> <div id="btnSaveLoader"></div> </button>
+                </div>
 
+
+                <div class="serviceView  margin-top-1rem">
+                    <div class="strong">
+                        CSR No.:
+                    </div>
+                    <div id="lblCSRNo">
+                        N/a
+                    </div>
+                    <div class="strong">
+                        Sales Route:
+                    </div>
+                    <div id="lblSalesRoute">
+                        N/a
+                    </div>
+                    <div class="strong">
+                        Total Devices:
+                    </div>
+                    <div id="lblTotalDevice">
+                        N/a
+                    </div>
+        
+                    <div class="dataTable tabContentArea">
+                        <table id="CSRTable" class="display">
+                          <thead>
+                              <tr>
+                                  <th>Vendor</th>
+                                  <th>Contact</th>
+                                  <th>Phone</th>
+                                  <th>Locaiton</th>
+                                                        
+                              </tr>
+                          </thead>
+                          <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                        <tr>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>
+                            <td>Vendor</td>                     
+                        </tr>
+                       
+                          <tbody>
+                       
+                          </tbody>
+                      </table>
+                      </div>
+                </div>
+
+                </div>
+                <div class="btnGroup">
+                    <div class="message" id='formResult'></div>
+                    <button name="btnPrint" id="btnPrint" class="btnUpdate"><div id="txtSave">Print</div> <div id="btnSaveLoader"></div> </button>
+                    <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
                 </div>
                 </section>
 
