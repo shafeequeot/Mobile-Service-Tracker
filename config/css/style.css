@@ -978,3 +978,38 @@ position: absolute;
 .progSpace{
     height: 12fr;
 }
+
+
+
+
+@media print {
+    .Receipt>.container {
+        margin-top: 0rem;
+    }
+    .dontPrint {
+        display: none;
+    }
+    .container {
+        margin: 0px;
+    }
+    .margin-top-3rem {
+        margin-top: 0px;
+        margin: 0px;
+    }
+    .print .lefSign {
+        display: block;
+        margin-top: 3rem;
+        display: grid;
+        justify-items: center;
+        grid-column-start: 1;
+        border-top: solid 2px gray;
+    }
+    .print .rightSign {
+        display: block;
+        margin-top: 3rem;
+        display: grid;
+        justify-items: center;
+        grid-column-end: 5;
+        border-top: solid 2px gray;
+    }
+}

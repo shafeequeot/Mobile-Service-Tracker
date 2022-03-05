@@ -36,6 +36,6 @@
 
 .serviceView{
     display: grid;
-    grid-template-columns: 100px auto;
+    grid-template-columns: 100px auto 100px auto;
     gap: 12px;
     }

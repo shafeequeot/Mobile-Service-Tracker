@@ -15,7 +15,9 @@
 .tabset>input:nth-child(9):checked~.tab-panels>.tab-panel:nth-child(5),
 .tabset>input:nth-child(11):checked~.tab-panels>.tab-panel:nth-child(6) {
     display: block;
-   
+    padding: 0px 0;
+    /* border: 1px solid rgba(0, 0, 0, 0.2); */
+
 }
 
 
@@ -59,14 +61,11 @@
     text-align: center;
 }
 
-.tab-panel {
-    padding: 0px 0;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    height: 100vh;
-    width: 100vw;
-    /* border-top: 1px solid var(--primary-color); */
-}
 
+.panelSize{
+ /* height: 80vh; */
+    width: 100vw;
+}
 
 /*
    Demo purposes only
@@ -81,8 +80,7 @@
 .tabset {
     /* max-width: 65em; */
     width: 100vw;
-    
-    display: grid;
+    display:grid;
 	grid-template-columns: repeat(var(--count, 3), minmax(8em, 1fr));
 	grid-template-rows: auto auto;
    align-items: center  ;

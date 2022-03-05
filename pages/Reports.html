@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
 
-    <link rel="stylesheet" href="../config/css/style.css">
     <link rel="stylesheet" href="../config/css/grid-Style.css">
     <link rel="stylesheet" href="../config/css/tabStyle.css">
     <link rel="stylesheet" href="../config/css/dataTable.css">
+    <link rel="stylesheet" href="../config/css/style.css">
 
     <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.min.css">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
@@ -22,182 +22,184 @@
 
 
 
-    <div class="main">
-        <div class="tabset">
-            <!-- Tab 1 -->
-            <input type="radio" name="tabset" id="tab1" aria-controls="CSRDetials" checked>
-            <label for="tab1">CSR Report</label>
-            <!-- Tab 2 -->
-            <input type="radio" name="tabset" id="tab2" aria-controls="AgentDetials">
-            <label for="tab2">Agent Report</label>
-            <!-- Tab 3 -->
-            <input type="radio" name="tabset" id="tab3" aria-controls="RouteDetials">
-            <label for="tab3">Route Report</label>
-            <div class="tab-panels">
+
+    <div class="tabset">
+        <!-- Tab 1 -->
+        <input type="radio" name="tabset" id="tab1" aria-controls="CSRDetials" checked>
+        <label for="tab1">CSR Report</label>
+        <!-- Tab 2 -->
+        <input type="radio" name="tabset" id="tab2" aria-controls="AgentDetials">
+        <label for="tab2">Agent Report</label>
+        <!-- Tab 3 -->
+        <input type="radio" name="tabset" id="tab3" aria-controls="RouteDetials">
+        <label for="tab3">Route Report</label>
+        <div class="tab-panels dontPrint">
 
 
-                <!-- First tab compnay registration starting here  -->
+            <!-- First tab compnay registration starting here  -->
 
 
-                <section id="CSRDetials" class="tab-panel">
-                    <div class="container ">
+            <section id="CSRDetials" class="tab-panel panelSize">
+                <div class="container ">
 
-                  
-                <div class=" Grid-3 margin-top-1rem">
-                    <div class="">
-                        <label for="txtRoute">CSR Number</label>
-                        <input class="input-feild" type="text" name="txtRoute" id="txtRoute" placeholder="Enter CSR No" />
+                    <div class=" Grid-3 margin-top-1rem">
+                        <div class="">
+                            <label for="txtCSRNo">CSR Number</label>
+                            <input class="input-feild" type="text" name="txtCSRNo" id="txtCSRNo"
+                                placeholder="Enter CSR No" />
+                        </div>
+
+                        <div class="">
+                            <label for="dtCSRMonth">Select Month</label>
+                            <input class="input-feild" type="month" name="dtCSRMonth" id="dtCSRMonth"
+                                placeholder="Enter Route name" />
+                        </div>
+                        <button name="btnCSRSearch" id="btnCSRSearch" class="btnSearch">
+                            <div id="txtCSRSearch">Search</div>
+                            <div id="btnSaveLoader"></div>
+                        </button>
                     </div>
-                
-                    <div class="">
-                        <label for="dtMonth">Select Month</label>
-                        <input class="input-feild" type="month" name="dtMonth" id="dtMonth" placeholder="Enter Route name" />
-                    </div>
-                    <button name="btnSearch" id="btnSearch" class="btnSearch"><div id="txtSearch">Search</div> <div id="btnSaveLoader"></div> </button>
+
+
+                   
                 </div>
 
+            </section>
 
-                <div class="serviceView  margin-top-1rem">
-                    <div class="strong">
-                        CSR No.:
+            <section id="AgentDetials" class="tab-panel panelSize">
+                <div class="container ">
+
+                    <div class=" Grid-3 margin-top-1rem">
+                        <div class="">
+                            <label for="txtServiceAgent">Service Agent</label>
+                        <select class="input-feild" name="txtServiceAgent" id="txtServiceAgent" 
+                            placeholder="Select Service Agnet">
+                            <option value="00" disabled selected>Service Agent</option>
+                        </select>
+                        </div>
+
+                        <div class="">
+                            <label for="dtAgentMonth">Select Month</label>
+                            <input class="input-feild" type="month" name="dtAgentMonth" id="dtAgentMonth"
+                                placeholder="Enter Route name" />
+                        </div>
+                        <button name="btnSearch" id="btnAgentSearch" class="btnSearch">
+                            <div id="txtAgentSearch">Search</div>
+                            <div id="btnSaveLoader"></div>
+                        </button>
                     </div>
-                    <div id="lblCSRNo">
-                        N/a
-                    </div>
-                    <div class="strong">
-                        Sales Route:
-                    </div>
-                    <div id="lblSalesRoute">
-                        N/a
-                    </div>
-                    <div class="strong">
-                        Total Devices:
-                    </div>
-                    <div id="lblTotalDevice">
-                        N/a
-                    </div>
-        
-                    <div class="dataTable tabContentArea">
-                        <table id="CSRTable" class="display">
-                          <thead>
-                              <tr>
-                                  <th>Vendor</th>
-                                  <th>Contact</th>
-                                  <th>Phone</th>
-                                  <th>Locaiton</th>
-                                                        
-                              </tr>
-                          </thead>
-                          <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                        <tr>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>
-                            <td>Vendor</td>                     
-                        </tr>
-                       
-                          <tbody>
-                       
-                          </tbody>
-                      </table>
-                      </div>
+
+
+                    
                 </div>
+            </section>
 
+            <section id="RouteDetials" class="tab-panel panelSize">
+                <div class="container ">
+
+                    <div class=" Grid-3 margin-top-1rem">
+                        <div class="">
+                            <label for="txtRoute">Sales Route</label>
+                        <select class="input-feild" name="txtRoute" id="txtRoute"
+                            placeholder="Select Route">
+                            <option value="00" disabled selected>Sales Route</option>
+                        </select>
+                        </div>
+
+                        <div class="">
+                            <label for="dtSalesMonth">Select Month</label>
+                            <input class="input-feild" type="month" name="dtSalesMonth" id="dtSalesMonth"
+                                placeholder="Select the date" />
+                        </div>
+                        <button name="btnSalesSearch" id="btnSalesSearch" class="btnSearch">
+                            <div id="txtSalesSearch">Search</div>
+                            <div id="btnSaveLoader"></div>
+                        </button>
+                    </div>
+
+
+                    
                 </div>
-                <div class="btnGroup">
-                    <div class="message" id='formResult'></div>
-                    <button name="btnPrint" id="btnPrint" class="btnUpdate"><div id="txtSave">Print</div> <div id="btnSaveLoader"></div> </button>
-                    <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
-                </div>
-                </section>
+            </section>
+        </div>
 
-                <section id="AgentDetials" class="tab-panel">
-                    kdjfsdsd
-                </section>
+    </div>
 
-                <section id="RouteDetials" class="tab-panel">
-                    kdjfsd dd
-                </section>
+    <div class="container">
+
+        <div class="serviceView  margin-top-1rem">
+            <div class="strong">
+                CSR No.:
+            </div>
+            <div id="lblCSRNo">
+                N/a
+            </div>
+            <div class="strong">
+                Processing:
+            </div>
+            <div id="lblProcessing">
+                N/a
+            </div>
+            <div class="strong">
+                Sales Route:
+            </div>
+            <div id="lblSalesRoute">
+                N/a
+            </div>
+            <div class="strong">
+                Completed:
+            </div>
+            <div id="lblCompleted">
+                N/a
+            </div>
+            <div class="strong">
+                Total Devices:
+            </div>
+            <div id="lblTotalDevice">
+                N/a
+            </div>
+            <div class="strong">
+                Dead:
+            </div>
+            <div id="lblDead">
+                N/a
             </div>
 
+        </div>
 
+        <div class="dataTable tabContentArea margin-top-1rem">
+            <table id="CSRTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Phone</th>
+                        <th>CSR No</th>
+                        <th>Service Agent</th>
+                        <th>Sale Route</th>
+                        <th>Status</th>
 
+                    </tr>
+                </thead>
+               
+
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="btnGroup dontPrint">
+            <div class="message" id='formResult'></div>
+            <button name="btnPrint" id="btnPrint" class="btnUpdate">
+                <div id="txtSave">Print</div>
+                <div id="btnSaveLoader"></div>
+            </button>
+            <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader">
+                </div></button>
         </div>
     </div>
 
     <script src="./reports.js"> </script>
 </body>
-
 
 </html>

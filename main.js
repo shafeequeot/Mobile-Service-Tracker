@@ -171,7 +171,7 @@ ipcMain.handle('fetchAllDataFromDb', async(event, userRequest) => {
     let sql = ''
     return new Promise((resolve, reject) => {
         sql = `SELECT ${userRequest.tableData}  FROM ${userRequest.tableName} WHERE ${userRequest.where}`
-
+console.log(sql)
         db.serialize(async function() {
             await db.all(sql, [], (err, row) => {
                 if (err) reject(err)
