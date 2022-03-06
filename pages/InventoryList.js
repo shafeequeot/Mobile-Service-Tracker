@@ -72,14 +72,15 @@ $('#inventoryList').on('click', 'td.editor-delete', function (e) {
   let dialogMessage = {
     message: {
       type: 'error',
-      buttons: ["Delete", "No"],
+      buttons: ["Dont Delete", "Delete", "No"],
       message: "Are your sure to delete? Can't revert back",
       title: "Are you sure?"
     },
     quit: false
   }
   ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
-    if (!confirmed.response) {
+    console.log(confirmed)
+    if (confirmed.response==1) {
 
       let deleteQuery = {
         tableName: `${commonNames.purchase}`,

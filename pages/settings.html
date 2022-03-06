@@ -28,24 +28,18 @@
                 <h2>IMPORT INVENTORY LIST</h2>
             </div>
 
-            <div class="formGroup Grid-2">
+            <div class="formGroup">
 
-                <div class="margin-top-1rem">
-                    <input class="inputfile" type="file" name="txtImportPath" id="txtImportPath"
-                        placeholder="Import file path" />
-                </div>
                 <div class="btnGroup">
-
+                    <div class="message" id='importResult'></div>
                     <button name="btnImport" id="btnImport" class="btnUpdate">
-                        <div id="txtSave">Import Data</div>
+                        <div id="txtImport">Choose file</div>
                         <div id="btnSaveLoader"></div>
                     </button>
                 </div>
-                <div class="message Error" id='formResult'>*Action can't undone</div>
 
             </div>
-        
-
+    
         </div>
 
         <div class="card">
@@ -54,19 +48,18 @@
             </div>
 
 
-            <div class="formGroup Grid-2">
+            <div class="formGroup">
 
-                <div class="margin-top-1rem">
-                    <input class="inputfile" type="file" name="txtBackupPath" id="txtBackupPath"
-                        placeholder="Enter Route name" />
-                </div>
+            
                 <div class="btnGroup">
-                    <button name="btnImport" id="btnImport" class="btnSave">
-                        <div id="txtSave">Backup now</div>
+                    <div class="message" id='lblBackup'></div>
+
+                    <button name="btnDBBackup" id="btnDBBackup" class="btnSave">
+                        <div id="txtDBBackup">Backup now</div>
                         <div id="btnSaveLoader"></div>
                     </button>
                 </div>
-
+<span id="lblNewLocation">New path?</span>
             </div>
         </div>
 
