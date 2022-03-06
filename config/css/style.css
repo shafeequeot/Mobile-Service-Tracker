@@ -1012,4 +1012,7 @@ position: absolute;
         grid-column-end: 5;
         border-top: solid 2px gray;
     }
+    .printMe{
+        display: block;
+    }
 }

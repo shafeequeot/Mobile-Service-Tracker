@@ -19,11 +19,16 @@
 <body>
 
 
+<!-- for printing  -->
+<div class="hideMe printMe">
+
+    <h1 class=" heading">
+        Service Report
+    </h1>
+</div>
 
 
-
-
-    <div class="tabset">
+    <div class="tabset dontPrint">
         <!-- Tab 1 -->
         <input type="radio" name="tabset" id="tab1" aria-controls="CSRDetials" checked>
         <label for="tab1">CSR Report</label>
@@ -38,7 +43,7 @@
 
             <!-- First tab compnay registration starting here  -->
 
-
+            
             <section id="CSRDetials" class="tab-panel panelSize">
                 <div class="container ">
 
@@ -83,7 +88,7 @@
                             <input class="input-feild" type="month" name="dtAgentMonth" id="dtAgentMonth"
                                 placeholder="Enter Route name" />
                         </div>
-                        <button name="btnSearch" id="btnAgentSearch" class="btnSearch">
+                        <button name="btnAgentSearch" id="btnAgentSearch" class="btnSearch">
                             <div id="txtAgentSearch">Search</div>
                             <div id="btnSaveLoader"></div>
                         </button>
@@ -128,7 +133,7 @@
     <div class="container">
 
         <div class="serviceView  margin-top-1rem">
-            <div class="strong">
+            <div id="lblfilterType" class="strong">
                 CSR No.:
             </div>
             <div id="lblCSRNo">
