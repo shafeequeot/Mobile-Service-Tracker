@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+    <link rel="stylesheet" href="../config/css/style.css">
+    <link rel="stylesheet" href="../config/css/grid-Style.css">
+    <link rel="stylesheet" href="../config/css/card.css">
+
+    <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.min.css">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Auxwall - Mobile Repair Tracking System</title>
+</head>
+
+<body>
+
+
+
+    <div class="container margin-top-1rem">
+
+        <div class="card">
+
+            <div class="heading">
+                <h2>IMPORT INVENTORY LIST</h2>
+            </div>
+
+            <div class="formGroup Grid-2">
+
+                <div class="margin-top-1rem">
+                    <input class="inputfile" type="file" name="txtImportPath" id="txtImportPath"
+                        placeholder="Import file path" />
+                </div>
+                <div class="btnGroup">
+
+                    <button name="btnImport" id="btnImport" class="btnUpdate">
+                        <div id="txtSave">Import Data</div>
+                        <div id="btnSaveLoader"></div>
+                    </button>
+                </div>
+                <div class="message Error" id='formResult'>*Action can't undone</div>
+
+            </div>
+        
+
+        </div>
+
+        <div class="card">
+            <div class="heading">
+                <h2>BACKUP DATABASE</h2>
+            </div>
+
+
+            <div class="formGroup Grid-2">
+
+                <div class="margin-top-1rem">
+                    <input class="inputfile" type="file" name="txtBackupPath" id="txtBackupPath"
+                        placeholder="Enter Route name" />
+                </div>
+                <div class="btnGroup">
+                    <button name="btnImport" id="btnImport" class="btnSave">
+                        <div id="txtSave">Backup now</div>
+                        <div id="btnSaveLoader"></div>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="btnGroup">
+
+            <button name="btnCancel" id="btnCancel" class="btnCancel"> Close
+            </button>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="./settings.js"> </script>
+</body>
+
+
+</html>

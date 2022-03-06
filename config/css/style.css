@@ -1016,3 +1016,27 @@ position: absolute;
         display: block;
     }
 }
+
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+    padding: 88px;
+}
+
+input[type="file"]::file-selector-button {
+	background-color: var(--background-color);
+    color: var(--primary-color);
+    height: 3rem;
+    width: 6rem;
+	z-index: -1;
+    cursor: pointer;
+}

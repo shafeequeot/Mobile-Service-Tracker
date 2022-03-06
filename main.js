@@ -12,6 +12,8 @@ function createWindow() {
         minWidth: 1200,
         height: 700,
         minHeight: 700,
+        icon: __dirname + '/public/auxwall/logos/favicon.png',
+
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: true,
@@ -81,7 +83,7 @@ const createSubWindow = (htmlFile, parentWindow, width, height, arg, id) => {
         height: height,
         modal: true,
         resizable: false,
-        icon: path.join(__dirname + 'public/auxwall/logos/favicon.ico'),
+        icon: __dirname + '/public/auxwall/logos/favicon.png',
         parent: parentWindow,
         frame: false,
         // show: false,
@@ -366,4 +368,4 @@ const template = [
 ]
 
 const menu = Menu.buildFromTemplate(template)
-    Menu.setApplicationMenu(menu)
+    // Menu.setApplicationMenu(menu)

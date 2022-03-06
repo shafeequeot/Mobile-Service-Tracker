@@ -23,3 +23,10 @@ ipcRenderer.invoke("userDataPath").then((gotDataPath) => {
     window.localStorage.dbPath = gotDataPath
 })
 
+// set darkmode if prevouse used darkmode
+if(window.localStorage.Theme == 'Dark'){
+ipcRenderer.invoke('dark-mode:toggle').then((res)=>{
+console.log(res)
+  // window.localStorage.Theme ='Dark'  : 'Light'
+})
+}

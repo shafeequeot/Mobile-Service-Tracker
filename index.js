@@ -8,7 +8,7 @@ var dt = require( 'datatables.net' )();
 
 // const bootstrap = require('bootstrap')
 
-window.localStorage.Theme ? document.getElementById("toggle-dark-mode").innerHTML = window.localStorage.Theme : document.getElementById("toggle-dark-mode").innerHTML = "Dark"
+window.localStorage.Theme == 'Dark' ? document.getElementById("toggle-dark-mode").innerHTML = 'Light' : document.getElementById("toggle-dark-mode").innerHTML = "Dark"
 document.getElementById('toggle-dark-mode').addEventListener('click', async () => {
  
   const isDarkMode = await ipcRenderer.invoke('dark-mode:toggle')
@@ -16,7 +16,7 @@ document.getElementById('toggle-dark-mode').addEventListener('click', async () =
   window.localStorage.Theme = isDarkMode ? 'Dark'  : 'Light'
  
     
-    document.getElementById("toggle-dark-mode").innerHTML = window.localStorage.Theme;
+    document.getElementById("toggle-dark-mode").innerHTML = isDarkMode ? 'Light'  : 'Dark';
   
 })
 
@@ -55,6 +55,10 @@ rdReport.onclick = evt = () =>{
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
+rdSettings.onclick = evt = () =>{
+  openThisPage = { Page: "/pages/settings.html", Parent: "MainWindow", Width: "800", Height: "530" }
+  ipcRenderer.invoke('createNewWindow', openThisPage)
+}
 
 ServiceList()
 

@@ -1,19 +1,36 @@
 {
   "name": "aux-services",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Mobile Repair Tracking System",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "electron-builder -w",
+    "rebuild": "electron-rebuild -f -w sqlite3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shafeequeot/Mobile-Service-Tracker.git"
   },
   "author": "AuxWall",
-  "license": "ISC",
+  "email": "shafeequeot@gmail.com",
+  "url": "http://auxwall.com/",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shafeequeot/Mobile-Service-Tracker/issues"
+  },
+  "homepage": "https://github.com/shafeequeot/Mobile-Service-Tracker#readme",
+  "devDependencies": {
+    "electron": "^17.0.0",
+    "electron-builder": "^22.14.13"
+  },
   "dependencies": {
     "datatables": "^1.10.18",
     "datatables.net-dt": "^1.11.4",
-    "electron": "^17.0.0",
     "fs-extra": "^10.0.0",
     "jquery": "^3.6.0",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "xlsx": "^0.18.3"
   }
 }
