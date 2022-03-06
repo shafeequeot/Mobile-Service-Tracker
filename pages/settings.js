@@ -93,7 +93,7 @@ btnDBBackup.onclick = () =>{
     if(txtDBBackup.innerHTML == 'Choose Location'){
        setBackupLocation()
             }else{
-                fsextra.copyFile(window.localStorage.dbPath, window.localStorage.dbBackup+"/abc.db").then(err=>{
+                fsextra.copyFile(window.localStorage.dbPath, window.localStorage.dbBackup+"/backup.db").then(err=>{
                     lblBackup.innerHTML = err? err : 'Backup completed'
                 })
             }
