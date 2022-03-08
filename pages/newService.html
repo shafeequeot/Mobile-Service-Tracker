@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" href="../config/css/style.css">
     <link rel="stylesheet" href="../config/css/grid-Style.css">
+    <link rel="stylesheet" href="../config/css/card.css">
+
 
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
@@ -37,23 +39,33 @@
                     </div>
 
                     <div>
-                        <label for="txtBrand">Brand</label>
+                        <label for="txtBrand">Phone</label>
                         <input class="input-feild" type="text" disabled name="txtBrand" id="txtBrand" required
                             placeholder="Brand name" />
                     </div>
 
                     <div>
-                        <label for="txtModelNo">Model No.</label>
-                        <input class="input-feild" type="text" disabled name="txtModelNo" id="txtModelNo" required
+                        <label for="txtSupplier">Supplier</label>
+                        <input class="input-feild" type="text" disabled name="txtSupplier" id="txtSupplier" 
                             placeholder="Model No." />
                     </div>
 
                 </div>
 
-                <div class="margin-top-1rem">
+                <div class="margin-top-1rem Grid-2">
+                    <div>
 
-                    <label for="txtCSR">CSR No.</label>
-                    <input type="number" class="input-feild" name="txtCSR" id="txtCSR" required placeholder="CSR Number"/>
+                        <label for="txtCSR">CSR No.</label>
+                        <input type="number" class="input-feild" name="txtCSR" id="txtCSR" required
+                            placeholder="CSR Number" />
+                    </div>
+                    <div>
+
+                        <label for="txtDate">Choose Date</label>
+                        <input type="date" class="input-feild" name="txtDate" id="txtDate" required
+                            placeholder="Select Date" />
+                    </div>
+
                 </div>
                 <div class="Grid-2">
                     <div class="margin-top-1rem">
@@ -81,10 +93,10 @@
                     <textarea class="input-feild-area" rows="5" name="txtOtherDesc" id="txtOtherDesc" required
                         placeholder="Description"></textarea>
                 </div>
-                <div id="divStatus" class="margin-top-1rem hisdeMe">
+                <div id="divStatus" class="margin-top-1rem hisdeMe card">
 
-                    <label for="txtStatus">Status</label>
-                    <select class="input-feild" name="txtStatus" id="txtStatus" required autofocus
+                    <label for="txtStatus">Service Status</label>
+                    <!-- <select class="input-feild" name="txtStatus" id="txtStatus" required autofocus
                         placeholder="Select Status">
                         <option value="1" selected>Collected from Client</option>
                         <option value="2">Handover to Agent</option>
@@ -92,7 +104,15 @@
                         <option value="4">Delivered</option>
                         <option value="5">Dead</option>
 
-                    </select>
+                    </select> -->
+
+                    <ul class="list-unstyled multi-steps">
+                        <li value="1">Received from Client</li>
+                        <li value="2">Handover to Agent</li>
+                        <li value="3" class="is-active">Ready for ship</li>
+                        <li value="4"> Delivered</li>
+                        <li value="5"> Dead</li>
+                      </ul>
 
                 </div>
 
@@ -122,4 +142,3 @@
 </html>
 
 
-<!-- git password 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 -->

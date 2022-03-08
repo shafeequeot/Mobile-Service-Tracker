@@ -9,7 +9,7 @@ btnCancel.onclick = evt = () => {
         window.close()
     })
 }
-
+txtDate.value = calculateHelpers.datePickerFormat(new Date())
 
 // bring detials to compobox
 
@@ -101,15 +101,15 @@ txtServiceAgent.onchange = evt = (selected) => {
 txtIMEI.onchange = evt = (selected) => {
     let fetchPhoneQuery = {
         tableName: commonNames.purchase,
-        tableData: "id, `Brand_Name`, `Model_No`, `IMEI`",
+        tableData: "id, `Brand_Name`, `Model_No`, `Supplier_Name`, `IMEI`",
         where: "`IMEI` = '" + txtIMEI.value + "'"
     }
 
     ipcRenderer.invoke("fetchFromDb", fetchPhoneQuery).then((Mobile) => {
         console.log(Mobile)
         if (Mobile) {
-            txtBrand.value = Mobile.Brand_Name
-            txtModelNo.value = Mobile.Model_No
+            txtBrand.value = Mobile.Brand_Name + " " + Mobile.Model_No
+            txtSupplier.value = Mobile.Supplier_Name
             btnSave.disabled = false
         } else {
 
@@ -151,7 +151,7 @@ btnSave.onclick = evt => {
        
         // updating existing requests 
 
-        txtSave.textContent = "Saving.."
+        txtSave.textContent = "Updating.."
         btnSaveLoader.classList.add('loader')
 
         if (txtIMEI.value === '') {
@@ -276,7 +276,7 @@ btnSave.onclick = evt => {
                 tableName: commonNames.services,
                 tableContent: {
 
-                    Created_Date: '"' + toDay + '"',
+                    Created_Date: '"' + calculateHelpers.dateFormat(txtDate.value) + '"',
                     Stock: '"' + txtIMEI.value + '"',
                     Sale_Route: '"' + txtRoute.value + '"',
                     Service_Agent: '"' + txtServiceAgent.value + '"',
@@ -334,7 +334,7 @@ ipcRenderer.on('gotID', (key, res) => {
     serviceId = res
     txtSave.textContent = "Update"
     txtIMEI.disabled = true
-
+    txtDate.disabled = true
 
 
 // fetch selected item detials 
