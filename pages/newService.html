@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
 
+    <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/">
     <link rel="stylesheet" href="../config/css/style.css">
     <link rel="stylesheet" href="../config/css/grid-Style.css">
     <link rel="stylesheet" href="../config/css/card.css">
+    <link rel="stylesheet" href="../config/css/StepSelection.css">
+
 
 
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
@@ -90,7 +93,7 @@
                 </div>
                 <div class="margin-top-1rem">
                     <label for="txtOtherDesc">Other Description</label>
-                    <textarea class="input-feild-area" rows="5" name="txtOtherDesc" id="txtOtherDesc" required
+                    <textarea class="input-feild-area" rows="3" name="txtOtherDesc" id="txtOtherDesc" required
                         placeholder="Description"></textarea>
                 </div>
                 <div id="divStatus" class="margin-top-1rem hisdeMe card">
@@ -106,13 +109,44 @@
 
                     </select> -->
 
-                    <ul class="list-unstyled multi-steps">
-                        <li value="1">Received from Client</li>
-                        <li value="2">Handover to Agent</li>
-                        <li value="3" class="is-active">Ready for ship</li>
-                        <li value="4"> Delivered</li>
-                        <li value="5"> Dead</li>
-                      </ul>
+                    <section class="flexGroup">
+                        <div class="steps">
+                            <label class="lblSteps">
+                              <input value="1" name="ckSteps" type="checkbox">
+                              <span class="checkmark"></span>
+                            </label>
+                            Collected from client
+                        </div>
+                        <div class="steps">
+                            <label class="lblSteps">
+                                <input value="2" name="ckSteps" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            Handover to agent
+                        </div>
+                        <div class="steps">
+                            <label class="lblSteps">
+                                <input value="3" name="ckSteps" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                                Received from agent     
+                        </div>
+                         <div class="steps">
+                            <label class="lblSteps">
+                                <input value="4" name="ckSteps" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            Delivered
+                        </div>
+                        <div class="steps">
+                            <label class="lblSteps">
+                                <input value="5" name="ckSteps" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            Dead
+                        </div>
+                      
+                        </section>
 
                 </div>
 

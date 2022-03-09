@@ -364,3 +364,9 @@ ipcRenderer.on('gotID', (key, res) => {
 
 
 })
+
+
+rdServiceStatus.onclick = (e)=>{
+    
+console.log(this.closest('li').prop('id'))
+}
