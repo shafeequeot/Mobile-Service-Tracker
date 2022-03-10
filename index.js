@@ -56,7 +56,7 @@ rdReport.onclick = evt = () =>{
 }
 
 rdSettings.onclick = evt = () =>{
-  openThisPage = { Page: "/pages/settings.html", Parent: "MainWindow", Width: "800", Height: "530" }
+  openThisPage = { Page: "/pages/settings.html", Parent: "MainWindow", Width: "800", Height: "580" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 

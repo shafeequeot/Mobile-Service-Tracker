@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../config/css/grid-Style.css">
     <link rel="stylesheet" href="../config/css/card.css">
 
-    <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.css">
 
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
@@ -44,22 +44,30 @@
 
         <div class="card">
             <div class="heading">
-                <h2>BACKUP DATABASE</h2>
+                <h2>DATABASE SETTINGS</h2>
             </div>
 
 
-            <div class="formGroup">
+            <div class="formGrosup dbBackup">
 
             
-                <div class="btnGroup">
-                    <div class="message" id='lblBackup'></div>
+               
+                    <div class="message alignToCenter" id='lblDbFile'></div>
+                    <div class="message alignToCenter" id='lblBackup'></div>
 
-                    <button name="btnDBBackup" id="btnDBBackup" class="btnSave">
-                        <div id="txtDBBackup">Backup now</div>
-                        <div id="btnSaveLoader"></div>
-                    </button>
+                    
+                <div class="Grid-3">
+
+                    <span class="link" id="lblNewDBLocation"> Change DB Location</span>
+                    <div class="btnGroup">
+                        <button name="btnDBBackup" id="btnDBBackup" class="btnSave">
+                            <div id="txtDBBackup">Backup now</div>
+                            <div id="btnSaveLoader"></div>
+                        </button>
+                    </div>
+
+                    <span class="rightAlign link" id="lblNewBackupLocation">Set new backup path?</span>
                 </div>
-<span id="lblNewLocation">New path?</span>
             </div>
         </div>
 

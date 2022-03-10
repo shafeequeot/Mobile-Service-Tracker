@@ -39,3 +39,14 @@
     grid-template-columns: 100px auto 100px auto;
     gap: 12px;
     }
+
+    
+.dbBackup > .Grid-3{
+   
+    align-items: flex-end;
+  }
+
+.Grid-3 > .rightAlign{
+
+    text-align: end;
+}

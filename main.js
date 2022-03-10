@@ -28,14 +28,16 @@ function createWindow() {
 
     // send user data path to render page
     ipcMain.handle('userDataPath', async(e, sav) => {
-        return path.join(app.getPath('userData'), '\DB/dataBase.db')
+        return app.getPath('userData')
     })
 
 
-
+    ipcMain.send('getTheDbPath').then((res)=>{
+        console.log(res)
+    })
 
     //  dark  mode start 
-    ipcMain.handle('dark-mode:toggle', () => {
+    ipcMain.on('dark-mode:toggle', () => {
 
         if (nativeTheme.shouldUseDarkColors) {
             nativeTheme.themeSource = 'light'
@@ -165,7 +167,21 @@ ipcMain.handle("showMeError", async(event, message) => {
 
 })
 
+   // select  Path dialogue box 
 
+   ipcMain.handle("selectFile", async(event, arg) => {
+
+    return dialog.showOpenDialog(arg.Prop)
+
+})
+
+  // Save  Path dialogue box 
+
+  ipcMain.handle("saveFile", async(event, arg) => {
+
+    return dialog.showSaveDialog(arg.Prop)
+
+})
 
 
 // fetch all data from Database start
@@ -374,10 +390,3 @@ const menu = Menu.buildFromTemplate(template)
 
 
 
-    // select  Path dialogue box 
-
-ipcMain.handle("selectFile", async(event, arg) => {
-
-    return dialog.showOpenDialog(arg.Prop)
-
-})

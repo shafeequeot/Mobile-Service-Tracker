@@ -326,7 +326,6 @@ let saveButtonName = txtSave.textContent
         }
 
         ipcRenderer.invoke("fetchFromDb", fetchQuery).then((Mobile) => {
-            console.log(Mobile)
             if (Mobile) {
                 txtIMEI.value = Mobile.Stock
                 txtCSR.value = Mobile.CSR_No

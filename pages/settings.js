@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron')
+const { ipcRenderer, dialog } = require('electron')
 let XLSX = require('xlsx')
 const calculateHelpers = require('../config/js/calculateHelpers')
 const commonNames = require('../config/js/commonNames')
@@ -86,7 +86,10 @@ cells.forEach(element => {
 
 if(!window.localStorage.dbBackup){
     txtDBBackup.innerHTML = 'Choose Location'
-        }else  lblBackup.innerHTML = window.localStorage.dbBackup
+        }else  {
+            lblBackup.innerHTML = "<strong> Backup Location: </strong>" + window.localStorage.dbBackup 
+            lblDbFile.innerHTML = "<strong> DB Location: </strong> " + window.localStorage.dbPath
+        }
 
 btnDBBackup.onclick = () =>{
     // <div id="txtDBBackup">Backup now</div>
@@ -111,12 +114,50 @@ function setBackupLocation(){
     }
 
     ipcRenderer.invoke('selectFile', dgProp2).then(res=>{
+        if (res.filePaths.length > 0)
+        {
         lblBackup.innerHTML = res.filePaths[0]
         window.localStorage.dbBackup = res.filePaths[0]
         txtDBBackup.innerHTML = "Backup Now"
+        }
     })
 }
 
-lblNewLocation.onclick = () =>{
+lblNewBackupLocation.onclick = () =>{
     setBackupLocation()
+}
+
+
+lblNewDBLocation.onclick = () =>{
+    let dialogMessage = {
+        message: {
+            type: 'warning',
+            buttons: ["No", "Yes"],
+            message: "Are you sure?",
+            title: "Do you want change database?",
+            checkboxLabel: 'If yes, Tick & Press Yes button',
+            detail: 'You will lose all previous data'
+        },
+        quit: false
+    }
+    ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
+        console.log(confirmed)
+        if (confirmed.response == 1 && confirmed.checkboxChecked) {
+            const dgProp3 = {
+                Prop: {
+                    properties: ['openDirectory', 'promptToCreate'],
+                    title: "Save database",
+                    filters: [{ name: '*', extensions: ['db'] }],
+                    message: "Choose backup location",
+                    canceled: '0'
+                }
+            }
+            ipcRenderer.invoke("saveFile", dgProp3).then((saved) => {
+if (!saved.canceled){
+    // console.log(saved)
+    window.localStorage.dbPath = saved.filePath
+}
+            })
+        }
+    })
 }
