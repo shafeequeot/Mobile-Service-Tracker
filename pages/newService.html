@@ -55,7 +55,7 @@
 
                 </div>
 
-                <div class="margin-top-1rem Grid-2">
+                <div class="margin-top-0_5rem Grid-2">
                     <div>
 
                         <label for="txtCSR">CSR No.</label>
@@ -70,8 +70,8 @@
                     </div>
 
                 </div>
-                <div class="Grid-2">
-                    <div class="margin-top-1rem">
+                <div class="Grid-2 margin-top-0_5rem">
+                    <div class="">
 
                         <label for="txtRoute">Sales route</label>
                         <select class="input-feild" name="txtRoute" id="txtRoute" required autofocus
@@ -82,7 +82,7 @@
 
                     </div>
 
-                    <div class="margin-top-1rem">
+                    <div class=" ">
                         <label for="txtServiceAgent">Service Agent</label>
                         <select class="input-feild" name="txtServiceAgent" id="txtServiceAgent" required autofocus
                             placeholder="Select Service Agnet">
@@ -91,9 +91,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="margin-top-1rem">
+                <div class="margin-top-0_5rem">
                     <label for="txtOtherDesc">Other Description</label>
-                    <textarea class="input-feild-area" rows="3" name="txtOtherDesc" id="txtOtherDesc" required
+                    <textarea class="input-feild-area" rows="2" name="txtOtherDesc" id="txtOtherDesc" required
                         placeholder="Description"></textarea>
                 </div>
                 <div id="divStatus" class="margin-top-1rem hisdeMe card">
@@ -112,7 +112,7 @@
                     <section class="flexGroup">
                         <div class="steps">
                             <label class="lblSteps">
-                              <input value="1" name="ckSteps" type="checkbox">
+                              <input value="1" name="ckSteps" checked type="checkbox">
                               <span class="checkmark"></span>
                             </label>
                             Collected from client
@@ -140,14 +140,19 @@
                         </div>
                         <div class="steps">
                             <label class="lblSteps">
-                                <input value="5" name="ckSteps" type="checkbox">
+                                <input value="5" name="ckSteps" id="ckDead" type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                             Dead
                         </div>
                       
                         </section>
+                        <div id="divDeadReason" class="margin-top-0_5rem hideMe">
 
+                            <!-- <label for="txtCSR">CSR No.</label> -->
+                            <input  type="text" class="input-feild" name="txtStatusDesc" id="txtStatusDesc" required
+                                placeholder="Describe reason" />
+                        </div>
                 </div>
 
                 <div class="btnGroup">

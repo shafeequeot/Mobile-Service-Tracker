@@ -1,10 +1,10 @@
 const { ipcRenderer } = require("electron")
 const calculateHelpers = require("../config/js/calculateHelpers")
 const commonNames = require("../config/js/commonNames")
-let serviceId, currentStatus, saveNewUpdates
+let serviceId, currentStatus, saveNewUpdates, newStatus
 let toDay = calculateHelpers.dateFormat(new Date())
 btnCancel.onclick = evt = () => {
-    ipcRenderer.invoke('somthingUpdated').then(()=>{
+    ipcRenderer.invoke('somthingUpdated').then(() => {
 
         window.close()
     })
@@ -145,52 +145,66 @@ txtIMEI.onchange = evt = (selected) => {
 
 btnSave.onclick = evt => {
 
+
+    // get new status
+    if (document.getElementsByName('ckSteps')[0].checked) newStatus = 1 
+    else newStatus = undefined
+    if (document.getElementsByName('ckSteps')[1].checked) newStatus = 2
+    if (document.getElementsByName('ckSteps')[2].checked) newStatus = 3
+    if (document.getElementsByName('ckSteps')[3].checked) newStatus = 4
+    if (document.getElementsByName('ckSteps')[4].checked) newStatus = 5
+    console.log(newStatus)
     evt.preventDefault();
+let saveButtonName = txtSave.textContent
+    if (txtIMEI.value === '') {
+        formResult.classList.add('Error')
+        formResult.textContent = "IMEI code is manditory"
+        btnSaveLoader.classList.remove('loader')
+        txtSave.textContent = saveButtonName
+        txtIMEI.focus()
+    } else if (txtRoute.value === '0') {
+        formResult.classList.add('Error')
+        formResult.textContent = "Select sales route"
+        btnSaveLoader.classList.remove('loader')
+        txtSave.textContent = saveButtonName
+        txtRoute.focus()
+    } else if (txtCSR.value == '') {
+        formResult.classList.add('Error')
+        formResult.textContent = "Enter CSR Number"
+        btnSaveLoader.classList.remove('loader')
+        txtSave.textContent = saveButtonName
+        txtCSR.focus()
+    } else if (txtServiceAgent.value == '0') {
+        formResult.classList.add('Error')
+        formResult.textContent = "Select Service Agent"
+        btnSaveLoader.classList.remove('loader')
+        txtSave.textContent = saveButtonName
+        txtServiceAgent.focus()
+    } else if (newStatus == undefined) {
+        formResult.classList.add('Error')
+        formResult.textContent = "Select current status"
+        btnSaveLoader.classList.remove('loader')
+        txtSave.textContent = saveButtonName
 
-    if (txtSave.textContent == "Update") {
-       
-        // updating existing requests 
+    } else {
+        if (txtSave.textContent == "Update") {
 
-        txtSave.textContent = "Updating.."
-        btnSaveLoader.classList.add('loader')
+            // updating existing requests 
 
-        if (txtIMEI.value === '') {
-            formResult.classList.add('Error')
-            formResult.textContent = "IMEI code is manditory"
-            btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Update"
-            txtIMEI.focus()
-        } else if (txtRoute.value === '0') {
-            formResult.classList.add('Error')
-            formResult.textContent = "Select sales route"
-            btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Update"
-            txtRoute.focus()
-        } else if (txtCSR.value == '') {
-            formResult.classList.add('Error')
-            formResult.textContent = "Enter CSR Number"
-            btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Update"
-            txtCSR.focus()
-        }else if (txtServiceAgent.value == '0') {
-            formResult.classList.add('Error')
-            formResult.textContent = "Select Service Agent"
-            btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Update"
-            txtServiceAgent.focus()
-        } 
-        else {
+            txtSave.textContent = "Updating.."
+            btnSaveLoader.classList.add('loader')
+
             btnSave.disabled = true
             let updateThis = {
                 tableName: `${commonNames.services}`,
                 setContent: [
 
                     `'Sale_Route' = '${txtRoute.value}',
-                    'Service_Agent' = '${txtServiceAgent.value}',
-                    'Status' = '${txtStatus.value}',
-                    'Other' = '${txtOtherDesc.value}',
-                    'CSR_No' = '${txtCSR.value}'
-                    `
+                        'Service_Agent' = '${txtServiceAgent.value}',
+                        'Status' = '${txtStatus.value}',
+                        'Other' = '${txtOtherDesc.value}',
+                        'CSR_No' = '${txtCSR.value}'
+                        `
                 ],
 
                 where: `id` + ` = '${serviceId}'`
@@ -198,26 +212,26 @@ btnSave.onclick = evt => {
 
             ipcRenderer.invoke("UpdateToDb", updateThis).then(() => {
 
-                if(currentStatus != txtStatus.value){
+                if (currentStatus != txtStatus.value) {
                     saveNewUpdates = {
                         tableName: commonNames.serviceStatus,
                         tableContent: {
-                           
+
                             Created_Date: '"' + toDay + '"',
                             Serv_Req: '"' + serviceId + '"',
                             Status: '"' + txtStatus.value + '"'
-                           
+
                         }
                     }
                     ipcRenderer.invoke("SaveToDb", saveNewUpdates)
-                } 
+                }
 
                 formResult.classList.remove('Error')
                 formResult.classList.add('success')
                 formResult.textContent = "All data has been saved!"
                 btnSaveLoader.classList.remove('loader')
                 txtSave.textContent = "Updated"
-                
+
 
 
             }).catch((err) => {
@@ -231,46 +245,13 @@ btnSave.onclick = evt => {
                 txtSave.textContent = "Update"
                 btnSave.disabled = false
             })
-
-
-
-        }
-        
-
-
-
-
-    } else {
-
-// saving new data 
-        txtSave.textContent = "Saving.."
-        btnSaveLoader.classList.add('loader')
-
-        if (txtIMEI.value === '') {
-            formResult.classList.add('Error')
-            formResult.textContent = "IMEI code is manditory"
-            btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Save"
-            txtIMEI.focus()
-        } else if (txtCSR.value == '') {
-            formResult.classList.add('Error')
-            formResult.textContent = "Enter CSR Number"
-            btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Save"
-            txtCSR.focus()
-        }else if (txtRoute.value === '0') {
-            formResult.classList.add('Error')
-            formResult.textContent = "Select sales route"
-            btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Save"
-            txtRoute.focus()
-        }  else if (txtServiceAgent.value == '0') {
-            formResult.classList.add('Error')
-            formResult.textContent = "Select Service Agent"
-            btnSaveLoader.classList.remove('loader')
-            txtSave.textContent = "Save"
-            txtServiceAgent.focus()
         } else {
+
+
+
+            // saving new data 
+            txtSave.textContent = "Saving.."
+            btnSaveLoader.classList.add('loader')
             btnSave.disabled = true
             let ServiceReqDetials = {
                 tableName: commonNames.services,
@@ -285,18 +266,18 @@ btnSave.onclick = evt => {
                     CSR_No: '"' + txtCSR.value + '"'
                 }
             }
-
+        }
 
             ipcRenderer.invoke("SaveToDb", ServiceReqDetials).then((newServiceID) => {
 
                 saveNewUpdates = {
                     tableName: commonNames.serviceStatus,
                     tableContent: {
-                       
+
                         Created_Date: '"' + toDay + '"',
                         Serv_Req: '"' + newServiceID + '"',
                         Status: '"' + txtStatus.value + '"'
-                       
+
                     }
                 }
                 ipcRenderer.invoke("SaveToDb", saveNewUpdates)
@@ -325,48 +306,49 @@ btnSave.onclick = evt => {
             })
 
 
-
         }
-    }
-}
 
-ipcRenderer.on('gotID', (key, res) => {
-    serviceId = res
-    txtSave.textContent = "Update"
-    txtIMEI.disabled = true
-    txtDate.disabled = true
-
-
-// fetch selected item detials 
-
-    let fetchQuery = {
-        tableName: commonNames.services +" , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
-        tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'CSR_No', '${commonNames.services}'.'Service_Agent', '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.services}'.'Sale_Route' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
-        where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id' AND ${commonNames.services}.'id' = ${serviceId}`
-    
     }
 
-    ipcRenderer.invoke("fetchFromDb", fetchQuery).then((Mobile) => {
-        if (Mobile) {
-            txtIMEI.value = Mobile.Stock
-            txtCSR.value = Mobile.CSR_No
-            txtBrand.value = Mobile.Brand_Name
-            txtModelNo.value = Mobile.Model_No
-            txtRoute.value = Mobile.Sale_Route
-            txtServiceAgent.value = Mobile.Service_Agent
-            txtOtherDesc.value = Mobile.Other
-            currentStatus = Mobile.Status
-            txtStatus.value = currentStatus
+    ipcRenderer.on('gotID', (key, res) => {
+        serviceId = res
+        txtSave.textContent = "Update"
+        txtIMEI.disabled = true
+        txtDate.disabled = true
+
+
+        // fetch selected item detials 
+
+        let fetchQuery = {
+            tableName: commonNames.services + " , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
+            tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'CSR_No', '${commonNames.services}'.'Service_Agent', '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.services}'.'Sale_Route' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
+            where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id' AND ${commonNames.services}.'id' = ${serviceId}`
+
         }
-      
+
+        ipcRenderer.invoke("fetchFromDb", fetchQuery).then((Mobile) => {
+            if (Mobile) {
+                txtIMEI.value = Mobile.Stock
+                txtCSR.value = Mobile.CSR_No
+                txtBrand.value = Mobile.Brand_Name
+                txtModelNo.value = Mobile.Model_No
+                txtRoute.value = Mobile.Sale_Route
+                txtServiceAgent.value = Mobile.Service_Agent
+                txtOtherDesc.value = Mobile.Other
+                currentStatus = Mobile.Status
+                txtStatus.value = currentStatus
+            }
+
+        })
+
+
+
     })
 
 
 
-})
 
+    ckDead.onclick = () => {
+        ckDead.checked ? divDeadReason.classList.remove('hideMe') : divDeadReason.classList.add('hideMe')
 
-rdServiceStatus.onclick = (e)=>{
-    
-console.log(this.closest('li').prop('id'))
-}
+    }
