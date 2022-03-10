@@ -106,7 +106,6 @@ txtIMEI.onchange = evt = (selected) => {
     }
 
     ipcRenderer.invoke("fetchFromDb", fetchPhoneQuery).then((Mobile) => {
-        console.log(Mobile)
         if (Mobile) {
             txtBrand.value = Mobile.Brand_Name + " " + Mobile.Model_No
             txtSupplier.value = Mobile.Supplier_Name
@@ -126,9 +125,9 @@ txtIMEI.onchange = evt = (selected) => {
                 quit: false
             }
             ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
-                txtBrand.value = ""
-                txtModelNo.value = ""
                 txtIMEI.focus()
+                txtBrand.value = ""
+                txtSupplier.value = ""
                 btnSave.disabled = true
             })
 
@@ -201,7 +200,7 @@ let saveButtonName = txtSave.textContent
 
                     `'Sale_Route' = '${txtRoute.value}',
                         'Service_Agent' = '${txtServiceAgent.value}',
-                        'Status' = '${txtStatus.value}',
+                        'Status' = '${newStatus}',
                         'Other' = '${txtOtherDesc.value}',
                         'CSR_No' = '${txtCSR.value}'
                         `
@@ -212,15 +211,15 @@ let saveButtonName = txtSave.textContent
 
             ipcRenderer.invoke("UpdateToDb", updateThis).then(() => {
 
-                if (currentStatus != txtStatus.value) {
+                if (currentStatus != newStatus) {
                     saveNewUpdates = {
                         tableName: commonNames.serviceStatus,
                         tableContent: {
 
                             Created_Date: '"' + toDay + '"',
                             Serv_Req: '"' + serviceId + '"',
-                            Status: '"' + txtStatus.value + '"'
-
+                            Status: '"' + newStatus + '"',
+                            Description: '"' + txtStatusDesc.value + '"'
                         }
                     }
                     ipcRenderer.invoke("SaveToDb", saveNewUpdates)
@@ -261,12 +260,12 @@ let saveButtonName = txtSave.textContent
                     Stock: '"' + txtIMEI.value + '"',
                     Sale_Route: '"' + txtRoute.value + '"',
                     Service_Agent: '"' + txtServiceAgent.value + '"',
-                    Status: `"${txtStatus.value}"`,
+                    Status: `"${newStatus}"`,
                     Other: '"' + txtOtherDesc.value + '"',
                     CSR_No: '"' + txtCSR.value + '"'
                 }
             }
-        }
+        
 
             ipcRenderer.invoke("SaveToDb", ServiceReqDetials).then((newServiceID) => {
 
@@ -276,7 +275,7 @@ let saveButtonName = txtSave.textContent
 
                         Created_Date: '"' + toDay + '"',
                         Serv_Req: '"' + newServiceID + '"',
-                        Status: '"' + txtStatus.value + '"'
+                        Status: '"' + newStatus + '"'
 
                     }
                 }
@@ -305,7 +304,7 @@ let saveButtonName = txtSave.textContent
                 btnSave.disabled = false
             })
 
-
+        }
         }
 
     }
@@ -321,22 +320,39 @@ let saveButtonName = txtSave.textContent
 
         let fetchQuery = {
             tableName: commonNames.services + " , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
-            tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'CSR_No', '${commonNames.services}'.'Service_Agent', '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.services}'.'Sale_Route' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
+            tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'CSR_No', '${commonNames.services}'.'Service_Agent', '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Supplier_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.services}'.'Sale_Route' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
             where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id' AND ${commonNames.services}.'id' = ${serviceId}`
 
         }
 
         ipcRenderer.invoke("fetchFromDb", fetchQuery).then((Mobile) => {
+            console.log(Mobile)
             if (Mobile) {
                 txtIMEI.value = Mobile.Stock
                 txtCSR.value = Mobile.CSR_No
-                txtBrand.value = Mobile.Brand_Name
-                txtModelNo.value = Mobile.Model_No
+                txtBrand.value = Mobile.Brand_Name + " " + Mobile.Model_No
+                txtSupplier.value = Mobile.Supplier_Name
                 txtRoute.value = Mobile.Sale_Route
                 txtServiceAgent.value = Mobile.Service_Agent
                 txtOtherDesc.value = Mobile.Other
                 currentStatus = Mobile.Status
-                txtStatus.value = currentStatus
+                if (currentStatus == 1) {
+                    ckCollect.checked = true}
+                if (currentStatus == 2) {
+                    ckHandover.checked = true; ckCollect.checked = true
+                    ckCollect.disabled = true
+                }
+                if (currentStatus == 3) {
+                    ckHandover.checked = true; ckCollect.checked = true ; ckReceived.checked = true
+                    ckHandover.disabled = true; ckCollect.disabled = true}
+                if (currentStatus == 4) {
+                    ckHandover.checked = true; ckCollect.checked = true; ckReceived.checked = true; ckDelivered.checked = true
+                    ckCollect.disabled = true; ckHandover.disabled = true; ckReceived.disabled = true}
+                if (currentStatus == 5) {
+                     ckDead.checked = true; ckCollect.checked = false
+                    ckCollect.disabled = true; ckHandover.disabled = true; ckReceived.disabled = true; ckDelivered.disabled = false}
+
+                // txtStatus.value = currentStatus
             }
 
         })

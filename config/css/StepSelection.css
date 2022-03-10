@@ -9,7 +9,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
+    margin-right: 8px;
   }
   
   /* Hide the browser's default checkbox */
@@ -19,6 +19,7 @@
     cursor: pointer;
     height: 0;
     width: 0;
+    
   }
   
   /* Create a custom checkbox */
@@ -29,7 +30,9 @@
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    background-color: var(--primary-color);
+    border: solid var(--primary-color);
+    border-width: 2px;
+    
   }
   
   /* On mouse-over, add a grey background color */
@@ -39,7 +42,8 @@
   
   /* When the checkbox is checked, add a blue background */
   .lblSteps input:checked ~ .checkmark {
-    background-color: #2196F3;
+    background-color: var(--primary-color)
+;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -60,7 +64,7 @@
     top: 5px;
     width: 7px;
     height: 20px;
-    border: solid var(--primary-color);
+    border: solid var(--secondary-color);
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -78,4 +82,10 @@
 
   .margin-top-0_5rem{
     margin-top: 0.7rem;
+  }
+
+  .lblSteps input:disabled ~ .checkmark {
+    background-color: var( --aux-gray);
+    cursor: default;
+    color: green;
   }

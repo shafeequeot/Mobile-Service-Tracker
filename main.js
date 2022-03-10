@@ -132,7 +132,7 @@ ipcMain.handle('SaveToDb', async(event, SaveToDb) => {
         svTableDataContent = Object.values(SaveToDb.tableContent)
         svtableName = Object.values(SaveToDb)
         db.serialize(function() {
-console.log(`INSERT INTO  ${svtableName[0]} (${svTableDataHead.toString()}) VALUES (${svTableDataContent.toString()})`)
+// console.log(`INSERT INTO  ${svtableName[0]} (${svTableDataHead.toString()}) VALUES (${svTableDataContent.toString()})`)
             db.run(`INSERT INTO  ${svtableName[0]} (${svTableDataHead.toString()}) VALUES (${svTableDataContent.toString()})`, function(err) {
 
                 if (err) {

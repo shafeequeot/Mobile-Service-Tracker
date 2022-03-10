@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
 
-    <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/">
+    <!-- <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.min.css"> -->
     <link rel="stylesheet" href="../config/css/style.css">
     <link rel="stylesheet" href="../config/css/grid-Style.css">
     <link rel="stylesheet" href="../config/css/card.css">
@@ -74,7 +74,7 @@
                     <div class="">
 
                         <label for="txtRoute">Sales route</label>
-                        <select class="input-feild" name="txtRoute" id="txtRoute" required autofocus
+                        <select class="input-feild" name="txtRoute" id="txtRoute" required 
                             placeholder="select Sales route">
                             <option value="00" disabled selected>Sales Route</option>
                             <option value="0">Add New</option>
@@ -84,7 +84,7 @@
 
                     <div class=" ">
                         <label for="txtServiceAgent">Service Agent</label>
-                        <select class="input-feild" name="txtServiceAgent" id="txtServiceAgent" required autofocus
+                        <select class="input-feild" name="txtServiceAgent" id="txtServiceAgent" required 
                             placeholder="Select Service Agnet">
                             <option value="00" disabled selected>Service Agent</option>
                             <option value="0">Add New</option>
@@ -99,7 +99,7 @@
                 <div id="divStatus" class="margin-top-1rem hisdeMe card">
 
                     <label for="txtStatus">Service Status</label>
-                    <!-- <select class="input-feild" name="txtStatus" id="txtStatus" required autofocus
+                    <!-- <select class="input-feild" name="txtStatus" id="txtStatus" required 
                         placeholder="Select Status">
                         <option value="1" selected>Collected from Client</option>
                         <option value="2">Handover to Agent</option>
@@ -112,28 +112,28 @@
                     <section class="flexGroup">
                         <div class="steps">
                             <label class="lblSteps">
-                              <input value="1" name="ckSteps" checked type="checkbox">
+                              <input value="1" name="ckSteps" id="ckCollect" checked type="checkbox">
                               <span class="checkmark"></span>
                             </label>
                             Collected from client
                         </div>
                         <div class="steps">
                             <label class="lblSteps">
-                                <input value="2" name="ckSteps" type="checkbox">
+                                <input value="2" name="ckSteps" id="ckHandover" type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                             Handover to agent
                         </div>
                         <div class="steps">
                             <label class="lblSteps">
-                                <input value="3" name="ckSteps" type="checkbox">
+                                <input value="3" name="ckSteps" id="ckReceived" type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                                 Received from agent     
                         </div>
                          <div class="steps">
                             <label class="lblSteps">
-                                <input value="4" name="ckSteps" type="checkbox">
+                                <input value="4" name="ckSteps" id="ckDelivered" type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                             Delivered
