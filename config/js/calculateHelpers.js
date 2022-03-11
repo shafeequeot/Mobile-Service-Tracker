@@ -1,3 +1,4 @@
+const fs = require('fs-extra')
 module.exports = {
 
     dateFormat: (date) => {
@@ -18,12 +19,24 @@ module.exports = {
              }else if (status ==2){
                 res('Service')
              } else if (status ==3){
-                res('Completed')
+                res('Ready')
              }else if (status ==4){
                 res('Delivered')
+             }else if (status ==5){
+                res('Dead')
              } else{
                  rej('Wrong data')
              }
+        })
+    },
+    dbPath: ()=>{
+        return new Promise((res, rej)=>{
+           
+                let dbConfigPath =  window.localStorage.dbConfigPath
+fs.readJSON(dbConfigPath).then(gotPath =>{
+    res(gotPath)
+
+            })
         })
     }
 }

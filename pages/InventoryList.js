@@ -50,7 +50,7 @@ function ServiceList() {
         {
           data: null,
           className: "dt-center editor-delete",
-          defaultContent: '<i class="fa fa-trash"/>',
+          defaultContent: '<i class="link fa fa-edit"/>',
           orderable: false
         }
       ],
@@ -72,9 +72,10 @@ $('#inventoryList').on('click', 'td.editor-delete', function (e) {
   let dialogMessage = {
     message: {
       type: 'error',
-      buttons: ["Dont Delete", "Delete", "No"],
-      message: "Are your sure to delete? Can't revert back",
-      title: "Are you sure?"
+      buttons: ["No", "Edit"],
+      message: "Are your sure to edit?",
+      title: "Are you sure?",
+      cancelId: '0'
     },
     quit: false
   }
@@ -82,16 +83,8 @@ $('#inventoryList').on('click', 'td.editor-delete', function (e) {
     console.log(confirmed)
     if (confirmed.response==1) {
 
-      let deleteQuery = {
-        tableName: `${commonNames.purchase}`,
-        where: `id = ${$(this).closest('tr')[0].id}`
-      }
-
-      ipcRenderer.invoke("DeleteFromDb", deleteQuery).then((id) => {
-
-        console.log(`has been Deleted!` + id)
-        ServiceList()
-      })
+     window.location = `./purchase.html?id= ${$(this).closest('tr')[0].id}`
+      // ServiceList()
 
     }
   })

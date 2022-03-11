@@ -3,7 +3,8 @@
 
 // All of the Node.js APIs are available in the preload process.
 
-const { ipcRenderer } = require("electron")
+const { ipcRenderer} = require("electron")
+const path = require('path')
 
 
 // It has the same sandbox as a Chrome extension.
@@ -20,19 +21,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 if (!window.localStorage.dbPath){
   ipcRenderer.invoke("userDataPath").then((gotDataPath) => {
-    console.log(gotDataPath + '/\DB/\dataBase.db')
-      window.localStorage.dbPath =  gotDataPath  + '\\DB\\dataBase.db'
+      window.localStorage.dbPath =  path.join(gotDataPath, 'DB','dataBase.db')
+      window.localStorage.dbConfigPath = path.join(gotDataPath, 'DB','dbConfig.json')
   })
 }
 
 // set darkmode if prevouse used darkmode
 if(window.localStorage.Theme == 'Dark'){
 ipcRenderer.invoke('dark-mode:toggle').then((res)=>{
-console.log(res)
   // window.localStorage.Theme ='Dark'  : 'Light'
 })
 }
-
-ipcRenderer.handle('getTheDbPath',()=>{
-  return window.localStorage.dbPath
-})

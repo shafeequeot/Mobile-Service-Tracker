@@ -51,17 +51,20 @@ let eachStatus
        else if (statusElements.Status == 2) eachStatus = 'Given to repair center'
        else if (statusElements.Status == 3) eachStatus = 'Received from rapair Center'
        else if (statusElements.Status == 4) eachStatus = 'Delivered to client' 
+       else if (statusElements.Status == 5) eachStatus = 'Device is Dead' 
+
        else eachStatus = 'Not recorded' 
                 const promoContent = `
                     <div class="card">
         <div class="flexGroup">
             <h3 id="Staff:" class="col-1">${eachStatus}</h3>
+            
         </div>
-       
-        <div class="flexGroup">
+      <div><span class="Error">${statusElements.Description? statusElements.Description : ""}</span></div>
+   
+        
             <div class="col-1"><span class="AuxGray">Dated on ${statusElements.Created_Date}</span></div>
            
-            </div>
         </div>
     </div>
                   `;

@@ -1,4 +1,4 @@
-const { ipcRenderer, dialog } = require('electron')
+const { ipcRenderer, dialog, } = require('electron')
 let XLSX = require('xlsx')
 const calculateHelpers = require('../config/js/calculateHelpers')
 const commonNames = require('../config/js/commonNames')
@@ -156,8 +156,22 @@ lblNewDBLocation.onclick = () =>{
 if (!saved.canceled){
     // console.log(saved)
     window.localStorage.dbPath = saved.filePath
+
+    ipcRenderer.invoke("userDataPath").then((gotDataPath) => {
+        let dbConfigPath = gotDataPath + '//DB//dbConfig.json'
+        console.log(dbConfigPath)
+        //   window.localStorage.dbPath =  gotDataPath  + '\\DB\\dataBase.db'
+        fsextra.outputJson(dbConfigPath, { dbPath: saved.filePath })
+      })
+
+              
 }
             })
         }
     })
 }
+
+
+calculateHelpers.dbPath().then(res=>{
+    console.log(res)
+})

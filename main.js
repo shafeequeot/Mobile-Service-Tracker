@@ -1,7 +1,16 @@
 const { app, BrowserWindow, ipcMain, nativeTheme, dialog, ipcRenderer, Menu } = require('electron')
 const path = require('path')
 const sqlite3 = require('sqlite3')
-var db = new sqlite3.Database(path.join(app.getPath('userData'), '\DB/dataBase.db'))
+const fs = require('fs-extra')
+let db
+
+
+fs.readJSON(path.join(app.getPath('userData'),'DB','dbConfig.json')).then(dbpath=>{
+
+     db = new sqlite3.Database(dbpath.dbPath)
+}).catch(err=>{
+    db = new sqlite3.Database(path.join(app.getPath('userData'),'DB','dataBase.db'))
+})
 let modal
 
 let MainWindow
@@ -32,12 +41,12 @@ function createWindow() {
     })
 
 
-    ipcMain.send('getTheDbPath').then((res)=>{
-        console.log(res)
-    })
+    // ipcMain.send('getTheDbPath').then((res)=>{
+    //     console.log(res)
+    // })
 
     //  dark  mode start 
-    ipcMain.on('dark-mode:toggle', () => {
+    ipcMain.handle('dark-mode:toggle', () => {
 
         if (nativeTheme.shouldUseDarkColors) {
             nativeTheme.themeSource = 'light'

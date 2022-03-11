@@ -67,7 +67,7 @@ function ServiceList(){
 
   let serviceList = {
     tableName: commonNames.services +" , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
-    tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'CSR_No' , '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route', '${commonNames.services}'.'Status'`,
+    tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock' , '${commonNames.services}'.'CSR_No' , '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route', '${commonNames.services}'.'Status'`,
     where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id'`
 
 }
@@ -91,8 +91,8 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
             // Combine the first and last names into a single table field
             return data.Brand_Name+' '+data.Model_No;
         } }, 
+        { data: 'Stock' },
         { data: 'CSR_No' },
-
           { data: 'Company_Name' },
           { data: 'Sale_Route' },
           { data: null, render: function (data, type, row){
@@ -102,7 +102,7 @@ ipcRenderer.invoke("fetchAllDataFromDb", serviceList).then((Data) => {
 } else if (data.Status == 2 ) 
 {status = 'Service'
 } else if (data.Status == 3) {
-  status = 'Completed'
+  status = 'Ready'
 } else if (data.Status == 4) {
   status = '<span class="Success">Delivered <i class="fa-solid fa-check"></i> </span>'
 } else status = '<span class="Error">Dead  </span>'
@@ -207,15 +207,16 @@ let fetchSingQuery = {
 function updateCircle(){
 
   ipcRenderer.invoke("fetchFromDb", fetchSingQuery).then((gotDetials) => {
-    circleDetials('crlTotalStock','100')
-  let serviceCount = ( (gotDetials.RcFromClnt + gotDetials.GaveToService + gotDetials.GotFromService) / gotDetials.totals )*100
+    let serviceStock = ( (gotDetials.RcFromClnt +  gotDetials.GotFromService) / gotDetials.totals )*100
+    circleDetials('crlTotalStock',serviceStock)
+  let serviceCount = ( ( gotDetials.GaveToService ) / gotDetials.totals )*100
   circleDetials('crlTotalService',serviceCount)
   let completedCount = ( gotDetials.Delivered / gotDetials.totals )*100
   circleDetials('crlTotalDone',completedCount)
   let deadCount = ( gotDetials.Dead / gotDetials.totals )*100
     circleDetials('crlTotalDead',deadCount) 
-    lblTotalStock.innerHTML = gotDetials.totals
-    lblTotalService.innerHTML = gotDetials.RcFromClnt + gotDetials.GaveToService + gotDetials.GotFromService
+    lblTotalStock.innerHTML = gotDetials.RcFromClnt +  gotDetials.GotFromService
+    lblTotalService.innerHTML = gotDetials.GaveToService 
     lblTotalDone.innerHTML = gotDetials.Delivered
     
     lblTotalDead.innerHTML = gotDetials.Dead
