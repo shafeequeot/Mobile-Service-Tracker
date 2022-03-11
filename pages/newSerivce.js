@@ -367,3 +367,9 @@ let saveButtonName = txtSave.textContent
         ckDead.checked ? divDeadReason.classList.remove('hideMe') : divDeadReason.classList.add('hideMe')
 
     }
+
+    ckDelivered.onclick = () => {
+        ckDelivered.checked ? divDeadReason.classList.remove('hideMe') : divDeadReason.classList.add('hideMe')
+
+    }
+    

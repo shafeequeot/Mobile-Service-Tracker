@@ -4,13 +4,23 @@ module.exports = {
     dateFormat: (date) => {
         return new Date(date).toLocaleDateString('en-GB', {
             day: 'numeric',
-            month: 'numeric',
+            month: 'short',
             year: 'numeric',
         })
     }, datePickerFormat: (date) => {
          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
         day = ("0" + date.getDate()).slice(-2);
       return [date.getFullYear(), mnth, day].join("-");
+    },
+    getNoOfDays: (date1, date2)=>{
+        var Difference_In_Time = date2.getTime() - date1.getTime();
+  
+// To calculate the no. of days between two dates
+var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+            return Math.round(Difference_In_Days - 1)
+        
+        
+       
     },
     serviceStatus: (status)=>{
         return new Promise((res, rej)=>{
@@ -33,8 +43,8 @@ module.exports = {
         return new Promise((res, rej)=>{
            
                 let dbConfigPath =  window.localStorage.dbConfigPath
-fs.readJSON(dbConfigPath).then(gotPath =>{
-    res(gotPath)
+                fs.readJSON(dbConfigPath).then(gotPath =>{
+                res(gotPath)
 
             })
         })

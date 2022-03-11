@@ -965,6 +965,9 @@ text-align: center;
   stroke: var(--primary-color);
 }
 
+.redCircle{
+    stroke: var(--btn-red) !important;
+}
 
 .pregressTitle{
 position: absolute;
