@@ -28,11 +28,11 @@ function biringtoCompoBox() {
     }
 
     Promise.all([ipcRenderer.invoke("fetchAllDataFromDb", salesRouteQuery), ipcRenderer.invoke("fetchAllDataFromDb", serviceAgentQuery)]).then((List) => {
-        txtRoute.textContent = ''
-        txtRoute.add(new Option('Add New Route', '0'))
+        txtClient.textContent = ''
+        txtClient.add(new Option('Add New Route', '0'))
         List[0].forEach((element, idx) => {
 
-            txtRoute.add(new Option(element.Sale_Route, element.id))
+            txtClient.add(new Option(element.Sale_Route, element.id))
         })
 
         txtServiceAgent.textContent = ''
@@ -52,26 +52,26 @@ biringtoCompoBox()
 
 // add new sales route & agent if not available
 
-txtRoute.onchange = evt = (selected) => {
-    if (txtRoute.options[txtRoute.selectedIndex].value == 0) {
-        let dialogMessage = {
-            message: {
-                type: 'warning',
-                buttons: ["Yes", "No"],
-                message: "Do you wish to Create new route?",
-                title: "Are you sure?"
-            },
-            quit: false
-        }
-        ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
-            if (!confirmed.response) {
-                openThisPage = { Page: `pages/salesRoute.html`, Parent: "MainWindow", Width: "700", Height: "650" }
-                ipcRenderer.invoke('createNewWindow', openThisPage)
-                window.close()
-            }
-        })
+txtClient.onchange = evt = (selected) => {
+    // if (txtRoute.options[txtRoute.selectedIndex].value == 0) {
+    //     let dialogMessage = {
+    //         message: {
+    //             type: 'warning',
+    //             buttons: ["Yes", "No"],
+    //             message: "Do you wish to Create new route?",
+    //             title: "Are you sure?"
+    //         },
+    //         quit: false
+    //     }
+    //     ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
+    //         if (!confirmed.response) {
+    //             openThisPage = { Page: `pages/salesRoute.html`, Parent: "MainWindow", Width: "700", Height: "650" }
+    //             ipcRenderer.invoke('createNewWindow', openThisPage)
+    //             window.close()
+    //         }
+    //     })
 
-    }
+    // }
 }
 
 txtServiceAgent.onchange = evt = (selected) => {
@@ -373,3 +373,7 @@ let saveButtonName = txtSave.textContent
 
     }
     
+
+    // autcomplete
+
+   

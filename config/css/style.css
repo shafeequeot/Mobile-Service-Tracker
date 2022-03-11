@@ -388,7 +388,7 @@ a {
 
 .btnGroup {
     text-align: center;
-    margin: 1rem;
+    margin: 0.5rem;
 }
 
 .btnUpdate {
@@ -1047,3 +1047,23 @@ input[type="file"]::file-selector-button {
 .link{
     cursor: pointer;
 }
+
+
+
+/* autocomplete text box */
+
+#result {
+    border: 1px dotted #ccc;
+    padding: 3px;
+  }
+  #result ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  #result ul li {
+    padding: 5px 0;
+  }
+  #result ul li:hover {
+    background: #eee;
+  }

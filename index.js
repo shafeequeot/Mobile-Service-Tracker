@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron')
 const dataBase = require('./config/js/dbConfig')
-let status
+let status, overDay
 
 var $ = require('jquery');
 const commonNames = require('./config/js/commonNames');
@@ -32,7 +32,7 @@ rdStock.onclick = evt = () => {
 
 
 rdPurchaseList.onclick = evt = () => {
-  openThisPage = { Page: "/pages/InventoryList.html", Parent: "MainWindow", Width: "800", Height: "700" }
+  openThisPage = { Page: "/pages/InventoryList.html", Parent: "MainWindow", Width: "800", Height: "650" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
@@ -58,6 +58,10 @@ rdReport.onclick = evt = () => {
 
 rdSettings.onclick = evt = () => {
   openThisPage = { Page: "/pages/settings.html", Parent: "MainWindow", Width: "800", Height: "580" }
+  ipcRenderer.invoke('createNewWindow', openThisPage)
+}
+rdClient.onclick = evt =() =>{
+  openThisPage = { Page: "/pages/Client.html", Parent: "MainWindow", Width: "800", Height: "580" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
@@ -150,7 +154,7 @@ function ServiceList() {
             })
 
           } else if (confirmed.response == 2) {
-            openThisPage = { Page: `/pages/viewServiceStatus.html`, Parent: "MainWindow", Width: "800", Height: "600", id: id }
+            openThisPage = { Page: `/pages/viewServiceStatus.html`, Parent: "MainWindow", Width: "800", Height: "550", id: id }
             ipcRenderer.invoke('createNewWindow', openThisPage)
           }
         })
@@ -162,14 +166,21 @@ function ServiceList() {
 
 
 //  change circle if service arrived too long
-
+overDay = 0
 Data.forEach(element => {
   // console.log(element)
   if(element.Status != 4 && element.Status != 5 ){
 
-    if (calculateHelpers.getNoOfDays(new Date(element.Created_Date),  new Date()) < 12) {
-      
-    }
+    if (calculateHelpers.getNoOfDays(new Date(element.Created_Date),  new Date()) > 12) overDay ++
+
+  }
+  console.log(overDay)
+  if (overDay > 0){
+    crlTotalStock.classList.add('redCircle')
+
+  }else{
+    crlTotalStock.classList.remove('redCircle')
+
   }
 });
 
@@ -178,7 +189,6 @@ Data.forEach(element => {
 
 }
 
-rdService.classList.add('redCircle')
 
 // updating circle detials
 function circleDetials(Circle, input) {
