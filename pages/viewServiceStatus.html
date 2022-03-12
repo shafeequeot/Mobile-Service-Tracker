@@ -21,62 +21,135 @@
 
 
         <div class="heading">
-            <h2>SERVICE HISTORY</h2>
+            <h2>SERVICE REPORT</h2>
         </div>
         <div class="serviceView">
             <div class="strong">
-                Device:
+                Cust. Name:
             </div>
-            <div id="phoneName">
+            <div id="clientName">
                 N/a
             </div>
             <div class="strong">
-                IMEI:
+               Date:
             </div>
-            <div id="phoneIMEI">
+            <div id="lblDate">
                 N/a
             </div>
             <div class="strong">
-                CSR No:
+                Contact
             </div>
-            <div id="CSRNo">
+            <div id="lblContact">
+                N/a
+            </div>
+            <div class="strong">
+               Route:
+            </div>
+            <div id="lblRoute">
+                N/a
+            </div>
+
+            <div class="strong ">
+                Address:
+            </div>
+            <div id="lblAddress">
                 N/a
             </div>
 
             <div class="strong">
-                Service Agent:
-            </div>
-            <div id="serviceAgent">
-                N/a
-            </div>
-
-            <div class="strong">
-                Sale Route:
-            </div>
-            <div id="saleRoute">
-                N/a
-            </div>
-            <div class="strong">
-                Current Status:
+                Status:
             </div>
             <div id="currentStatus">
                 N/a
             </div>
-            <div class="strong" >
-                Description:
+            <div class="strong dontPrint" >
+                Service Agent:
             </div>
-            <div id="description">
+            <div class="dontPrint" id="lblAgent">
                 N/a
             </div>
         </div>
-        <div id="divServiceHistory" name="divServiceHistory" class="max-Height-250 min-Height-250 overFlowActive">
+
+        <table class="cstTable margin-top-1rem">
+            <tr>
+                <th>CSR No.</th>
+                <th>Model</th>
+                <th></span>IMEI No.</th>
+                <th>Remarks</th>
+            </tr>
+            <tr>
+                <td><span id="tblCSR">Model </span></td>
+                <td><span id="tblModel"> </span></td>
+                <td><span id="tblIMEI"> </td>
+                <td><span id="tblRemarks"> </span></td>
+            </tr>
+
+           
+        </table>
+        <div class="hideMe printMe">
+            <div class="margin-top-1rem" id="lblReason">
+                Reason: 
+             </div>
+             <div>
+                 <ul>
+                     <li>
+                        All services are carried out as per warranty terms, condition & manufactures guideline
+                     </li>
+                     <li>
+                        For more details, kindly refer to warranty guidelines / product user manual
+                     </li>
+                  
+                 </ul>
+             </div>
+             <div class="Grid-2 signature margin-top-4rem">
+                 <div class="upLine">
+                    Authorised Signature
+                 </div>
+                 <div class="upLine">
+                    Customer Signature
+                 </div>
+             </div>
+        </div>
+   
+  
+
+        <div id="divServiceHistory" name="divServiceHistory" class="max-Height-250 min-Height-250 overFlowActive dontPrint">
          
         </div>
-        <div class="btnGroup">
+        <div class="btnGroup dontPrint">
             <button name="btnCancel" id="btnCancel" class="btnCancel">Close<div id="btnResetLoader"></div></button>
+            <button name="btnRej" id="btnRej" class="btnUpdate">Rejection Report</button>
         </div>
     </div>
 
+
+
+
+<!-- rejection report content -->
+<!-- <div class="container  printMe">
+<div class="Grid-4">
+    <div class="strong" >
+        Customer Name: 
+    </div>
+    <div id="description">
+        N/a
+    </div>
+
+    <div class="strong" >
+        Date
+    </div>
+    <div id="description">
+        N/a
+    </div>
+
+    <div class="strong" >
+        Date
+    </div>
+    <div id="description">
+        N/a
+    </div>
+</div>
+</div> -->
 
 
 

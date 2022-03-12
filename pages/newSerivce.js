@@ -14,12 +14,17 @@ txtDate.value = calculateHelpers.datePickerFormat(new Date())
 // bring detials to compobox
 
 function biringtoCompoBox() {
-    let salesRouteQuery = {
-        tableName: commonNames.saleRoute,
-        tableData: `id, Sale_Route`,
+    let selectClientQuery = {
+        tableName: commonNames.client,
+        tableData: `*`,
         where: ` id = id ORDER BY "id" DESC`
     }
 
+    let salesRouteQuery = {
+        tableName: commonNames.saleRoute,
+        tableData: `*`,
+        where: ` id = id ORDER BY "id" DESC`
+    }
 
     let serviceAgentQuery = {
         tableName: commonNames.serviceAgent,
@@ -27,20 +32,28 @@ function biringtoCompoBox() {
         where: ` id = id ORDER BY "id" DESC`
     }
 
-    Promise.all([ipcRenderer.invoke("fetchAllDataFromDb", salesRouteQuery), ipcRenderer.invoke("fetchAllDataFromDb", serviceAgentQuery)]).then((List) => {
+    Promise.all([ipcRenderer.invoke("fetchAllDataFromDb", salesRouteQuery), ipcRenderer.invoke("fetchAllDataFromDb", serviceAgentQuery) ,ipcRenderer.invoke("fetchAllDataFromDb", selectClientQuery) ]).then((List) => {
         txtClient.textContent = ''
-        txtClient.add(new Option('Add New Route', '0'))
+        txtServiceAgent.textContent = ''
+        txtSaleRoute.textContent = ''
+        txtSaleRoute.add(new Option('Select Sale Route', '0'))
         List[0].forEach((element, idx) => {
 
-            txtClient.add(new Option(element.Sale_Route, element.id))
+            txtSaleRoute.add(new Option(element.Sale_Route, element.id))
         })
 
-        txtServiceAgent.textContent = ''
-        txtServiceAgent.add(new Option('Add New Agent', '0'))
+        txtServiceAgent.add(new Option('Add new agent', '0'))
         List[1].forEach((element, idx) => {
 
             txtServiceAgent.add(new Option(element.Company_Name, element.id))
         })
+
+        txtClient.add(new Option('Select Client', '0'))
+        List[2].forEach((element, idx) => {
+
+            txtClient.add(new Option(element.Client_Name, element.id))
+        })
+    
 
     })
 }
@@ -53,25 +66,37 @@ biringtoCompoBox()
 // add new sales route & agent if not available
 
 txtClient.onchange = evt = (selected) => {
-    // if (txtRoute.options[txtRoute.selectedIndex].value == 0) {
-    //     let dialogMessage = {
-    //         message: {
-    //             type: 'warning',
-    //             buttons: ["Yes", "No"],
-    //             message: "Do you wish to Create new route?",
-    //             title: "Are you sure?"
-    //         },
-    //         quit: false
-    //     }
-    //     ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
-    //         if (!confirmed.response) {
-    //             openThisPage = { Page: `pages/salesRoute.html`, Parent: "MainWindow", Width: "700", Height: "650" }
-    //             ipcRenderer.invoke('createNewWindow', openThisPage)
-    //             window.close()
-    //         }
-    //     })
 
-    // }
+    let fetchQuery = {
+        tableName: commonNames.client,
+        tableData: `'${commonNames.client}'.'Sale_Route' `,
+        where: `'${commonNames.client}'.'id' = ${txtClient.value} `
+
+    }
+
+    ipcRenderer.invoke("fetchFromDb", fetchQuery).then((saleRoute) => {
+txtSaleRoute.value = saleRoute.Sale_Route
+    })
+
+//     if (txtSaleRoute.options[txtSaleRoute.selectedIndex].value == 0) {
+//         let dialogMessage = {
+//             message: {
+//                 type: 'warning',
+//                 buttons: ["Yes", "No"],
+//                 message: "Do you wish to Create new route?",
+//                 title: "Are you sure?"
+//             },
+//             quit: false
+//         }
+//         ipcRenderer.invoke("showMeError", dialogMessage).then((confirmed) => {
+//             if (!confirmed.response) {
+//                 openThisPage = { Page: `pages/salesRoute.html`, Parent: "MainWindow", Width: "700", Height: "650" }
+//                 ipcRenderer.invoke('createNewWindow', openThisPage)
+//                 window.close()
+//             }
+//         })
+
+//     }
 }
 
 txtServiceAgent.onchange = evt = (selected) => {
@@ -152,7 +177,6 @@ btnSave.onclick = evt => {
     if (document.getElementsByName('ckSteps')[2].checked) newStatus = 3
     if (document.getElementsByName('ckSteps')[3].checked) newStatus = 4
     if (document.getElementsByName('ckSteps')[4].checked) newStatus = 5
-    console.log(newStatus)
     evt.preventDefault();
 let saveButtonName = txtSave.textContent
     if (txtIMEI.value === '') {
@@ -161,12 +185,18 @@ let saveButtonName = txtSave.textContent
         btnSaveLoader.classList.remove('loader')
         txtSave.textContent = saveButtonName
         txtIMEI.focus()
-    } else if (txtRoute.value === '0') {
+    } else if (txtClient.value === '0') {
+        formResult.classList.add('Error')
+        formResult.textContent = "Select client"
+        btnSaveLoader.classList.remove('loader')
+        txtSave.textContent = saveButtonName
+        txtClient.focus()
+    }else if (txtSaleRoute.value === '0') {
         formResult.classList.add('Error')
         formResult.textContent = "Select sales route"
         btnSaveLoader.classList.remove('loader')
         txtSave.textContent = saveButtonName
-        txtRoute.focus()
+        txtSaleRoute.focus()
     } else if (txtCSR.value == '') {
         formResult.classList.add('Error')
         formResult.textContent = "Enter CSR Number"
@@ -198,7 +228,7 @@ let saveButtonName = txtSave.textContent
                 tableName: `${commonNames.services}`,
                 setContent: [
 
-                    `'Sale_Route' = '${txtRoute.value}',
+                    `'Sale_Route' = '${txtSaleRoute.value}',
                         'Service_Agent' = '${txtServiceAgent.value}',
                         'Status' = '${newStatus}',
                         'Other' = '${txtOtherDesc.value}',
@@ -258,14 +288,15 @@ let saveButtonName = txtSave.textContent
 
                     Created_Date: '"' + calculateHelpers.dateFormat(txtDate.value) + '"',
                     Stock: '"' + txtIMEI.value + '"',
-                    Sale_Route: '"' + txtRoute.value + '"',
+                    Sale_Route: '"' + txtSaleRoute.value + '"',
                     Service_Agent: '"' + txtServiceAgent.value + '"',
                     Status: `"${newStatus}"`,
                     Other: '"' + txtOtherDesc.value + '"',
-                    CSR_No: '"' + txtCSR.value + '"'
+                    CSR_No: '"' + txtCSR.value + '"',
+                    Client: '"' + txtClient.value + '"',
                 }
             }
-        
+          
 
             ipcRenderer.invoke("SaveToDb", ServiceReqDetials).then((newServiceID) => {
 
@@ -320,7 +351,7 @@ let saveButtonName = txtSave.textContent
 
         let fetchQuery = {
             tableName: commonNames.services + " , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
-            tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'CSR_No', '${commonNames.services}'.'Service_Agent', '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Supplier_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.services}'.'Sale_Route' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
+            tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'CSR_No', '${commonNames.services}'.'Service_Agent', '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Supplier_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.services}'.'Sale_Route' , '${commonNames.services}'.'Client' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
             where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id' AND ${commonNames.services}.'id' = ${serviceId}`
 
         }
@@ -331,8 +362,9 @@ let saveButtonName = txtSave.textContent
                 txtCSR.value = Mobile.CSR_No
                 txtBrand.value = Mobile.Brand_Name + " " + Mobile.Model_No
                 txtSupplier.value = Mobile.Supplier_Name
-                txtRoute.value = Mobile.Sale_Route
+                txtSaleRoute.value = Mobile.Sale_Route
                 txtServiceAgent.value = Mobile.Service_Agent
+                txtClient.value = Mobile.Client
                 txtOtherDesc.value = Mobile.Other
                 currentStatus = Mobile.Status
                 if (currentStatus == 1) {
@@ -373,7 +405,5 @@ let saveButtonName = txtSave.textContent
 
     }
     
-
-    // autcomplete
 
    

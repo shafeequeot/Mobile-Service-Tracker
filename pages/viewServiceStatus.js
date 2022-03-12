@@ -10,17 +10,24 @@ btnCancel.onclick = evt =()=>{
 
 ipcRenderer.on('gotID', (key, serviceId) => {
 let serviceQuery = {
-    tableName: commonNames.services +" , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
-    tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'CSR_No', '${commonNames.serviceAgent}'.'Company_Name' as Service_Agent, '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
-    where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id' AND ${commonNames.services}.'id' = ${serviceId}`
+    tableName: commonNames.services +" , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute + ' , ' + commonNames.client,
+    tableData: `'${commonNames.services}'.'id' , '${commonNames.services}'.'Created_Date' , '${commonNames.services}'.'Stock', '${commonNames.services}'.'CSR_No', '${commonNames.serviceAgent}'.'Company_Name' as Service_Agent, '${commonNames.purchase}'.'Brand_Name', '${commonNames.purchase}'.'Model_No', '${commonNames.client}'.'Client_Name', '${commonNames.client}'.'Location', '${commonNames.client}'.'Contact','${commonNames.serviceAgent}'.'Company_Name' , '${commonNames.saleRoute}'.'Sale_Route' , '${commonNames.services}'.'Other', '${commonNames.services}'.'Status'`,
+    where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id' AND ${commonNames.services}.'id' = ${serviceId} AND '${commonNames.client}'.'id' = '${commonNames.services}'.'Client'`
 }
     ipcRenderer.invoke("fetchFromDb", serviceQuery).then((serviceDetials) => {
+console.log(serviceDetials)
 
-        document.getElementById('phoneName').innerHTML = serviceDetials.Brand_Name + ' ' + serviceDetials.Model_No
-        document.getElementById('phoneIMEI').innerHTML = serviceDetials.Stock 
-        document.getElementById('serviceAgent').innerHTML = serviceDetials.Service_Agent
-        document.getElementById('saleRoute').innerHTML = serviceDetials.Sale_Route
-        document.getElementById('CSRNo').innerHTML = serviceDetials.CSR_No
+clientName.innerHTML = serviceDetials.Client_Name
+lblContact.innerHTML = serviceDetials.Contact
+lblRoute.innerHTML = serviceDetials.Sale_Route
+lblAddress.innerHTML = serviceDetials.Location
+lblAgent.innerHTML = serviceDetials.Service_Agent
+tblCSR.innerHTML = serviceDetials.CSR_No
+tblModel.innerHTML = serviceDetials.Brand_Name + ' ' + serviceDetials.Model_No
+tblIMEI.innerHTML = serviceDetials.Stock
+tblRemarks.innerHTML = serviceDetials.Other
+        
+   
           calculateHelpers.serviceStatus(serviceDetials.Status).then((res)=>{
             document.getElementById('currentStatus').innerHTML = res
         }) 
@@ -75,4 +82,12 @@ let eachStatus
            
         })
     })
+}
+
+
+
+// print rejection report
+
+btnRej.onclick = evt = ()=>{
+    window.print()
 }

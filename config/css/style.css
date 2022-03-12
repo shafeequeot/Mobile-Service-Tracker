@@ -1052,18 +1052,23 @@ input[type="file"]::file-selector-button {
 
 /* autocomplete text box */
 
-#result {
-    border: 1px dotted #ccc;
-    padding: 3px;
+.custom-combobox {
+    position: relative;
+    display: inline-block;
   }
-  #result ul {
-    list-style-type: none;
+  .custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
     padding: 0;
+  }
+  .custom-combobox-input {
     margin: 0;
+    padding: 5px 10px;
   }
-  #result ul li {
-    padding: 5px 0;
-  }
-  #result ul li:hover {
-    background: #eee;
+
+
+  .margin-top-4rem{
+      margin-top: 4rem;
   }

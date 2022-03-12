@@ -53,9 +53,20 @@
                             placeholder="Model No." />
                     </div>
 
-                </div>
+                
+                    <div class="">
 
-                <div class="margin-top-0_5rem Grid-2">
+                        <label for="txtClient">Client</label>
+                        <select  class="input-feild" name="txtClient" id="txtClient" required 
+                            placeholder="select Sales route">
+                            <option value="00" disabled selected>Salect Client</option>
+                            <option value="0">Add New</option>
+                        </select>
+
+                       
+
+                    </div>
+
                     <div>
 
                         <label for="txtCSR">CSR No.</label>
@@ -68,13 +79,12 @@
                         <input type="date" class="input-feild" name="txtDate" id="txtDate" required
                             placeholder="Select Date" />
                     </div>
-
-                </div>
+</div>
                 <div class="Grid-2 margin-top-0_5rem">
                     <div class="">
 
-                        <label for="txtClient">Client</label>
-                        <select class="input-feild" name="txtClient" id="txtClient" required 
+                        <label for="txtSaleRoute">Sale Route</label>
+                        <select class="input-feild" name="txtSaleRoute" id="txtSaleRoute" required 
                             placeholder="select Sales route">
                             <option value="00" disabled selected>Sales Route</option>
                             <option value="0">Add New</option>
