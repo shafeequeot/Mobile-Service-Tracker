@@ -1072,3 +1072,7 @@ input[type="file"]::file-selector-button {
   .margin-top-4rem{
       margin-top: 4rem;
   }
+
+  .margin-top-6rem{
+    margin-top: 6rem;
+}

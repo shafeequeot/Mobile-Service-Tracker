@@ -218,7 +218,7 @@ ipcMain.handle('fetchFromDb', async(event, userRequestingData) => {
         let whereCondition = ''
         if (userRequestingData.where) whereCondition = 'WHERE ' + userRequestingData.where
         sql = `SELECT ${userRequestingData.tableData}  FROM ${userRequestingData.tableName} ${whereCondition}`
-            console.log(sql)    
+            // console.log(sql)    
         db.serialize(function() {
             db.parallelize(function() {
                 db.get(sql, [], (err, row) => {

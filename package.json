@@ -1,6 +1,6 @@
 {
   "name": "aux-services",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Mobile Repair Tracking System",
   "main": "main.js",
   "scripts": {

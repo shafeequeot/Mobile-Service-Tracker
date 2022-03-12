@@ -50,6 +50,15 @@
     padding: 8px;
 }
 
+.max-Height-200 {
+    max-height: 200px;
+    padding: 8px;
+}
+
+.min-Height-200 {
+    min-height: 200px;
+    padding: 8px;
+}
 .staffList {
     max-height: 400px;
     padding-right: 8px;

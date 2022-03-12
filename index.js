@@ -65,6 +65,20 @@ rdClient.onclick = evt =() =>{
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
+divTotalStock.onclick = evt =()=>{
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "600", id: 'status = 1 OR status = 3' }
+            ipcRenderer.invoke('createNewWindow', openThisPage)
+}
+
+divTotalService.onclick = evt = ()=>{
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "600", id: 'status = 2' }
+            ipcRenderer.invoke('createNewWindow', openThisPage)
+}
+
+divTotalDead.onclick = evt = ()=>{
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "600", id: 'status = 5' }
+            ipcRenderer.invoke('createNewWindow', openThisPage)
+}
 ServiceList()
 
 
@@ -174,7 +188,6 @@ Data.forEach(element => {
     if (calculateHelpers.getNoOfDays(new Date(element.Created_Date),  new Date()) > 12) overDay ++
 
   }
-  console.log(overDay)
   if (overDay > 0){
     crlTotalStock.classList.add('redCircle')
 

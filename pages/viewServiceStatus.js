@@ -15,7 +15,7 @@ let serviceQuery = {
     where: `'${commonNames.purchase}'.'IMEI' = ${commonNames.services}.'Stock' AND ${commonNames.services}.'Service_Agent' = ${commonNames.serviceAgent}.'id' AND ${commonNames.services}.'Sale_Route' = ${commonNames.saleRoute}.'id' AND ${commonNames.services}.'id' = ${serviceId} AND '${commonNames.client}'.'id' = '${commonNames.services}'.'Client'`
 }
     ipcRenderer.invoke("fetchFromDb", serviceQuery).then((serviceDetials) => {
-console.log(serviceDetials)
+
 
 clientName.innerHTML = serviceDetials.Client_Name
 lblContact.innerHTML = serviceDetials.Contact
@@ -31,7 +31,7 @@ tblRemarks.innerHTML = serviceDetials.Other
           calculateHelpers.serviceStatus(serviceDetials.Status).then((res)=>{
             document.getElementById('currentStatus').innerHTML = res
         }) 
-        document.getElementById('description').innerHTML = serviceDetials.Other
+        
         
         bringPromotionDetials(serviceId)
     })
@@ -51,9 +51,10 @@ function bringPromotionDetials(serviceId) {
     }
 let eachStatus
     ipcRenderer.invoke("fetchAllDataFromDb", statusDateHistory).then((statusHist) => {
-        console.log(statusHist)
-        statusHist.forEach((statusElements, idx) => {
         
+        statusHist.forEach((statusElements, idx) => {
+            lblDate.innerHTML = statusElements.Created_Date
+            lblReason.innerHTML = "Reason: " + statusElements.Description
        if (statusElements.Status == 1) eachStatus = 'Received for Repair'
        else if (statusElements.Status == 2) eachStatus = 'Given to repair center'
        else if (statusElements.Status == 3) eachStatus = 'Received from rapair Center'
@@ -89,5 +90,6 @@ let eachStatus
 // print rejection report
 
 btnRej.onclick = evt = ()=>{
+    currentStatus.innerHTML = "Rejected"
     window.print()
 }

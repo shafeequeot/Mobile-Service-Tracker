@@ -56,8 +56,10 @@ biringtoCompoBox()
 
 
 btnCSRSearch.onclick = () => {
+    console.log()
+
     let month = dtCSRMonth.value.split('-')
-    if (dtCSRMonth.value) month = `AND  '${commonNames.services}'.'Created_Date' likE '%${month[1]}/${month[0]}%'`
+    if (dtCSRMonth.value) month = `AND  '${commonNames.services}'.'Created_Date' likE '%${calculateHelpers.dateFormat(dtCSRMonth.value).split('1')[1]}%'`
     else month = ''
     serviceList = {
         tableName: commonNames.services + " , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
@@ -143,7 +145,7 @@ btnCSRSearch.onclick = () => {
 
 btnAgentSearch.onclick = () => {
     let month = dtAgentMonth.value.split('-')
-    if (dtAgentMonth.value) month = `AND  '${commonNames.services}'.'Created_Date' likE '%${month[1]}/${month[0]}%'`
+    if (dtAgentMonth.value) month = `AND  '${commonNames.services}'.'Created_Date' likE '%${calculateHelpers.dateFormat(dtAgentMonth.value).split('1')[1]}%'`
     else month = ''
      serviceList = {
         tableName: commonNames.services + " , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
@@ -228,7 +230,7 @@ btnAgentSearch.onclick = () => {
 // Sales route filter
 btnSalesSearch.onclick = () => {
     let month = dtSalesMonth.value.split('-')
-    if (dtSalesMonth.value) month = `AND  '${commonNames.services}'.'Created_Date' likE '%${month[1]}/${month[0]}%'`
+    if (dtSalesMonth.value) month = `AND  '${commonNames.services}'.'Created_Date' likE '%${calculateHelpers.dateFormat(dtSalesMonth.value).split('1')[1]}%'`
     else month = ''
      serviceList = {
         tableName: commonNames.services + " , " + commonNames.purchase + ' , ' + commonNames.serviceAgent + ' , ' + commonNames.saleRoute,
