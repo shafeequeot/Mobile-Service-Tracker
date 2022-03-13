@@ -66,7 +66,7 @@ rdClient.onclick = evt =() =>{
 }
 
 divTotalStock.onclick = evt =()=>{
-  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "600", id: 'status = 1 OR status = 3' }
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "600", id: 'status IN (1, 3)' }
             ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 

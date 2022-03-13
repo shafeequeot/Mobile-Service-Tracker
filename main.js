@@ -393,7 +393,7 @@ const template = [
 ]
 
 const menu = Menu.buildFromTemplate(template)
-    Menu.setApplicationMenu(menu)
+    // Menu.setApplicationMenu(menu)
 
 
 

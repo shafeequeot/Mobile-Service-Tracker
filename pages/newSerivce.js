@@ -169,7 +169,6 @@ txtIMEI.onchange = evt = (selected) => {
 
 btnSave.onclick = evt => {
 
-
     // get new status
     if (document.getElementsByName('ckSteps')[0].checked) newStatus = 1 
     else newStatus = undefined
@@ -215,7 +214,14 @@ let saveButtonName = txtSave.textContent
         btnSaveLoader.classList.remove('loader')
         txtSave.textContent = saveButtonName
 
-    } else {
+    } else if (txtDate.value == '') {
+        formResult.classList.add('Error')
+        formResult.textContent = "Choose date"
+        btnSaveLoader.classList.remove('loader')
+        txtDate.focus()
+        txtSave.textContent = saveButtonName
+
+    }else {
         if (txtSave.textContent == "Update") {
 
             // updating existing requests 
@@ -319,6 +325,7 @@ let saveButtonName = txtSave.textContent
                 txtSave.textContent = "Save"
                 txtIMEI.focus()
                 purchaseForm.reset()
+                txtDate.value = calculateHelpers.datePickerFormat(new Date())
                 btnSave.disabled = false
 
 

@@ -3,7 +3,7 @@ let XLSX = require('xlsx')
 const calculateHelpers = require('../config/js/calculateHelpers')
 const commonNames = require('../config/js/commonNames')
 const fsextra = require('fs-extra')
-
+let count =0
 btnCancel.onclick=()=>{
     window.close()
 }
@@ -51,12 +51,11 @@ cells.forEach(element => {
         
        
             ipcRenderer.invoke("SaveToDb", purchaseDetials).then((newCompanyID) => {
-
+                count ++
                 importResult.classList.remove('error')
                 importResult.classList.add('success')
-                importResult.textContent = "All data has been saved!"
-                btnImport.classList.remove('loader')
-                btnImport.textContent = "Importing.."
+                importResult.textContent = count + " data has been saved!"
+                btnImport.textContent = "Imported"
               
                 
 
@@ -73,6 +72,10 @@ cells.forEach(element => {
             })
 
      });
+
+     btnImport.textContent = "Imported.."
+     btnImport.classList.remove('loader')
+
 
     }else if(txtImport.innerHTML == "Choose file"){
         ipcRenderer.invoke('selectFile', dgProp).then(res=>{
@@ -172,6 +175,3 @@ if (!saved.canceled){
 }
 
 
-calculateHelpers.dbPath().then(res=>{
-    console.log(res)
-})
