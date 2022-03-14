@@ -1076,3 +1076,17 @@ input[type="file"]::file-selector-button {
   .margin-top-6rem{
     margin-top: 6rem;
 }
+
+#notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    /* background-color: white; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  .hidden {
+    display: none;
+  }

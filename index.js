@@ -278,22 +278,33 @@ ipcRenderer.on('somethingUpdated', () => {
 
 
 
-// customize menu
-// window.addEventListener('contextmenu', (e) => {
-//   e.preventDefault()
-//   ipcRenderer.send('show-context-menu')
-// })
+// notify about new ubdates
+const notification = document.getElementById('notification');
+const message = document.getElementById('message');
+const restartButton = document.getElementById('restart-button');
+ipcRenderer.on('update_available', () => {
+  ipcRenderer.removeAllListeners('update_available');
+  message.innerText = 'A new update is available. Downloading now...';
+  notification.classList.remove('hidden');
+});
+ipcRenderer.on('update_downloaded', () => {
+  ipcRenderer.removeAllListeners('update_downloaded');
+  message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
+  restartButton.classList.remove('hidden');
+  notification.classList.remove('hidden');
+});
 
-// ipcRenderer.on('context-menu-command', (e, command) => {
-//   const template = [
-//         {
-//           label: 'Menu Item 1',
-//           click: () => { event.sender.send('context-menu-command', 'menu-item-1') }
-//         },
-//         { type: 'separator' },
-//         { label: 'Menu Item 2', type: 'checkbox', checked: true }
-//       ]
-//       const menu = Menu.buildFromTemplate(template)
-//       menu.popup(BrowserWindow.fromWebContents(event.sender))
-// })
+function closeNotification() {
+  notification.classList.add('hidden');
+}
+function restartApp() {
+  ipcRenderer.send('restart_app');
+}
 
+close_button.onclick  = evt = ()=>{
+ closeNotification()
+}
+
+restart_button.onclick = evt = ()=>{
+  restartApp()
+}

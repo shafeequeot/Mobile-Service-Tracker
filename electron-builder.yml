@@ -1,0 +1,5 @@
+appId: com.auxwall.service
+publish:
+  provider: github
+  token: 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
+

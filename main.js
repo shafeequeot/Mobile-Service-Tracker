@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, nativeTheme, dialog, ipcRenderer, Menu } = 
 const path = require('path')
 const sqlite3 = require('sqlite3')
 const fs = require('fs-extra')
+const { autoUpdater } = require('electron-updater');
 let db
 
 
@@ -33,6 +34,10 @@ function createWindow() {
 
     MainWindow.loadFile('index.html')
    
+    // auto updates (1 of 2)
+    MainWindow.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
+    });
 
 
     // send user data path to render page
@@ -388,14 +393,28 @@ const template = [
                 const { shell } = require('electron')
                 await shell.openExternal('https://auxwall.com')
             }
-        }]
+        },
+       {label: "V " + app.getVersion()}]
     }
 ]
 
 const menu = Menu.buildFromTemplate(template)
-    // Menu.setApplicationMenu(menu)
+    Menu.setApplicationMenu(menu)
 
 
 
 
 
+ // auto updates (2 of 2)
+
+ 
+ autoUpdater.on('update-available', () => {
+    mainWindow.webContents.send('update_available');
+  });
+  autoUpdater.on('update-downloaded', () => {
+    mainWindow.webContents.send('update_downloaded');
+  });
+
+  ipcMain.on('restart_app', () => {
+    autoUpdater.quitAndInstall();
+  });
