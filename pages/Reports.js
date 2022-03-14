@@ -100,6 +100,8 @@ btnCSRSearch.onclick = () => {
             "pageLength": 6,
             data: Data,
             destroy: true,
+            "columnDefs" : [{"targets":0, "type":"date"}],
+      "order": [[ 0, "desc" ]],
             rowId: "id",
             columns: [
 
@@ -186,6 +188,8 @@ btnAgentSearch.onclick = () => {
             "pageLength": 6,
             data: Data,
             destroy: true,
+            "columnDefs" : [{"targets":0, "type":"date"}],
+      "order": [[ 0, "desc" ]],
             rowId: "id",
             columns: [
 
@@ -272,6 +276,8 @@ btnSalesSearch.onclick = () => {
             data: Data,
             destroy: true,
             rowId: "id",
+            "columnDefs" : [{"targets":0, "type":"date"}],
+      "order": [[ 0, "desc" ]],
             columns: [
 
                 { data: 'Created_Date' },

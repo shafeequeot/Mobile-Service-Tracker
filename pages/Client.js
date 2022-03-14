@@ -159,16 +159,17 @@ clientList()
 function clientList() {
 
     let clientList = {
-      tableName: commonNames.client,
-      tableData: `*`,
-      where: `id = id`
+      tableName: commonNames.client + ", " + commonNames.saleRoute,
+      tableData: `'${commonNames.client}'.'Client_Name', '${commonNames.client}'.'Contact', '${commonNames.client}'.'Contact_Person' , 
+      '${commonNames.client}'.'Created_Date', '${commonNames.client}'.'Location' , '${commonNames.client}'.'Other', '${commonNames.saleRoute}'.'Sale_Route' , '${commonNames.client}'.'id'`,
+      where: `${commonNames.client}.Sale_Route = ${commonNames.saleRoute}.id`
   
     }
   
   
   
     ipcRenderer.invoke("fetchAllDataFromDb", clientList).then((Cleints) => {
-  
+  console.log(Cleints)
       // data table work start
     
       let tableEditor = $('#tblClientList').DataTable({

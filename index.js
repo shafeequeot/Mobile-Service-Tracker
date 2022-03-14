@@ -105,6 +105,8 @@ function ServiceList() {
       data: Data,
       rowId: "id",
       destroy: true,
+      "columnDefs" : [{"targets":0, "type":"date"}],
+      "order": [[ 0, "desc" ]],
       columns: [
 
         { data: 'Created_Date' },

@@ -1,18 +1,19 @@
 {
   "name": "aux-services",
-  "version": "1.0.8",
+  "version": "1.1.1",
   "description": "Mobile Repair Tracking System",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
-    "pack": "electron-builder -w",
+    "pack": "electron-builder -w --x64 --ia32",
     "rebuild": "electron-rebuild -f -w sqlite3",
+    "build": "electron-builder build --mac --win --publish never",
     "deploy": "electron-builder build --win --publish always"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shafeequeot/Mobile-Service-Tracker.git"
+    "url": "https://github.com/shafeequeot/Mobile-Service-Tracker.git"
   },
   "author": "AuxWall",
   "email": "shafeequeot@gmail.com",
