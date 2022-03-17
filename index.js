@@ -66,19 +66,25 @@ rdClient.onclick = evt =() =>{
 }
 
 divTotalStock.onclick = evt =()=>{
-  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "600", id: 'status IN (1, 3)' }
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "650", id: 'status IN (1, 3)' }
             ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 divTotalService.onclick = evt = ()=>{
-  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "600", id: 'status = 2' }
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "650", id: 'status = 2' }
             ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 divTotalDead.onclick = evt = ()=>{
-  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "600", id: 'status = 5' }
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "650", id: 'status = 5' }
             ipcRenderer.invoke('createNewWindow', openThisPage)
 }
+
+divTotalDelivered.onclick = evt = ()=>{
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "650", id: 'status = 4' }
+            ipcRenderer.invoke('createNewWindow', openThisPage)
+}
+
 ServiceList()
 
 
@@ -292,7 +298,7 @@ ipcRenderer.on('update_available', () => {
 ipcRenderer.on('update_downloaded', () => {
   ipcRenderer.removeAllListeners('update_downloaded');
   message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
-  restartButton.classList.remove('hidden');
+  restart_button.classList.remove('hidden');
   notification.classList.remove('hidden');
 });
 

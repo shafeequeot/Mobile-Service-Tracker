@@ -34,6 +34,8 @@ function createWindow() {
 
     MainWindow.loadFile('index.html')
    
+    MainWindow.maximize()
+
     // auto updates (1 of 2)
     MainWindow.once('ready-to-show', () => {
     autoUpdater.checkForUpdatesAndNotify();
@@ -399,7 +401,7 @@ const template = [
 ]
 
 const menu = Menu.buildFromTemplate(template)
-    // Menu.setApplicationMenu(menu)
+    Menu.setApplicationMenu(menu)
 
 
 
@@ -409,10 +411,10 @@ const menu = Menu.buildFromTemplate(template)
 
  
  autoUpdater.on('update-available', () => {
-    mainWindow.webContents.send('update_available');
+    MainWindow.webContents.send('update_available');
   });
   autoUpdater.on('update-downloaded', () => {
-    mainWindow.webContents.send('update_downloaded');
+    MainWindow.webContents.send('update_downloaded');
   });
 
   ipcMain.on('restart_app', () => {
