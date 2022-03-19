@@ -109,6 +109,12 @@ function ServiceList() {
     let tableEditor = $('#serviceList').DataTable({
       dom: "Bfrtip",
       data: Data,
+      scrollY:        '52vh',
+      scrollCollapse: true,
+      paging:         true,
+      "initComplete": function(settings, json) {
+        $('body').find('.dataTables_scrollBody').addClass("overFlowActive");
+    },
       rowId: "id",
       destroy: true,
       "columnDefs" : [{"targets":0, "type":"date"}],

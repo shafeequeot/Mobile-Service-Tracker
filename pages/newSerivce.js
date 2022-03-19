@@ -67,15 +67,18 @@ biringtoCompoBox()
 
 txtClient.onchange = evt = (selected) => {
 
+
     let fetchQuery = {
-        tableName: commonNames.client,
-        tableData: `'${commonNames.client}'.'Sale_Route' `,
-        where: `'${commonNames.client}'.'id' = ${txtClient.value} `
+        tableName: commonNames.client + ', ' + commonNames.saleRoute,
+        tableData: `'${commonNames.client}'.'Sale_Route', '${commonNames.saleRoute}'.'Sl_No' `,
+        where: `'${commonNames.client}'.'id' = ${txtClient.value} AND '${commonNames.client}'.'Sale_Route' = '${commonNames.saleRoute}'.'id'`
 
     }
 
     ipcRenderer.invoke("fetchFromDb", fetchQuery).then((saleRoute) => {
+
 txtSaleRoute.value = saleRoute.Sale_Route
+txtCSR.value = saleRoute.Sl_No
     })
 
 //     if (txtSaleRoute.options[txtSaleRoute.selectedIndex].value == 0) {
@@ -316,7 +319,27 @@ let saveButtonName = txtSave.textContent
 
                     }
                 }
-                ipcRenderer.invoke("SaveToDb", saveNewUpdates)
+
+
+
+
+
+                let CSRNoUpdates = {
+                    tableName: `${commonNames.saleRoute}`,
+                    setContent: [
+    
+                        `'Sl_No' = '${parseInt(txtCSR.value) + 1}'
+                            `
+                    ],
+    
+                    where: `id` + ` = '${txtSaleRoute.value}'`
+                }
+
+
+
+Promise.all([ ipcRenderer.invoke("SaveToDb", saveNewUpdates), ipcRenderer.invoke("UpdateToDb", CSRNoUpdates)])
+
+               
 
                 formResult.classList.remove('Error')
                 formResult.classList.add('success')
@@ -352,7 +375,7 @@ let saveButtonName = txtSave.textContent
         txtSave.textContent = "Update"
         txtIMEI.disabled = true
         txtDate.disabled = true
-
+        txtCSR.disabled = true
 
         // fetch selected item detials 
 

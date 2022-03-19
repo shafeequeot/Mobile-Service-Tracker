@@ -32,6 +32,12 @@ function ServiceList() {
       dom: "Bfrtip",
       data: Data,
       rowId: "id",
+      scrollY:        '52vh',
+      scrollCollapse: true,
+      paging:         true,
+      "initComplete": function(settings, json) {
+        $('body').find('.dataTables_scrollBody').addClass("overFlowActive");
+    },
       destroy: true,
       "columnDefs" : [{"targets":0, "type":"date"}],
       "order": [[ 0, "desc" ]],

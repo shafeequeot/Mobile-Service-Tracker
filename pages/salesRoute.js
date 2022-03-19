@@ -33,7 +33,7 @@ btnSave.onclick = evt => {
                 setContent: [
 
                     `'Sale_Route' = '${txtRoute.value}',
-                    'Other' = '${txtOther.value}'
+                    'Sl_No' = '${txtOther.value}'
                    
                     `
                 ],
@@ -75,7 +75,7 @@ btnSave.onclick = evt => {
                 tableContent: {
                     Created_Date: '"' + toDay + '"',
                     Sale_Route: '"' + txtRoute.value + '"',
-                    Other: '"' + txtOther.value + '"'
+                    Sl_No: '"' + txtOther.value + '"'
                 }
             }
 
@@ -139,7 +139,7 @@ function tableList() {
             columns: [
 
                 { data: 'Sale_Route' },
-                { data: 'Other' },
+                { data: 'Sl_No' },
 
             ],
             select: 'true',
@@ -169,7 +169,7 @@ function tableList() {
                 ipcRenderer.invoke("fetchFromDb", fetchSingQuery).then((gotDetials) => {
                     console.log(gotDetials)
                     txtRoute.value = gotDetials.Sale_Route
-                    txtOther.value = gotDetials.Other
+                    txtOther.value = gotDetials.Sl_No
                     txtSave.textContent = "Update"
 
                 })

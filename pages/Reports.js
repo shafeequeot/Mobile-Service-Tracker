@@ -97,6 +97,12 @@ btnCSRSearch.onclick = () => {
         // data table 1
         tableEditor = $('#CSRTable').DataTable({
             dom: "Brtip",
+            scrollY:        '52vh',
+      scrollCollapse: true,
+      paging:         true,
+      "initComplete": function(settings, json) {
+        $('body').find('.dataTables_scrollBody').addClass("overFlowActive");
+    },
             "pageLength": 6,
             data: Data,
             destroy: true,
