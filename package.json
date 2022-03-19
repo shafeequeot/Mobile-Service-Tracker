@@ -1,12 +1,12 @@
 {
   "name": "aux-services",
-  "version": "1.1.51",
+  "version": "1.1.60",
   "description": "Mobile Repair Tracking System",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
-    "pack": "electron-builder -w --x64 --ia32",
+    "pack": "electron-builder -w ",
     "rebuild": "electron-rebuild -f -w sqlite3",
     "build": "electron-builder build --mac --win --publish never",
     "deploy": "electron-builder build --win --publish always"
