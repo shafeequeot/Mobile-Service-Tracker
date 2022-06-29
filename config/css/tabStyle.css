@@ -81,7 +81,7 @@
     /* max-width: 65em; */
     width: 100vw;
     display:grid;
-	grid-template-columns: repeat(var(--count, 3), minmax(8em, 1fr));
+	grid-template-columns: repeat(var(--count, 4), minmax(8em, 1fr));
 	grid-template-rows: auto auto;
    align-items: center  ;
   

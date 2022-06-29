@@ -9,7 +9,7 @@ if(btnCancel.textContent == "Go Back") window.location = 'InventoryList.html'
 else window.close()
 }
 
-let toDay = calculateHelpers.dateFormat(new Date())
+let toDay = calculateHelpers.datePickerFormat(new Date())
 urlParams = new URLSearchParams(window.location.search);
 productID = urlParams.get('id')
 

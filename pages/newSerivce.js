@@ -2,7 +2,7 @@ const { ipcRenderer } = require("electron")
 const calculateHelpers = require("../config/js/calculateHelpers")
 const commonNames = require("../config/js/commonNames")
 let serviceId, currentStatus, saveNewUpdates, newStatus
-let toDay = calculateHelpers.dateFormat(new Date())
+let toDay = calculateHelpers.datePickerFormat(new Date())
 btnCancel.onclick = evt = () => {
     ipcRenderer.invoke('somthingUpdated').then(() => {
 
@@ -295,7 +295,7 @@ let saveButtonName = txtSave.textContent
                 tableName: commonNames.services,
                 tableContent: {
 
-                    Created_Date: '"' + calculateHelpers.dateFormat(txtDate.value) + '"',
+                    Created_Date: '"' + txtDate.value + '"',
                     Stock: '"' + txtIMEI.value + '"',
                     Sale_Route: '"' + txtSaleRoute.value + '"',
                     Service_Agent: '"' + txtServiceAgent.value + '"',

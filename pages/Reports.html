@@ -7,8 +7,14 @@
 
     <link rel="stylesheet" href="../config/css/grid-Style.css">
     <link rel="stylesheet" href="../config/css/tabStyle.css">
-    <link rel="stylesheet" href="../config/css/dataTable.css">
+    <link rel="stylesheet" href="../config/css/tabulator.css">
     <link rel="stylesheet" href="../config/css/style.css">
+    <link rel="stylesheet" href="../config/css/report.css">
+
+
+    <script type="text/javascript" src="../config/js/moment.js"></script>
+<script type="text/javascript" src="../config/js/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../config/css/datetimepicker.css" />
 
     <link rel="stylesheet" href="../config/css/fontawesome-free-6.0.0-web/css/all.min.css">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
@@ -38,10 +44,15 @@
         <!-- Tab 3 -->
         <input type="radio" name="tabset" id="tab3" aria-controls="RouteDetials">
         <label for="tab3">Route Report</label>
+
+             <!-- Tab 4 -->
+        <input type="radio" name="tabset" id="tab4" aria-controls="ClientDetials">
+        <label for="tab4">Client Report</label>
+
         <div class="tab-panels dontPrint">
 
 
-            <!-- First tab compnay registration starting here  -->
+            <!-- First tab  starting here  -->
 
             
             <section id="CSRDetials" class="tab-panel panelSize">
@@ -55,8 +66,8 @@
                         </div>
 
                         <div class="">
-                            <label for="dtCSRMonth">Select Month</label>
-                            <input class="input-feild" type="month" name="dtCSRMonth" id="dtCSRMonth"
+                            <label for="dtCSRMonth">Select Date</label>
+                            <input class="input-feild" type="text" name="dtCSRMonth" id="dtCSRMonth"
                                 placeholder="Enter Route name" />
                         </div>
                         <button name="btnCSRSearch" id="btnCSRSearch" class="btnSearch">
@@ -84,8 +95,8 @@
                         </div>
 
                         <div class="">
-                            <label for="dtAgentMonth">Select Month</label>
-                            <input class="input-feild" type="month" name="dtAgentMonth" id="dtAgentMonth"
+                            <label for="dtAgentMonth">Select Date</label>
+                            <input class="input-feild" type="text" name="dtAgentMonth" id="dtAgentMonth"
                                 placeholder="Enter Route name" />
                         </div>
                         <button name="btnAgentSearch" id="btnAgentSearch" class="btnSearch">
@@ -112,13 +123,42 @@
                         </div>
 
                         <div class="">
-                            <label for="dtSalesMonth">Select Month</label>
-                            <input class="input-feild" type="month" name="dtSalesMonth" id="dtSalesMonth"
+                            <label for="dtSalesMonth">Select Date</label>
+                            <input class="input-feild" type="text" name="dtSalesMonth" id="dtSalesMonth"
                                 placeholder="Select the date" />
                         </div>
                         <button name="btnSalesSearch" id="btnSalesSearch" class="btnSearch">
                             <div id="txtSalesSearch">Search</div>
                             <div id="btnSaveLoader"></div>
+                        </button>
+                    </div>
+
+
+                    
+                </div>
+            </section>
+
+
+            <section id="ClientDetials" class="tab-panel panelSize">
+                <div class="container ">
+
+                    <div class=" Grid-3 margin-top-1rem">
+                        <div class="">
+                            <label for="txtClient">Client Name</label>
+                        <select class="input-feild" name="txtClient" id="txtClient"
+                            placeholder="Select a client">
+                            <option value="00" disabled selected>Clent name</option>
+                        </select>
+                        </div>
+
+                        <div class="">
+                            <label for="txtClientDate">Select Date</label>
+                            <input class="input-feild" type="text" name="txtClientDate" id="txtClientDate"
+                                placeholder="Select the date" />
+                        </div>
+                        <button name="btnClientSearch" id="txtClientSearch" class="btnSearch">
+                            <div id="txtCleintSearch">Search</div>
+                            <div id="btnClentSaveLoader"></div>
                         </button>
                     </div>
 
@@ -172,26 +212,11 @@
 
         </div>
 
-        <div class="dataTable tabContentArea margin-top-1rem">
-            <table id="CSRTable" class="display">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Phone</th>
-                        <th>CSR No</th>
-                        <th>Service Agent</th>
-                        <th>Sale Route</th>
-                        <th>Status</th>
+        <div id="reportTable"  class=" tabContentArea margin-top-1rem">
+            
 
-                    </tr>
-                </thead>
-               
-
-                <tbody>
-
-                </tbody>
-            </table>
         </div>
+
 
         <div class="btnGroup dontPrint">
             <div class="message" id='formResult'></div>

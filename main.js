@@ -103,7 +103,8 @@ const createSubWindow = (htmlFile, parentWindow, width, height, arg, id) => {
         resizable: false,
         icon: __dirname + '/public/auxwall/logos/favicon.png',
         parent: parentWindow,
-        frame: false,
+        frame: true,
+        maximizable: false,
         // show: false,
         webPreferences: {
             contextIsolation: false,

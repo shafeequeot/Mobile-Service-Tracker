@@ -2,12 +2,18 @@ const fs = require('fs-extra')
 module.exports = {
 
     dateFormat: (date) => {
+    //     date = new Date(date)
+    //     mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    //     day = ("0" + date.getDate()).slice(-2);
+    //   return [date.getFullYear(), mnth, day,].join("-");
+
         return new Date(date).toLocaleDateString('en-GB', {
             day: 'numeric',
             month: 'short',
             year: 'numeric',
         })
     }, datePickerFormat: (date) => {
+        date = new Date(date)
          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
         day = ("0" + date.getDate()).slice(-2);
       return [date.getFullYear(), mnth, day].join("-");

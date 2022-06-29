@@ -26,62 +26,62 @@ document.getElementById('toggle-dark-mode').addEventListener('click', async () =
 
 
 rdStock.onclick = evt = () => {
-  openThisPage = { Page: "/pages/purchase.html", Parent: "MainWindow", Width: "800", Height: "700" }
+  openThisPage = { Page: "/pages/purchase.html", Parent: "MainWindow", Width: "800", Height: "750" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 
 rdPurchaseList.onclick = evt = () => {
-  openThisPage = { Page: "/pages/InventoryList.html", Parent: "MainWindow", Width: "800", Height: "650" }
+  openThisPage = { Page: "/pages/InventoryList.html", Parent: "MainWindow", Width: "800", Height: "700" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 rdSalesRoute.onclick = evt = () => {
-  openThisPage = { Page: "/pages/salesRoute.html", Parent: "MainWindow", Width: "700", Height: "600" }
+  openThisPage = { Page: "/pages/salesRoute.html", Parent: "MainWindow", Width: "700", Height: "650" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 rdAgent.onclick = evt = () => {
-  openThisPage = { Page: "/pages/serviceAgent.html", Parent: "MainWindow", Width: "800", Height: "700" }
+  openThisPage = { Page: "/pages/serviceAgent.html", Parent: "MainWindow", Width: "800", Height: "750" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 rdService.onclick = evt = () => {
-  openThisPage = { Page: "/pages/newService.html", Parent: "MainWindow", Width: "800", Height: "600" }
+  openThisPage = { Page: "/pages/newService.html", Parent: "MainWindow", Width: "800", Height: "650" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 rdReport.onclick = evt = () => {
-  openThisPage = { Page: "/pages/Reports.html", Parent: "MainWindow", Width: "800", Height: "600" }
+  openThisPage = { Page: "/pages/Reports.html", Parent: "MainWindow", Width: "800", Height: "650" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 rdSettings.onclick = evt = () => {
-  openThisPage = { Page: "/pages/settings.html", Parent: "MainWindow", Width: "800", Height: "580" }
+  openThisPage = { Page: "/pages/settings.html", Parent: "MainWindow", Width: "800", Height: "620" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 rdClient.onclick = evt =() =>{
-  openThisPage = { Page: "/pages/Client.html", Parent: "MainWindow", Width: "800", Height: "580" }
+  openThisPage = { Page: "/pages/Client.html", Parent: "MainWindow", Width: "800", Height: "620" }
   ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 divTotalStock.onclick = evt =()=>{
-  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "650", id: 'status IN (1, 3)' }
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "700", id: 'status IN (1, 3)' }
             ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 divTotalService.onclick = evt = ()=>{
-  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "650", id: 'status = 2' }
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "700", id: 'status = 2' }
             ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 divTotalDead.onclick = evt = ()=>{
-  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "650", id: 'status = 5' }
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "700", id: 'status = 5' }
             ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 
 divTotalDelivered.onclick = evt = ()=>{
-  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "650", id: 'status = 4' }
+  openThisPage = { Page: `/pages/serviceList.html`, Parent: "MainWindow", Width: "800", Height: "700", id: 'status = 4' }
             ipcRenderer.invoke('createNewWindow', openThisPage)
 }
 

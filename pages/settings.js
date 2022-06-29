@@ -38,7 +38,7 @@ cells.forEach(element => {
          let purchaseDetials = {
             tableName: commonNames.purchase,
             tableContent: {
-                Created_Date: '"' + calculateHelpers.dateFormat(Date()) + '"',
+                Created_Date: '"' + calculateHelpers.datePickerFormat(Date()) + '"',
                 Supplier_Name: '"' + element.Supplier_Name + '"',
                 Brand_Name: '"' + element.Brand_Name + '"',
                 Model_No: '"' + element.Model_No  + '"',

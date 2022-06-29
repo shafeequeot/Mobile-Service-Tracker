@@ -1,6 +1,6 @@
 {
   "name": "aux-services",
-  "version": "1.1.60",
+  "version": "2.0.00",
   "description": "Mobile Repair Tracking System",
   "main": "main.js",
   "scripts": {
@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/shafeequeot/Mobile-Service-Tracker#readme",
   "devDependencies": {
-    "electron": "^17.0.0",
-    "electron-builder": "^22.14.13"
+    "electron": "^19.0.6",
+    "electron-builder": "^5.5.0"
   },
   "dependencies": {
     "datatables": "^1.10.18",
@@ -34,6 +34,7 @@
     "fs-extra": "^10.0.0",
     "jquery": "^3.6.0",
     "sqlite3": "^5.0.2",
+    "tabulator-tables": "^5.2.7",
     "xlsx": "^0.18.3"
   }
 }

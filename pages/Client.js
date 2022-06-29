@@ -3,7 +3,8 @@ const calculateHelpers = require("../config/js/calculateHelpers")
 const commonNames = require("../config/js/commonNames")
 var $ = require('jquery');
 var dt = require('datatables.net')();
-let toDay = calculateHelpers.dateFormat(new Date())
+let toDay = calculateHelpers.datePickerFormat(new Date())
+
 
 btnCancel.onclick = evt = ()=>{
     window.close()
